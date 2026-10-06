@@ -12,13 +12,14 @@ import android.os.Build
 import android.os.Process
 import android.os.SystemClock
 import android.util.Log
+import com.akashrajeev.voicebeam.core.DropOldestQueue
 import com.akashrajeev.voicebeam.core.EnergyVad
+import com.akashrajeev.voicebeam.core.FrameDsp
 import com.akashrajeev.voicebeam.core.GateInputs
 import com.akashrajeev.voicebeam.core.TargetGate
 import com.akashrajeev.voicebeam.core.WavWriter
 import com.akashrajeev.voicebeam.ml.AudioModels
 import com.akashrajeev.voicebeam.ml.SAMPLE_RATE
-import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.sqrt
 
@@ -36,8 +37,7 @@ class AudioPipeline(
     data class FrameInfo(val level: Float, val gain: Float, val probability: Float, val voiceActive: Boolean)
     data class CaptionBlock(val samples: FloatArray, val captureMs: Long, val probability: Float, val voiceActive: Boolean)
     private var capturedSamples = 0L
-    var droppedCaptionBlocks = 0L
-        private set
+    val droppedCaptionBlocks: Long get() = asrQueue.dropped
 
     @Volatile var quietOthers = 0.8f
     @Volatile var boostDb = 12f
@@ -48,10 +48,17 @@ class AudioPipeline(
     /** Debug builds only: when set, called with the frame size to produce mic input. */
     @Volatile var debugFeed: ((Int) -> FloatArray)? = null
 
-    /** Gated clean audio for captions (consumer: caption thread). */
-    val asrQueue = ArrayBlockingQueue<CaptionBlock>(400)
-    /** Denoised audio + whether the locked face was clearly talking (consumer: voice-print thread). */
-    val voiceQueue = ArrayBlockingQueue<Pair<FloatArray, Float>>(400)
+    /**
+     * Raw audio for captions (consumer: caption thread). Streaming ASR needs ordered audio, so this is
+     * a FIFO, not latest-only. The bound is small (about 1.5 s); on overload the oldest block is dropped
+     * and counted. Each block keeps its capture time so the caption timeline stays correct after a drop.
+     */
+    val asrQueue = DropOldestQueue<CaptionBlock>(ASR_BACKLOG_BLOCKS)
+    /**
+     * Denoised audio + whether the locked face was clearly talking (consumer: voice-print thread).
+     * Voice fingerprints only need recent speech, so overload drops the oldest block here too.
+     */
+    val voiceQueue = DropOldestQueue<Pair<FloatArray, Float>>(VOICE_BACKLOG_BLOCKS)
 
     private val gate = TargetGate(frameMs = (models.denoiser.frameShift.takeIf { it > 0 } ?: 256) * 1000f / SAMPLE_RATE)
     private val vad = com.akashrajeev.voicebeam.ml.NeuralVad(app.assets)
@@ -62,7 +69,7 @@ class AudioPipeline(
     @SuppressLint("MissingPermission")
     fun start(useSceneMic: Boolean) {
         if (running.getAndSet(true)) return
-        capturedSamples = 0L; droppedCaptionBlocks = 0L; vad.reset()
+        capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset()
         thread = Thread({ loop(useSceneMic) }, "vb-audio").also { it.start() }
     }
 
@@ -112,6 +119,11 @@ class AudioPipeline(
             }
         if (headset != null) track?.preferredDevice = headset
         val input = FloatArray(frameShift)
+        // Reused every frame. Only data handed to another thread is copied.
+        val denoiseIn = FloatArray(frameShift)
+        var clean = FloatArray(frameShift)
+        var gated = FloatArray(frameShift)
+        var out = FloatArray(frameShift)
         try {
             rec?.startRecording()
             track?.play()
@@ -140,28 +152,22 @@ class AudioPipeline(
                 capturedSamples += input.size
                 rawWriter?.write(input)
 
-                val denoised = try { models.denoiser.process(input.copyOf()) } catch (t: Throwable) { input.copyOf() }
+                System.arraycopy(input, 0, denoiseIn, 0, input.size)
+                val denoised = try { models.denoiser.process(denoiseIn) } catch (t: Throwable) { input }
                 val n = minOf(denoised.size, input.size)
-                val clean = FloatArray(n)
                 val mix = denoiseMix
                 if (n == 0) continue
+                if (clean.size < n) { clean = FloatArray(n); gated = FloatArray(n); out = FloatArray(n) }
                 // denoiser output may lag input by a frame; mixing uses aligned sizes
-                for (k in 0 until n) clean[k] = mix * denoised[k] + (1f - mix) * input[input.size - n + k]
+                FrameDsp.mixDenoised(denoised, input, mix, clean, n)
 
-                val voice = vad.isVoice(clean)
+                val voice = vad.isVoice(clean.let { if (it.size == n) it else it.copyOf(n) })
                 val s = signals()
                 gate.quietOthers = quietOthers
                 val g = gate.process(s.copy(voiceActive = voice))
                 val boost = TargetGate.dbToLinear(boostDb)
-                val gated = FloatArray(n)
-                val out = FloatArray(n)
-                var e = 0f
-                for (k in 0 until n) {
-                    gated[k] = clean[k] * g
-                    out[k] = (gated[k] * boost).coerceIn(-1f, 1f)
-                    e += clean[k] * clean[k]
-                }
-                cleanWriter?.write(gated)
+                val e = FrameDsp.gateAndBoost(clean, n, g, boost, gated, out)
+                cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
                 // The actual routed output, not merely a paired headset, must be safe.
                 val routed = track?.routedDevice
@@ -175,10 +181,10 @@ class AudioPipeline(
                 // Recognition needs speech, not the gate's sometimes 80%-attenuated output.
                 // Assign a caption to the target separately using the gate probability.
                 val captionBlock = CaptionBlock(input.copyOf(), capturedSamples * 1000 / SAMPLE_RATE, gate.probability, voice)
-                if (!asrQueue.offer(captionBlock)) { asrQueue.poll(); droppedCaptionBlocks++; asrQueue.offer(captionBlock) }
+                asrQueue.offer(captionBlock)
                 if (voice) {
-                    val v = Pair(clean, if (s.hasLock && s.othersSpeaking < 0.3f) s.lockedSpeaking else 0f)
-                    if (!voiceQueue.offer(v)) { voiceQueue.poll(); voiceQueue.offer(v) }
+                    // Copy: the consumer is on another thread and `clean` is reused next frame.
+                    voiceQueue.offer(Pair(clean.copyOf(n), if (s.hasLock && s.othersSpeaking < 0.3f) s.lockedSpeaking else 0f))
                 }
                 onFrame(FrameInfo(sqrt(e / n), g, gate.probability, voice))
                 if (com.akashrajeev.voicebeam.BuildConfig.DEBUG && ++dbgFrames % 400 == 0L) {
@@ -196,3 +202,7 @@ class AudioPipeline(
         }
     }
 }
+
+/** About 1.5 s of 256-sample blocks at 16 kHz (the old bound was 400 blocks, about 6 s of stale audio). */
+const val ASR_BACKLOG_BLOCKS = 96
+const val VOICE_BACKLOG_BLOCKS = 32

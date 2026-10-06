@@ -2,6 +2,8 @@ package com.akashrajeev.voicebeam.vision
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.PixelFormat
 import android.graphics.Matrix
 import android.os.SystemClock
 import android.util.Log
@@ -53,16 +55,19 @@ class FaceAnalyzer(
         Log.w("VoiceBeamVision", "landmarker init failed on $delegate", t); null
     }
 
+    // Reused every frame: the RGBA copy of the camera frame and, when the sensor is rotated, the upright copy.
+    // MediaPipe is done with the bitmap once the result listener runs (busy == false), so reuse is safe.
+    private var frameBitmap: Bitmap? = null
+    private var uprightBitmap: Bitmap? = null
+    private val rotation = Matrix()
+
     override fun analyze(image: ImageProxy) {
         val lm = landmarker
         if (lm == null || busy) { image.close(); return }
         try {
-            val bmp = image.toBitmap()
+            val bmp = frameBitmapFor(image)
             val rot = image.imageInfo.rotationDegrees
-            val upright = if (rot != 0) {
-                val m = Matrix().apply { postRotate(rot.toFloat()) }
-                Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, m, true)
-            } else bmp
+            val upright = if (rot != 0) rotateInto(bmp, rot) else bmp
             lastW = upright.width; lastH = upright.height
             busy = true
             lm.detectAsync(BitmapImageBuilder(upright).build(), SystemClock.uptimeMillis())
@@ -72,6 +77,44 @@ class FaceAnalyzer(
         } finally {
             image.close()
         }
+    }
+
+    /** Copies the frame into a reusable bitmap when it is tightly packed RGBA; otherwise falls back to toBitmap(). */
+    private fun frameBitmapFor(image: ImageProxy): Bitmap {
+        val plane = image.planes.firstOrNull()
+        if (image.format == PixelFormat.RGBA_8888 && plane != null && plane.pixelStride == 4 && plane.rowStride == image.width * 4) {
+            var b = frameBitmap
+            if (b == null || b.width != image.width || b.height != image.height) {
+                b = Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888)
+                frameBitmap = b
+            }
+            plane.buffer.rewind()
+            b!!.copyPixelsFromBuffer(plane.buffer)
+            return b
+        }
+        return image.toBitmap()
+    }
+
+    private fun rotateInto(src: Bitmap, degrees: Int): Bitmap {
+        val swap = degrees == 90 || degrees == 270
+        val w = if (swap) src.height else src.width
+        val h = if (swap) src.width else src.height
+        var dst = uprightBitmap
+        if (dst == null || dst.width != w || dst.height != h) {
+            dst = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+            uprightBitmap = dst
+        }
+        // Same transform Bitmap.createBitmap(src, 0, 0, w, h, postRotate(deg), true) applies:
+        // rotate about the origin, then shift so the result starts at (0, 0).
+        rotation.reset()
+        rotation.postRotate(degrees.toFloat())
+        when (degrees) {
+            90 -> rotation.postTranslate(src.height.toFloat(), 0f)
+            180 -> rotation.postTranslate(src.width.toFloat(), src.height.toFloat())
+            270 -> rotation.postTranslate(0f, src.width.toFloat())
+        }
+        Canvas(dst!!).drawBitmap(src, rotation, null)
+        return dst
     }
 
     private fun handle(r: FaceLandmarkerResult) {
@@ -91,5 +134,5 @@ class FaceAnalyzer(
 
     val available: Boolean get() = landmarker != null
 
-    fun close() { landmarker?.close(); landmarker = null }
+    fun close() { landmarker?.close(); landmarker = null; frameBitmap = null; uprightBitmap = null }
 }

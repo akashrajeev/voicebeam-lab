@@ -126,6 +126,16 @@ class VoicePrint(assets: AssetManager) {
 
 /** Loads all audio models once; safe to call from a background thread. */
 class AudioModels private constructor(val asr: Asr, val denoiser: Denoiser, val voicePrint: VoicePrint) {
+    private val released = java.util.concurrent.atomic.AtomicBoolean(false)
+
+    /** Releases every native model exactly once; later calls do nothing. */
+    fun release() {
+        if (!released.compareAndSet(false, true)) return
+        for (r in listOf<() -> Unit>({ asr.release() }, { denoiser.release() }, { voicePrint.release() })) {
+            try { r() } catch (t: Throwable) { Log.w(TAG, "release failed", t) }
+        }
+    }
+
     companion object {
         fun load(assets: AssetManager): AudioModels {
             val t0 = System.currentTimeMillis()

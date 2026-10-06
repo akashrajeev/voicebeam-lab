@@ -3,6 +3,7 @@ package com.akashrajeev.voicebeam.record
 import android.content.Context
 import com.akashrajeev.voicebeam.core.CaptionSegment
 import com.akashrajeev.voicebeam.core.Captions
+import com.akashrajeev.voicebeam.core.SessionIds
 import com.akashrajeev.voicebeam.engine.SaveMode
 import org.json.JSONArray
 import org.json.JSONObject
@@ -33,9 +34,12 @@ class SessionStore(private val context: Context) {
     private val root: File get() = File(context.filesDir, "sessions").apply { mkdirs() }
 
     fun newSessionDir(): Pair<String, File> {
-        val id = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date())
-        val dir = File(root, id).apply { mkdirs() }
-        return Pair(id, dir)
+        // mkdir() is atomic: it fails if the folder exists, so two starts in the same second cannot share one.
+        while (true) {
+            val id = SessionIds.next(Date()) { File(root, it).exists() }
+            val dir = File(root, id)
+            if (dir.mkdir()) return Pair(id, dir)
+        }
     }
 
     fun writeMeta(m: SessionMeta, segments: List<CaptionSegment>) {

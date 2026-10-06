@@ -168,6 +168,7 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
                 ).build()
             )
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
             .build().also { a -> analyzer?.let { an -> a.setAnalyzer(executor, an) } }
         provider.unbindAll()
         videoBound = try {

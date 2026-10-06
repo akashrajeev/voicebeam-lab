@@ -20,6 +20,20 @@ android {
         }
     }
 
+    // Release signing comes from the environment, never from the repo. Without these four variables
+    // the release build is left unsigned instead of falling back to the debug key.
+    val releaseKeystore = System.getenv("VB_RELEASE_KEYSTORE")
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("VB_RELEASE_STORE_PASSWORD")
+                keyAlias = System.getenv("VB_RELEASE_KEY_ALIAS")
+                keyPassword = System.getenv("VB_RELEASE_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         debug {
             signingConfig = signingConfigs.getByName("debug")
@@ -27,8 +41,11 @@ android {
             ndk { abiFilters += listOf("arm64-v8a") }
         }
         release {
+            // R8 stays off until a minified build has been run on a device: the sherpa-onnx JNI layer
+            // and MediaPipe need keep rules (see proguard-rules.pro) that are not yet verified.
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = if (releaseKeystore != null) signingConfigs.getByName("release") else null
         }
     }
 

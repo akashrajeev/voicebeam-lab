@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
-        if (isFinishing) engine.stopListening()
+        if (isFinishing) engine.releaseModels()
         super.onDestroy()
     }
 }

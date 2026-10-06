@@ -21,6 +21,7 @@ import com.akashrajeev.voicebeam.core.Captions
 import com.akashrajeev.voicebeam.core.FaceObservation
 import com.akashrajeev.voicebeam.core.FaceTracker
 import com.akashrajeev.voicebeam.core.GateInputs
+import com.akashrajeev.voicebeam.core.ListenLifecycle
 import com.akashrajeev.voicebeam.core.WavWriter
 import com.akashrajeev.voicebeam.ml.AudioModels
 import com.akashrajeev.voicebeam.ml.SAMPLE_RATE
@@ -62,6 +63,8 @@ class VoiceBeamEngine(private val app: Context) {
     @Volatile private var models: AudioModels? = null
     private val tracker = FaceTracker()
     private var pipeline: AudioPipeline? = null
+    private val lifecycle = ListenLifecycle()
+    private val loadingModels = AtomicBoolean(false)
     @Volatile private var audioOnly = false
     private var learner: VoiceLearner? = null
     private val assembler = CaptionAssembler(SAMPLE_RATE)
@@ -108,6 +111,7 @@ class VoiceBeamEngine(private val app: Context) {
 
     fun loadModels() {
         if (models != null || _state.value.modelError != null) return
+        if (!loadingModels.compareAndSet(false, true)) return
         scope.launch(Dispatchers.IO) {
             try {
                 val m = AudioModels.load(app.assets)
@@ -117,6 +121,8 @@ class VoiceBeamEngine(private val app: Context) {
             } catch (t: Throwable) {
                 Log.e(TAG, "model load failed", t)
                 _state.update { it.copy(modelError = t.message ?: t.javaClass.simpleName) }
+            } finally {
+                loadingModels.set(false)
             }
         }
     }
@@ -172,6 +178,7 @@ class VoiceBeamEngine(private val app: Context) {
 
     private var pipelineDebugFeed = false
 
+    @Synchronized
     fun startListening() {
         val m = models ?: return
         val s = _settings.value
@@ -183,6 +190,8 @@ class VoiceBeamEngine(private val app: Context) {
             if (pipelineDebugFeed == wantDebug) return
             stopListening()
         }
+        if (!lifecycle.beginStart()) return
+        try {
         if (BuildConfig.DEBUG) Log.i("VoiceBeamEngine", "startListening source=" + (if (wantDebug) "debug wav" else "mic"))
         val p = AudioPipeline(m, app, ::gateInputs) { f ->
             latestProbability = f.probability
@@ -198,9 +207,19 @@ class VoiceBeamEngine(private val app: Context) {
         p.start(s.useSceneMic)
         startWorkers(p, m)
         _state.update { it.copy(listening = true, earphones = earphoneName()) }
+        lifecycle.finishStart()
+        } catch (t: Throwable) {
+            Log.e(TAG, "startListening failed", t)
+            lifecycle.abortStart()
+            workers.set(false)
+            pipeline?.stop(); pipeline = null
+            throw t
+        }
     }
 
+    @Synchronized
     fun stopListening() {
+        if (!lifecycle.beginStop()) return
         if (_state.value.recording.active) stopRecording()
         workers.set(false)
         audioOnly = false
@@ -209,6 +228,20 @@ class VoiceBeamEngine(private val app: Context) {
         captionThread?.join(1500); voiceThread?.join(1500)
         captionThread = null; voiceThread = null
         _state.update { it.copy(listening = false, partial = "", inputLevel = 0f) }
+        lifecycle.finishStop()
+    }
+
+    /**
+     * Frees the native models once. Safe to call repeatedly; loadModels() can load them again later.
+     * Stops listening first so no worker is still using them.
+     */
+    @Synchronized
+    fun releaseModels() {
+        stopListening()
+        val m = models ?: return
+        models = null; learner = null
+        try { m.release() } catch (t: Throwable) { Log.w(TAG, "model release failed", t) }
+        _state.update { it.copy(modelsReady = false) }
     }
 
     private var dbgBlocks = 0
@@ -224,7 +257,7 @@ class VoiceBeamEngine(private val app: Context) {
             val block = FloatArray(1600)
             var fill = 0
             while (workers.get()) {
-                val packet = p.asrQueue.poll(200, TimeUnit.MILLISECONDS) ?: continue
+                val packet = p.asrQueue.poll(200) ?: continue
                 val f = packet.samples
                 var off = 0
                 while (off < f.size) {
@@ -248,7 +281,7 @@ class VoiceBeamEngine(private val app: Context) {
         }, "vb-captions").also { it.start() }
         voiceThread = Thread({
             while (workers.get()) {
-                val (samples, lip) = p.voiceQueue.poll(200, TimeUnit.MILLISECONDS) ?: continue
+                val (samples, lip) = p.voiceQueue.poll(200) ?: continue
                 val l = learner ?: continue
                 if (tracker.lockedId == null) continue
                 val wasLearned = l.learned
@@ -453,7 +486,7 @@ class VoiceBeamEngine(private val app: Context) {
     private fun defaultTitle(): String =
         java.text.SimpleDateFormat("EEE d MMM, h:mm a", java.util.Locale.getDefault()).format(java.util.Date())
 
-    fun shutdown() { stopListening(); stage?.stop() }
+    fun shutdown() { releaseModels(); stage?.stop() }
 
     companion object {
         private const val TAG = "VoiceBeamEngine"

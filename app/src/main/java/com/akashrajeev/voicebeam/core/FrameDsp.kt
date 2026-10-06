@@ -1,0 +1,30 @@
+package com.akashrajeev.voicebeam.core
+
+/**
+ * Per-frame audio maths on caller-owned buffers, so the audio loop allocates
+ * nothing here. Same arithmetic as the earlier inline loops.
+ */
+object FrameDsp {
+    /**
+     * out[k] = mix * denoised[k] + (1 - mix) * input[input.size - n + k] for k in 0 until n.
+     * The denoiser output may lag the input by a frame, so the input tail is used.
+     */
+    fun mixDenoised(denoised: FloatArray, input: FloatArray, mix: Float, out: FloatArray, n: Int) {
+        val offset = input.size - n
+        for (k in 0 until n) out[k] = mix * denoised[k] + (1f - mix) * input[offset + k]
+    }
+
+    /**
+     * gated[k] = clean[k] * gain; boosted[k] = clamp(gated[k] * boost, -1, 1).
+     * Returns the sum of squares of [clean] (energy before the gate).
+     */
+    fun gateAndBoost(clean: FloatArray, n: Int, gain: Float, boost: Float, gated: FloatArray, boosted: FloatArray): Float {
+        var e = 0f
+        for (k in 0 until n) {
+            gated[k] = clean[k] * gain
+            boosted[k] = (gated[k] * boost).coerceIn(-1f, 1f)
+            e += clean[k] * clean[k]
+        }
+        return e
+    }
+}
