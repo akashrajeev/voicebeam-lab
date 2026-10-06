@@ -1,8 +1,8 @@
-name: lab-apk
+name: lab-apk-hardening
 # One-off debug APK build for the lab branch. Runs only when this file is pushed.
 on:
   push:
-    branches: [lab/overnight-2026-10-07]
+    branches: [lab/hardening-2026-10-07]
     paths: ['.github/workflows/apk.yml']
 permissions:
   contents: read
@@ -18,10 +18,15 @@ jobs:
           java-version: '17'
       - name: Fetch models and sherpa-onnx library
         run: bash scripts/fetch_models.sh
+      - name: Unit tests
+        run: ./gradlew --no-daemon testDebugUnitTest -Dorg.gradle.jvmargs="-Xmx4g"
       - name: Build debug APK
         run: ./gradlew --no-daemon assembleDebug -Dorg.gradle.jvmargs="-Xmx4g"
       - name: Show APK
-        run: ls -la app/build/outputs/apk/debug/
+        run: |
+          ls -la app/build/outputs/apk/debug/
+          sha256sum app/build/outputs/apk/debug/*.apk
+          grep -ho 'tests="[0-9]*"' app/build/test-results/testDebugUnitTest/*.xml
       - uses: actions/upload-artifact@v4
         with:
           name: voicebeam-lab-debug-apk
