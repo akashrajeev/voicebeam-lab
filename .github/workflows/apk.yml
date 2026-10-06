@@ -16,7 +16,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
       - name: Fetch models and sherpa-onnx library
         run: bash scripts/fetch_models.sh
       - name: Build debug APK
