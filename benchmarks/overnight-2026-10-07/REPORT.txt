@@ -29,7 +29,7 @@ Energy clean 81.3%, noisy 98.9%; Silero probability clean 54.6%, noisy 51.7%.
 There are no human within-clip speech-boundary labels, so these cannot be called precision/recall or false-negative rates. First detection from inserted clip boundary: energy clean 21 ms/noisy 9 ms; Silero clean 107 ms/noisy 683 ms. The clip boundary is not an exact speech onset. Preserve pre-roll; the neural VAD rejects noise but can delay or miss soft speech. This is a tradeoff, not proof it wins every case.
 
 SPEAKER VERIFICATION
-Three LibriSpeech test-clean speakers, five held-out utterances per speaker. For each query: 1 genuine and 2 impostor comparisons, 15 genuine/30 impostor decisions. No speaker-identity ground truth for NPTEL, so no Indian-English speaker verification claim. Threshold held fixed at cosine 0.425 (the baseline 0.5 remapped score), not optimized on test data. Clean enrolment uses 3 separate snippets; current protocol 1.5 s each, long protocol 3 s each. Query length also changes from 1.5 to 3 s, so enrolment and query-length effects are confounded.
+Three LibriSpeech test-clean speakers, five held-out utterances per speaker. For each query: 1 genuine and 2 impostor comparisons, 15 genuine/30 impostor decisions. No speaker-identity ground truth for NPTEL, so no Indian-English speaker verification claim. Verification-table threshold held fixed at cosine 0.425 (the baseline 0.5 remapped score), not optimized on test data. Clean enrolment uses 3 separate snippets; current protocol 1.5 s each, long protocol 3 s each. Query length also changes from 1.5 to 3 s, so enrolment and query-length effects are confounded.
 
 Model       clean FAR/FRR 1.5 s   noisy FAR/FRR 1.5 s   clean FAR/FRR 3 s   noisy FAR/FRR 3 s
 CAM++          30% / 0%             40% / 20%            100% / 0%           100% / 0%
@@ -37,7 +37,7 @@ ResNet34       56.7% / 0%           66.7% / 20%           66.7% / 0%          66
 TitaNet Small   0% / 0%              0% / 20%              0% / 0%             0% / 0%
 ERes2Net en     0% / 20%             0% / 53.3%            0% / 0%             0% / 13.3%
 
-FAR = impostor accepted fraction; FRR = genuine rejected fraction. Zero observed errors on 30 impostor trials does not establish a zero population error rate. Very small and narrow sample. Longer CAM++ inputs inflate similarities for both genuine and impostor voices here, so longer alone is NOT a reliable fix.
+FAR = impostor accepted fraction; FRR = genuine rejected fraction. Zero observed errors on 30 impostor trials does not establish a zero population error rate. Very small and narrow sample. Runtime state decisions require score >0.8 (cosine >0.53), stricter than the table threshold; this runtime behavior is not the quoted FAR/FRR result. Longer CAM++ inputs inflate similarities for both genuine and impostor voices here, so longer alone is NOT a reliable fix.
 
 Baseline code already averaged 3 embeddings and fed speech-gated frames. Those are not new improvements. Lab changes: 3 s windows, 9 s total enrolment, 0.75 lip-confidence requirement, partial enrolment reset when confirmation disappears, no self-confirming online adaptation. Android voice path is denoised; host verification used clean and synthetic noisy inputs without GTCRN. This end-to-end mismatch requires phone/denoised follow-up. Camera-free mode stays disabled.
 
