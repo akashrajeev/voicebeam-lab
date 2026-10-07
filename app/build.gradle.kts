@@ -14,7 +14,7 @@ android {
         targetSdk = 35
         buildConfigField("String", "LAB_COMMIT", "\"" + (System.getenv("GITHUB_SHA") ?: "local") + "\"")
         versionCode = 1
-        versionName = "0.1.0-SEP-2-benchmark"
+        versionName = "0.1.0-SEP-3-benchmark"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters += listOf("arm64-v8a")

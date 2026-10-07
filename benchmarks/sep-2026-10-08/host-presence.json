@@ -1,0 +1,2306 @@
+[
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 1000,
+    "scores": [
+      0.6206221481729961,
+      0.1646400285042977
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 1250,
+    "scores": [
+      0.1646400285042977,
+      0.6206221481729961
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 1500,
+    "scores": [
+      0.1646400285042977,
+      0.6206221481729961
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 1750,
+    "scores": [
+      0.1646400285042977,
+      0.6206221481729961
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 2000,
+    "scores": [
+      0.1847800388165878,
+      0.7016832030110212
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 2250,
+    "scores": [
+      0.1847800388165878,
+      0.7016832030110212
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 2500,
+    "scores": [
+      0.1847800388165878,
+      0.7016832030110212
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 2750,
+    "scores": [
+      0.1847800388165878,
+      0.7016832030110212
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 3000,
+    "scores": [
+      0.14624651939078445,
+      0.4878283877844448
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 3250,
+    "scores": [
+      0.14624651939078445,
+      0.4878283877844448
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 3500,
+    "scores": [
+      0.4878283877844448,
+      0.14624651939078445
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 3750,
+    "scores": [
+      0.4878283877844448,
+      0.14624651939078445
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 4000,
+    "scores": [
+      0.040714859444673984,
+      0.686561945881096
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 1000,
+    "scores": [
+      0.011893385598661318,
+      0.0875342772464929
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 1250,
+    "scores": [
+      0.0875342772464929,
+      0.011893385598661318
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 1500,
+    "scores": [
+      0.0875342772464929,
+      0.011893385598661318
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 1750,
+    "scores": [
+      0.0875342772464929,
+      0.011893385598661318
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 2000,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 2250,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 2500,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 2750,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 3000,
+    "scores": [
+      0.003070714068545543,
+      0.1870186492042815
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 3250,
+    "scores": [
+      0.003070714068545543,
+      0.1870186492042815
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 3500,
+    "scores": [
+      0.003070714068545543,
+      0.1870186492042815
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 3750,
+    "scores": [
+      0.003070714068545543,
+      0.1870186492042815
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 4000,
+    "scores": [
+      0.08933647476431406,
+      0.151464851345338
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 1000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 1250,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 1500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 1750,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 2000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 2250,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 2500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 2750,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 3000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 3250,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 3500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 3750,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 4000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 1000,
+    "scores": [
+      0.011893385598661318,
+      0.0875342772464929
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 1250,
+    "scores": [
+      0.0875342772464929,
+      0.011893385598661318
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 1500,
+    "scores": [
+      0.0875342772464929,
+      0.011893385598661318
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 1750,
+    "scores": [
+      0.0875342772464929,
+      0.011893385598661318
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 2000,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 2250,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 2500,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 2750,
+    "scores": [
+      0.20481675822315865,
+      0.11222482544355394
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 3000,
+    "scores": [
+      0.29650573085481086,
+      0.056604365980148785
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 3250,
+    "scores": [
+      0.29650573085481086,
+      0.056604365980148785
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 3500,
+    "scores": [
+      0.29650573085481086,
+      0.056604365980148785
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 3750,
+    "scores": [
+      0.29650573085481086,
+      0.056604365980148785
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 4000,
+    "scores": [
+      0.6221618051454126,
+      0.11213021603850429
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 1000,
+    "scores": [
+      0.5146697042669481,
+      0.06870873181817977
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 1250,
+    "scores": [
+      0.06870873181817977,
+      0.5146697042669481
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 1500,
+    "scores": [
+      0.06870873181817977,
+      0.5146697042669481
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 1750,
+    "scores": [
+      0.06870873181817977,
+      0.5146697042669481
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 2000,
+    "scores": [
+      0.16988029015283349,
+      0.5806641720847914
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 2250,
+    "scores": [
+      0.16988029015283349,
+      0.5806641720847914
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 2500,
+    "scores": [
+      0.16988029015283349,
+      0.5806641720847914
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 2750,
+    "scores": [
+      0.16988029015283349,
+      0.5806641720847914
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 3000,
+    "scores": [
+      0.1879049293108051,
+      0.39198396722278916
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 3250,
+    "scores": [
+      0.1879049293108051,
+      0.39198396722278916
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 3500,
+    "scores": [
+      0.1879049293108051,
+      0.39198396722278916
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 3750,
+    "scores": [
+      0.1879049293108051,
+      0.39198396722278916
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 4000,
+    "scores": [
+      0.20602142419832623,
+      0.6041565132484361
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 1000,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 1250,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 1500,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 1750,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 2000,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 2250,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 2500,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 2750,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 3000,
+    "scores": [
+      0.2000228224334008,
+      -0.04108760135637372
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 3250,
+    "scores": [
+      0.2000228224334008,
+      -0.04108760135637372
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 3500,
+    "scores": [
+      0.2000228224334008,
+      -0.04108760135637372
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 3750,
+    "scores": [
+      -0.04108760135637372,
+      0.2000228224334008
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 4000,
+    "scores": [
+      0.1811200891966273,
+      0.12576721672857322
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 1000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 1250,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 1500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 1750,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 2000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 2250,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 2500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 2750,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 3000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 3250,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 3500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 3750,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 4000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 1000,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 1250,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 1500,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 1750,
+    "scores": [
+      0.16058712287265636,
+      -0.02240454636782295
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 2000,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 2250,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 2500,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 2750,
+    "scores": [
+      0.1973310066186754,
+      0.050505436074378414
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 3000,
+    "scores": [
+      0.33225851524137073,
+      0.05396999542038439
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 3250,
+    "scores": [
+      0.33225851524137073,
+      0.05396999542038439
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 3500,
+    "scores": [
+      0.33225851524137073,
+      0.05396999542038439
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 3750,
+    "scores": [
+      0.33225851524137073,
+      0.05396999542038439
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 4000,
+    "scores": [
+      0.5111456838119577,
+      0.09057791238896057
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 1000,
+    "scores": [
+      0.6232820959052612,
+      0.13989810606137715
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 1500,
+    "scores": [
+      0.13989810606137715,
+      0.6232820959052612
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 2000,
+    "scores": [
+      0.10027668826730667,
+      0.7052354635602947
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 2500,
+    "scores": [
+      0.10027668826730667,
+      0.7052354635602947
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 3000,
+    "scores": [
+      0.15476751527469776,
+      0.48861892220053726
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 3500,
+    "scores": [
+      0.48861892220053726,
+      0.15476751527469776
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_only",
+    "end_ms": 4000,
+    "scores": [
+      0.12494306216684027,
+      0.6717671006274657
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 1000,
+    "scores": [
+      0.01691493530854493,
+      0.15700972382258604
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 1500,
+    "scores": [
+      0.01691493530854493,
+      0.15700972382258604
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 2000,
+    "scores": [
+      0.12868567110208912,
+      0.10614948215268061
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 2500,
+    "scores": [
+      0.10614948215268061,
+      0.12868567110208912
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 3000,
+    "scores": [
+      0.1139573816079947,
+      0.004820057600453658
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 3500,
+    "scores": [
+      0.004820057600453658,
+      0.1139573816079947
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "other_only",
+    "end_ms": 4000,
+    "scores": [
+      0.10285849969725275,
+      0.23557305632646536
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 1000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 1500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 2000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 2500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 3000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 3500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "silence",
+    "end_ms": 4000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 1000,
+    "scores": [
+      0.01691493530854493,
+      0.15700972382258604
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 1500,
+    "scores": [
+      0.01691493530854493,
+      0.15700972382258604
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 2000,
+    "scores": [
+      0.12868567110208912,
+      0.10614948215268061
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 2500,
+    "scores": [
+      0.10614948215268061,
+      0.12868567110208912
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 3000,
+    "scores": [
+      0.31802685108173756,
+      0.049715486419898314
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 3500,
+    "scores": [
+      0.31802685108173756,
+      0.049715486419898314
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "target_enters",
+    "end_ms": 4000,
+    "scores": [
+      0.6012489085324155,
+      0.10627976734746371
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 1000,
+    "scores": [
+      0.5099017186090222,
+      0.04458055328167252
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 1500,
+    "scores": [
+      0.5099017186090222,
+      0.04458055328167252
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 2000,
+    "scores": [
+      0.16057678632387704,
+      0.557109551258026
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 2500,
+    "scores": [
+      0.16057678632387704,
+      0.557109551258026
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 3000,
+    "scores": [
+      0.10270945087208441,
+      0.39079966530194843
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 3500,
+    "scores": [
+      0.10270945087208441,
+      0.39079966530194843
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_only",
+    "end_ms": 4000,
+    "scores": [
+      0.056890772168322834,
+      0.6059162631176607
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 1000,
+    "scores": [
+      0.003926890387528054,
+      0.016095239534610402
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 1500,
+    "scores": [
+      0.003926890387528054,
+      0.016095239534610402
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 2000,
+    "scores": [
+      0.1795071919078965,
+      0.0417305957863363
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 2500,
+    "scores": [
+      0.1795071919078965,
+      0.0417305957863363
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 3000,
+    "scores": [
+      0.10663320211165672,
+      -0.04545591701368721
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 3500,
+    "scores": [
+      0.10663320211165672,
+      -0.04545591701368721
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "other_only",
+    "end_ms": 4000,
+    "scores": [
+      0.21903062556162012,
+      0.17553468851541712
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 1000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 1500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 2000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 2500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 3000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 3500,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "silence",
+    "end_ms": 4000,
+    "scores": [
+      0.014618310218316664,
+      0.014618310218316664
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 1000,
+    "scores": [
+      0.003926890387528054,
+      0.016095239534610402
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 1500,
+    "scores": [
+      0.003926890387528054,
+      0.016095239534610402
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 2000,
+    "scores": [
+      0.1795071919078965,
+      0.0417305957863363
+    ],
+    "fresh": true,
+    "decision": "MUTE"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 2500,
+    "scores": [
+      0.1795071919078965,
+      0.0417305957863363
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 3000,
+    "scores": [
+      0.2688418138768375,
+      0.04761534128973896
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 3500,
+    "scores": [
+      0.2688418138768375,
+      0.04761534128973896
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "target_enters",
+    "end_ms": 4000,
+    "scores": [
+      0.46809057191665826,
+      0.08733637477666147
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  }
+]

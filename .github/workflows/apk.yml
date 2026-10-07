@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-2: batched cadence/threads/QDQint8/fp16/NNAPI/XNNPACK benchmark.
+# SEP-3: speed/provider suite plus target/other/entry/silence presence probes.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
