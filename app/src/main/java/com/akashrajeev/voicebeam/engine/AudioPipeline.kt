@@ -41,6 +41,7 @@ class AudioPipeline(
     private var capturedSamples = 0L
     val droppedCaptionBlocks: Long get() = asrQueue.dropped
 
+    @Volatile var separator: ExperimentalSeparator? = null
     @Volatile var quietOthers = 0.8f
     @Volatile var boostDb = 12f
     @Volatile var denoiseMix = 1f          // 0 = raw, 1 = fully denoised
@@ -206,6 +207,12 @@ class AudioPipeline(
                 val g = gate.process(s.copy(voiceActive = voice))
                 val boost = if (gate.boostAllowed) TargetGate.dbToLinear(boostDb) else 1f
                 val e = FrameDsp.gateAndBoost(clean, n, g, boost, gated, out)
+                val experimental = separator
+                if (experimental != null) {
+                    val extracted = FloatArray(input.size)
+                    experimental.process(input, extracted)
+                    for (k in 0 until n) { gated[k] = extracted[k]; out[k] = extracted[k].coerceIn(-0.95f,0.95f) }
+                }
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
                 // The actual routed output, not merely a paired headset, must be safe.
@@ -274,6 +281,7 @@ class AudioPipeline(
         } finally {
             try { rec?.stop() } catch (_: Throwable) {}
             rec?.release()
+            separator?.stop()
             try { track?.stop() } catch (_: Throwable) {}
             track?.release()
         }

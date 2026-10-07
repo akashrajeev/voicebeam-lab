@@ -31,3 +31,19 @@ OpenSpeakerBeam-SS https://github.com/helloooideeeeea/OpenSpeakerBeam-SS : clone
 ## Listening sequence
 listening-clean.wav: 0-4s mix, 5-9s target A clean reference, 10-14s extracted A, 15-19s extracted B. 1s gaps.
 listening-reverb.wav: 0-4s mix, 5-9s reverberant target reference, 10-14s extraction. Public synthetic fixtures, not live phone audio. Human listening verdict still required.
+
+## Android feasibility wiring
+Separate application ID com.akashrajeev.voicebeam.lab.tse, can coexist with stable
+lab APK. Separation OFF by default; settings must explicitly enable it. Learn a
+locked target first on the listening screen. Experimental mode uses raw 2-second
+blocks with no GTCRN before separation. It plays/records buffered selected output
+only on the existing confirmed media-earphone route. No target template or low
+cosine/margin -> silence. Threshold controls are uncalibrated; defaults .35 cosine
+and .10 margin are starting experiment policy, not validated acceptance rates.
+TitaNet operations serialize to avoid native-model concurrent use. This can
+increase delay while voice enrollment/scoring also runs. Memory telemetry is Java
+heap only, not full native ONNX process memory. p50/p95 uses last 50 blocks.
+Source changes during a computation invalidate its output block. Input/output
+queues each hold one pending block and count drops. A compute error disables the
+worker into silence and records error class. Peak clamp is .95. This is a PRIVATE
+phone feasibility experiment, not cleared commercial weights or final live hearing.

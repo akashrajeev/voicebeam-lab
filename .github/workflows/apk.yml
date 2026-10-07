@@ -1,8 +1,8 @@
-name: lab-apk-hardening
+name: private-tse-experiment-apk
 # Optional local wearer voice veto, off by default. Bluetooth unchanged.
 on:
   push:
-    branches: [lab/hardening-2026-10-07]
+    branches: [experiment/tse-overlap-2026-10-08]
     paths: ['.github/workflows/apk.yml']
 permissions:
   contents: read
@@ -29,6 +29,6 @@ jobs:
           grep -ho 'tests="[0-9]*"' app/build/test-results/testDebugUnitTest/*.xml
       - uses: actions/upload-artifact@v4
         with:
-          name: voicebeam-lab-debug-apk
+          name: voicebeam-private-tse-experiment-apk
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 1
