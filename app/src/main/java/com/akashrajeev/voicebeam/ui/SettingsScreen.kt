@@ -76,7 +76,11 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
                 SwitchRow("Demo feed (testing)", "Plays a recorded two-person clip instead of the camera and mic", s.debugFeed) { v -> engine.updateSettings { it.copy(debugFeed = v) } }
             }
             SectionHeader("PRIVATE separation experiment")
-            SwitchRow("Two-speaker separation (experimental)", "OFF by default. Needs learned target. Buffers 2 seconds plus compute. Not safe for live hearing claims. Model CC-BY-SA version ambiguity remains.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
+            SwitchRow("Two-speaker separation (experimental)", "OFF by default. Needs learned target. Delayed output; presence policy not reliable. Not safe for live hearing claims. Model CC-BY-SA version ambiguity remains.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
+            Text("Context / hop", color=Color.White)
+            Segmented(listOf("1s / 250ms", "2s / 500ms", "2s blocks"), s.separationLiveMode) { i -> engine.updateSettings { it.copy(separationLiveMode=i) } }
+            SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate with uncertain mute.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
+            Text("State: " + Diagnostics.tseState, color=Muted, fontSize=12.sp)
             SliderRow("TSE cosine threshold (uncalibrated)", "${s.separationCosine}", s.separationCosine, 0.2f..0.7f) { v -> engine.updateSettings { it.copy(separationCosine=v) } }
             SliderRow("TSE source margin (uncalibrated)", "${s.separationMargin}", s.separationMargin, 0f..0.3f) { v -> engine.updateSettings { it.copy(separationMargin=v) } }
             SectionHeader("Optional wearer voice veto")

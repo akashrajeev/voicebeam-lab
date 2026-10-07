@@ -16,6 +16,8 @@ data class Settings(
     val onboarded: Boolean = false,
     val hd1080: Boolean = false,
     val experimentalSeparation: Boolean = false,
+    val separationLiveMode: Int = 0, // 0=1s/250ms; 1=2s/500ms; 2=2s blocks
+    val separationRaw: Boolean = false,
     val separationCosine: Float = 0.35f, // provisional experiment control, not calibrated
     val separationMargin: Float = 0.10f,
     val debugFeed: Boolean = false,
@@ -38,6 +40,8 @@ class SettingsStore(context: Context) {
         onboarded = p.getBoolean("onboarded", false),
         hd1080 = p.getBoolean("hd1080", false),
         experimentalSeparation = p.getBoolean("tse", false),
+        separationLiveMode = p.getInt("tseMode",0).coerceIn(0,2),
+        separationRaw = p.getBoolean("tseRaw",false),
         separationCosine = p.getFloat("tseCos", 0.35f),
         separationMargin = p.getFloat("tseMargin", 0.10f),
         debugFeed = p.getBoolean("dbgFeed", false),
@@ -49,6 +53,7 @@ class SettingsStore(context: Context) {
             .putBoolean("sceneMic", s.useSceneMic).putString("saveMode", s.saveMode.name).putString("burn", s.captionBurn.name)
             .putBoolean("others", s.showOthersCaptions).putBoolean("raw", s.keepRawAudio).putBoolean("stage", s.stageEnabled)
             .putInt("capSize", s.captionSize).putBoolean("onboarded", s.onboarded).putBoolean("hd1080", s.hd1080).putBoolean("dbgFeed", s.debugFeed)
+            .putInt("tseMode",s.separationLiveMode).putBoolean("tseRaw",s.separationRaw)
             .putBoolean("tse", s.experimentalSeparation).putFloat("tseCos", s.separationCosine).putFloat("tseMargin", s.separationMargin)
             .apply()
     }

@@ -250,7 +250,9 @@ class VoiceBeamEngine(private val app: Context) {
         }
         p.quietOthers = s.quietOthers; p.boostDb = s.boostDb; p.denoiseMix = s.denoise
         if (s.experimentalSeparation) p.separator = ExperimentalSeparator(app, m.voicePrint,
-            { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin })
+            { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw },
+            if(s.separationLiveMode==0) 1000 else 2000,
+            when(s.separationLiveMode) { 0 -> 250; 1 -> 500; else -> 2000 })
         pipeline = p
         pipelineDebugFeed = wantDebug
         if (wantDebug) {
@@ -400,7 +402,7 @@ class VoiceBeamEngine(private val app: Context) {
         settingsStore.save(s)
         pipeline?.let { it.quietOthers = s.quietOthers; it.boostDb = s.boostDb; it.denoiseMix = s.denoise }
         if (s.stageEnabled != old.stageEnabled) applyStage(s.stageEnabled)
-        if ((s.useSceneMic != old.useSceneMic || s.experimentalSeparation != old.experimentalSeparation) && pipeline != null) { stopListening(); startListening() }
+        if ((s.useSceneMic != old.useSceneMic || s.experimentalSeparation != old.experimentalSeparation || s.separationLiveMode != old.separationLiveMode) && pipeline != null) { stopListening(); startListening() }
         // Demo feed toggles swap the audio source too (recorded wav vs mic).
         if (BuildConfig.DEBUG && s.debugFeed != old.debugFeed && pipeline != null) { stopListening(); startListening() }
     }

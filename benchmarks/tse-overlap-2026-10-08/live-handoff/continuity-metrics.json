@@ -1,0 +1,290 @@
+[
+  {
+    "pair": 0,
+    "mode": "independent2s",
+    "improvement": 17.1757752597332,
+    "rtf": 0.19059289699998772,
+    "count": 2,
+    "max_join": 0.01827830821275711
+  },
+  {
+    "pair": 0,
+    "mode": "ola1s",
+    "improvement": 16.594369620084763,
+    "rtf": 0.447506609249956,
+    "count": 5,
+    "max_join": 0.005838701967149973
+  },
+  {
+    "pair": 0,
+    "mode": "center1s",
+    "improvement": 17.079890936613083,
+    "rtf": 0.33447575824999376,
+    "count": 4,
+    "max_join": 0.0069832694716751575
+  },
+  {
+    "pair": 1,
+    "mode": "independent2s",
+    "improvement": 17.37343180179596,
+    "rtf": 0.14885573725001677,
+    "count": 2,
+    "max_join": 0.010931926779448986
+  },
+  {
+    "pair": 1,
+    "mode": "ola1s",
+    "improvement": 17.371619820594788,
+    "rtf": 0.39922819100002016,
+    "count": 5,
+    "max_join": 0.010931926779448986
+  },
+  {
+    "pair": 1,
+    "mode": "center1s",
+    "improvement": 17.385200142860413,
+    "rtf": 0.3653594277500076,
+    "count": 4,
+    "max_join": 0.010493208654224873
+  },
+  {
+    "pair": 2,
+    "mode": "independent2s",
+    "improvement": 15.891766829416156,
+    "rtf": 0.18467806074997384,
+    "count": 2,
+    "max_join": 0.009675332345068455
+  },
+  {
+    "pair": 2,
+    "mode": "ola1s",
+    "improvement": 15.901279730722308,
+    "rtf": 0.4469983887499609,
+    "count": 5,
+    "max_join": 0.009675332345068455
+  },
+  {
+    "pair": 2,
+    "mode": "center1s",
+    "improvement": 15.898375792428851,
+    "rtf": 0.3438688435000188,
+    "count": 4,
+    "max_join": 0.008971218019723892
+  },
+  {
+    "pair": 3,
+    "mode": "independent2s",
+    "improvement": 19.53988465294242,
+    "rtf": 0.16739658800000257,
+    "count": 2,
+    "max_join": 0.05792834609746933
+  },
+  {
+    "pair": 3,
+    "mode": "ola1s",
+    "improvement": 19.493503656238317,
+    "rtf": 0.42060955399995237,
+    "count": 5,
+    "max_join": 0.05792834609746933
+  },
+  {
+    "pair": 3,
+    "mode": "center1s",
+    "improvement": 18.94825180992484,
+    "rtf": 0.3403572562500017,
+    "count": 4,
+    "max_join": 0.05806972086429596
+  },
+  {
+    "pair": 4,
+    "mode": "independent2s",
+    "improvement": 1.9302431717514992,
+    "rtf": 0.167640447000025,
+    "count": 2,
+    "max_join": 0.010689015500247478
+  },
+  {
+    "pair": 4,
+    "mode": "ola1s",
+    "improvement": 2.592491067945957,
+    "rtf": 0.4301989292499968,
+    "count": 5,
+    "max_join": 0.008167415857315063
+  },
+  {
+    "pair": 4,
+    "mode": "center1s",
+    "improvement": 10.938464559614658,
+    "rtf": 0.3354265775000158,
+    "count": 4,
+    "max_join": 0.13948775827884674
+  },
+  {
+    "pair": 5,
+    "mode": "independent2s",
+    "improvement": 10.933005578815937,
+    "rtf": 0.1678954664999992,
+    "count": 2,
+    "max_join": 0.05088742822408676
+  },
+  {
+    "pair": 5,
+    "mode": "ola1s",
+    "improvement": 11.030720002949238,
+    "rtf": 0.41785527025001556,
+    "count": 5,
+    "max_join": 0.05088742822408676
+  },
+  {
+    "pair": 5,
+    "mode": "center1s",
+    "improvement": 10.989060647785664,
+    "rtf": 0.3325370654999915,
+    "count": 4,
+    "max_join": 0.04972689598798752
+  },
+  {
+    "pair": 6,
+    "mode": "independent2s",
+    "improvement": 15.005806654691696,
+    "rtf": 0.17956167324999228,
+    "count": 2,
+    "max_join": 0.010252769105136395
+  },
+  {
+    "pair": 6,
+    "mode": "ola1s",
+    "improvement": 15.088052481412888,
+    "rtf": 0.43841036599997096,
+    "count": 5,
+    "max_join": 0.0023813708685338497
+  },
+  {
+    "pair": 6,
+    "mode": "center1s",
+    "improvement": 15.213260382413864,
+    "rtf": 0.3366777612500016,
+    "count": 4,
+    "max_join": 0.002720201388001442
+  },
+  {
+    "pair": 7,
+    "mode": "independent2s",
+    "improvement": 18.17533239722252,
+    "rtf": 0.16574052550001284,
+    "count": 2,
+    "max_join": 0.029884587973356247
+  },
+  {
+    "pair": 7,
+    "mode": "ola1s",
+    "improvement": 17.86821684241295,
+    "rtf": 0.4281942179999305,
+    "count": 5,
+    "max_join": 0.029884587973356247
+  },
+  {
+    "pair": 7,
+    "mode": "center1s",
+    "improvement": 17.65031561255455,
+    "rtf": 0.35980867149999085,
+    "count": 4,
+    "max_join": 0.030326412990689278
+  },
+  {
+    "pair": 8,
+    "mode": "independent2s",
+    "improvement": 15.375992137938738,
+    "rtf": 0.17392681674999722,
+    "count": 2,
+    "max_join": 0.06005723774433136
+  },
+  {
+    "pair": 8,
+    "mode": "ola1s",
+    "improvement": 15.357913333922625,
+    "rtf": 0.3790968582500227,
+    "count": 5,
+    "max_join": 0.06005723774433136
+  },
+  {
+    "pair": 8,
+    "mode": "center1s",
+    "improvement": 15.451689083129168,
+    "rtf": 0.2848540514999911,
+    "count": 4,
+    "max_join": 0.06043355166912079
+  },
+  {
+    "pair": 9,
+    "mode": "independent2s",
+    "improvement": 15.586859464645386,
+    "rtf": 0.14240059175000397,
+    "count": 2,
+    "max_join": 0.004779337905347347
+  },
+  {
+    "pair": 9,
+    "mode": "ola1s",
+    "improvement": 15.555682897567749,
+    "rtf": 0.4110007459999565,
+    "count": 5,
+    "max_join": 0.004410386085510254
+  },
+  {
+    "pair": 9,
+    "mode": "center1s",
+    "improvement": 15.565576314926147,
+    "rtf": 0.33584846749999997,
+    "count": 4,
+    "max_join": 0.0066599249839782715
+  },
+  {
+    "pair": 10,
+    "mode": "independent2s",
+    "improvement": 14.789631329476833,
+    "rtf": 0.144238493749981,
+    "count": 2,
+    "max_join": 0.02346082776784897
+  },
+  {
+    "pair": 10,
+    "mode": "ola1s",
+    "improvement": 14.228111706674099,
+    "rtf": 0.36045684375002907,
+    "count": 5,
+    "max_join": 0.02346082776784897
+  },
+  {
+    "pair": 10,
+    "mode": "center1s",
+    "improvement": 14.618728123605251,
+    "rtf": 0.2910220404999677,
+    "count": 4,
+    "max_join": 0.0235912948846817
+  },
+  {
+    "pair": 11,
+    "mode": "independent2s",
+    "improvement": 14.513713739812374,
+    "rtf": 0.14461926274998405,
+    "count": 2,
+    "max_join": 0.024713575839996338
+  },
+  {
+    "pair": 11,
+    "mode": "ola1s",
+    "improvement": 13.789062403142452,
+    "rtf": 0.36337634500000604,
+    "count": 5,
+    "max_join": 0.018081605434417725
+  },
+  {
+    "pair": 11,
+    "mode": "center1s",
+    "improvement": 14.085195444524288,
+    "rtf": 0.29322414724992996,
+    "count": 4,
+    "max_join": 0.0208306685090065
+  }
+]

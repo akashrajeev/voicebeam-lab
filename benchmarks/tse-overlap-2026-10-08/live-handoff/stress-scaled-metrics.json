@@ -1,0 +1,6402 @@
+[
+  {
+    "pair": 0,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0005.flac",
+    "improvement": 17.067006766796112,
+    "si_sdr": 16.77936553955078,
+    "other_si_sdr": -43.20563507080078,
+    "oracle_improvement": 17.067006766796112,
+    "cosines": [
+      [
+        0.6244834115730334,
+        -0.06553444198897569
+      ],
+      [
+        0.5931872218485146,
+        -0.04652193009723954
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.19379466050003202,
+    "block_seconds": [
+      0.39891358500005936,
+      0.37626505700006874
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 17.0677669942379,
+    "si_sdr": 16.780141830444336,
+    "other_si_sdr": -51.090354919433594,
+    "oracle_improvement": 17.0677669942379,
+    "cosines": [
+      [
+        -0.051104040833871524,
+        0.6331711930542708
+      ],
+      [
+        0.02061165136571254,
+        0.6734906919428922
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.19379466050003202,
+    "block_seconds": [
+      0.39891358500005936,
+      0.37626505700006874
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0005.flac",
+    "improvement": 12.662096858024597,
+    "si_sdr": 11.590463638305664,
+    "other_si_sdr": -47.66804504394531,
+    "oracle_improvement": 12.662096858024597,
+    "cosines": [
+      [
+        0.31719483955816313,
+        -0.023061699638006933
+      ],
+      [
+        0.38099501412037745,
+        0.013635272034848045
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.17789536499998349,
+    "block_seconds": [
+      0.3315937169999188,
+      0.37998774300001514
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 9.550448179244995,
+    "si_sdr": 8.51377010345459,
+    "other_si_sdr": -40.69187545776367,
+    "oracle_improvement": 9.550448179244995,
+    "cosines": [
+      [
+        0.06678310454705366,
+        0.3367850282472961
+      ],
+      [
+        0.08320079773137826,
+        0.5464841461944538
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17789536499998349,
+    "block_seconds": [
+      0.3315937169999188,
+      0.37998774300001514
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0005.flac",
+    "improvement": 6.913720577955246,
+    "si_sdr": 6.662890434265137,
+    "other_si_sdr": -26.65487289428711,
+    "oracle_improvement": 6.913720577955246,
+    "cosines": [
+      [
+        0.3767146848257555,
+        0.04588277187483586
+      ],
+      [
+        0.4185714466360626,
+        -0.0018974375161480116
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1677188630000046,
+    "block_seconds": [
+      0.3260851359999606,
+      0.34479031600005783
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 7.153503924608231,
+    "si_sdr": 6.860138893127441,
+    "other_si_sdr": -13.774040222167969,
+    "oracle_improvement": 7.153503924608231,
+    "cosines": [
+      [
+        0.04557508565233899,
+        0.2590729218186414
+      ],
+      [
+        0.17004839841629774,
+        0.5623355097660592
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1677188630000046,
+    "block_seconds": [
+      0.3260851359999606,
+      0.34479031600005783
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0005.flac",
+    "improvement": 9.818079948425293,
+    "si_sdr": 6.492834568023682,
+    "other_si_sdr": -15.516702651977539,
+    "oracle_improvement": 9.818079948425293,
+    "cosines": [
+      [
+        0.07311090616742925,
+        0.3013223275496941
+      ],
+      [
+        0.03580307882786321,
+        0.2977497933681744
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1650963247499817,
+    "block_seconds": [
+      0.3323552260000042,
+      0.3280300729999226
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 0.8598709106445312,
+    "si_sdr": -2.421381711959839,
+    "other_si_sdr": -9.082995414733887,
+    "oracle_improvement": 0.8598709106445312,
+    "cosines": [
+      [
+        0.11235940183423362,
+        0.18746798077766025
+      ],
+      [
+        0.3360556450205969,
+        0.0652452982401638
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.1650963247499817,
+    "block_seconds": [
+      0.3323552260000042,
+      0.3280300729999226
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0005.flac",
+    "improvement": null,
+    "si_sdr": -60.1124267578125,
+    "other_si_sdr": -35.64787292480469,
+    "oracle_improvement": 2.8303871154785156,
+    "cosines": [
+      [
+        0.041539887783682644,
+        -0.06382819587965749
+      ],
+      [
+        0.150965761234563,
+        0.009943126136463643
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.16686358774998666,
+    "block_seconds": [
+      0.3390369769999779,
+      0.32841737399996873
+    ]
+  },
+  {
+    "pair": 0,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 18.951283050701022,
+    "si_sdr": 18.960100173950195,
+    "other_si_sdr": -29.19601058959961,
+    "oracle_improvement": 18.951283050701022,
+    "cosines": [
+      [
+        0.12376973162540597,
+        0.549100752034834
+      ],
+      [
+        0.01834854777905246,
+        0.7136910606978794
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.16686358774998666,
+    "block_seconds": [
+      0.3390369769999779,
+      0.32841737399996873
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0006.flac",
+    "improvement": 4.059137687087059,
+    "si_sdr": 4.007689952850342,
+    "other_si_sdr": -9.570294380187988,
+    "oracle_improvement": 4.059137687087059,
+    "cosines": [
+      [
+        0.08549785830229387,
+        0.40947357873498524
+      ],
+      [
+        0.07859839945786012,
+        0.5398771587792716
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17327907975001722,
+    "block_seconds": [
+      0.3513059819999853,
+      0.34181033700008356
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0004.flac",
+    "improvement": 2.4253652431070805,
+    "si_sdr": 2.373857259750366,
+    "other_si_sdr": -26.808889389038086,
+    "oracle_improvement": 2.4253652431070805,
+    "cosines": [
+      [
+        0.5971034673108233,
+        0.08775293938887073
+      ],
+      [
+        0.6547123422698365,
+        0.0069243938964859975
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.17327907975001722,
+    "block_seconds": [
+      0.3513059819999853,
+      0.34181033700008356
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0006.flac",
+    "improvement": 3.638754427433014,
+    "si_sdr": 2.770958423614502,
+    "other_si_sdr": -9.262619972229004,
+    "oracle_improvement": 3.638754427433014,
+    "cosines": [
+      [
+        0.06197435419535853,
+        0.22074406112479272
+      ],
+      [
+        -0.0946853863088652,
+        0.250317218383592
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17711904349997099,
+    "block_seconds": [
+      0.3474079379999466,
+      0.3610682359999373
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0004.flac",
+    "improvement": 1.8571796417236328,
+    "si_sdr": 1.0418767929077148,
+    "other_si_sdr": -23.578689575195312,
+    "oracle_improvement": 1.8571796417236328,
+    "cosines": [
+      [
+        0.4448948570780517,
+        0.08749564943651937
+      ],
+      [
+        0.4950626894737138,
+        -0.1110011410318115
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.17711904349997099,
+    "block_seconds": [
+      0.3474079379999466,
+      0.3610682359999373
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0006.flac",
+    "improvement": 2.0727059096097946,
+    "si_sdr": 1.9978525638580322,
+    "other_si_sdr": -5.706710338592529,
+    "oracle_improvement": 2.0727059096097946,
+    "cosines": [
+      [
+        0.02575038338739725,
+        0.16141029511056765
+      ],
+      [
+        -0.06665266408334608,
+        0.14105265655069057
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17060391375002837,
+    "block_seconds": [
+      0.3447197740000547,
+      0.33769588100005876
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0004.flac",
+    "improvement": -0.09739407896995544,
+    "si_sdr": -0.19805528223514557,
+    "other_si_sdr": -16.37278938293457,
+    "oracle_improvement": -0.09739407896995544,
+    "cosines": [
+      [
+        0.28368715342380957,
+        0.2415922517526663
+      ],
+      [
+        0.47204228536039516,
+        -0.05129247484010194
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.17060391375002837,
+    "block_seconds": [
+      0.3447197740000547,
+      0.33769588100005876
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0006.flac",
+    "improvement": -4.924556255340576,
+    "si_sdr": -7.939182281494141,
+    "other_si_sdr": -2.6388144493103027,
+    "oracle_improvement": -1.1777820587158203,
+    "cosines": [
+      [
+        0.10628481434117322,
+        0.14603550896001308
+      ],
+      [
+        0.14098261818806654,
+        0.10689749867690132
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.1765225057500004,
+    "block_seconds": [
+      0.3295270520000031,
+      0.37656297099999847
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0004.flac",
+    "improvement": 4.586139678955078,
+    "si_sdr": 1.5165019035339355,
+    "other_si_sdr": -4.192408084869385,
+    "oracle_improvement": 4.586139678955078,
+    "cosines": [
+      [
+        -0.10156651988388093,
+        0.37576562152878257
+      ],
+      [
+        -0.0283596979375859,
+        0.44211380629147595
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1765225057500004,
+    "block_seconds": [
+      0.3295270520000031,
+      0.37656297099999847
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0006.flac",
+    "improvement": null,
+    "si_sdr": -42.932682037353516,
+    "other_si_sdr": -34.57657241821289,
+    "oracle_improvement": 25.44518280029297,
+    "cosines": [
+      [
+        0.11121404424795482,
+        -0.05804701441619562
+      ],
+      [
+        0.12661176255942277,
+        0.007418123628637391
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1687385294999899,
+    "block_seconds": [
+      0.3289769589999878,
+      0.34597715899997183
+    ]
+  },
+  {
+    "pair": 1,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0005.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0004.flac",
+    "improvement": 17.118812881410122,
+    "si_sdr": 17.139671325683594,
+    "other_si_sdr": -43.762733459472656,
+    "oracle_improvement": 17.118812881410122,
+    "cosines": [
+      [
+        -0.08441545854421967,
+        0.4891725865245184
+      ],
+      [
+        -0.11529883587361775,
+        0.6300568110838891
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1687385294999899,
+    "block_seconds": [
+      0.3289769589999878,
+      0.34597715899997183
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0004.flac",
+    "improvement": 19.08446629345417,
+    "si_sdr": 18.932052612304688,
+    "other_si_sdr": -44.30692672729492,
+    "oracle_improvement": 19.08446629345417,
+    "cosines": [
+      [
+        -0.017136070957865956,
+        0.49798587410358336
+      ],
+      [
+        0.017011584726307635,
+        0.39567886712688105
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.16853548124998952,
+    "block_seconds": [
+      0.3336069419999603,
+      0.34053498299999774
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0004.flac",
+    "improvement": 19.02979451417923,
+    "si_sdr": 18.87737464904785,
+    "other_si_sdr": -42.074806213378906,
+    "oracle_improvement": 19.02979451417923,
+    "cosines": [
+      [
+        0.2549582421678872,
+        0.20747278608891995
+      ],
+      [
+        0.5231087891449084,
+        0.028226119183313365
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.16853548124998952,
+    "block_seconds": [
+      0.3336069419999603,
+      0.34053498299999774
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0004.flac",
+    "improvement": -2.867508828639984,
+    "si_sdr": -3.7699952125549316,
+    "other_si_sdr": -4.974791049957275,
+    "oracle_improvement": 12.081765711307526,
+    "cosines": [
+      [
+        -0.001929106923607385,
+        0.24193371325461024
+      ],
+      [
+        0.08119770699742507,
+        0.05389593557025565
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.16949734224999702,
+    "block_seconds": [
+      0.33214783799996894,
+      0.34584153100001913
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0004.flac",
+    "improvement": 10.285490989685059,
+    "si_sdr": 9.314059257507324,
+    "other_si_sdr": -49.932804107666016,
+    "oracle_improvement": 10.285490989685059,
+    "cosines": [
+      [
+        0.11965390549943022,
+        0.07769206832595622
+      ],
+      [
+        0.41886292772482336,
+        -0.08357376248700925
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.16949734224999702,
+    "block_seconds": [
+      0.33214783799996894,
+      0.34584153100001913
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0004.flac",
+    "improvement": 9.230142295360565,
+    "si_sdr": 9.38672924041748,
+    "other_si_sdr": -21.543304443359375,
+    "oracle_improvement": 9.230142295360565,
+    "cosines": [
+      [
+        0.02067413869411039,
+        0.2661162739762243
+      ],
+      [
+        0.09501673829309051,
+        0.2636517426471906
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17705500574999178,
+    "block_seconds": [
+      0.35292759099991144,
+      0.35529243200005567
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0004.flac",
+    "improvement": -5.147913187742233,
+    "si_sdr": -5.31898307800293,
+    "other_si_sdr": -2.47123646736145,
+    "oracle_improvement": 9.349239140748978,
+    "cosines": [
+      [
+        0.09169307725826559,
+        0.09169367659121269
+      ],
+      [
+        0.3421381334797395,
+        -0.11028551940761566
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.17705500574999178,
+    "block_seconds": [
+      0.35292759099991144,
+      0.35529243200005567
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0004.flac",
+    "improvement": 4.657164096832275,
+    "si_sdr": 1.3929033279418945,
+    "other_si_sdr": -22.105728149414062,
+    "oracle_improvement": 4.657164096832275,
+    "cosines": [
+      [
+        -0.1242704643802783,
+        0.414326041573117
+      ],
+      [
+        -0.0092375870251067,
+        0.19887431986899773
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1729298714999743,
+    "block_seconds": [
+      0.3317567259999805,
+      0.35996275999991667
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0004.flac",
+    "improvement": -0.6655468940734863,
+    "si_sdr": -3.8073196411132812,
+    "other_si_sdr": -3.562938928604126,
+    "oracle_improvement": 4.36765730381012,
+    "cosines": [
+      [
+        -0.05916164314185232,
+        0.12632586385207942
+      ],
+      [
+        0.3322652253499841,
+        -0.05212201004936767
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.1729298714999743,
+    "block_seconds": [
+      0.3317567259999805,
+      0.35996275999991667
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0004.flac",
+    "improvement": null,
+    "si_sdr": -35.064369201660156,
+    "other_si_sdr": 16.86979103088379,
+    "oracle_improvement": -1.2007675170898438,
+    "cosines": [
+      [
+        -0.00612574409190517,
+        0.06494578744533631
+      ],
+      [
+        -0.06472747618192964,
+        0.045217903743953534
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1558916267499626,
+    "block_seconds": [
+      0.3374920179999208,
+      0.2860744889999296
+    ]
+  },
+  {
+    "pair": 2,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3570/5694/3570-5694-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0004.flac",
+    "improvement": 16.90729482471943,
+    "si_sdr": 16.86979103088379,
+    "other_si_sdr": -35.064369201660156,
+    "oracle_improvement": 16.90729482471943,
+    "cosines": [
+      [
+        -0.19361277690345577,
+        0.27901442331101556
+      ],
+      [
+        -0.047043634166827664,
+        0.6032800471797489
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1558916267499626,
+    "block_seconds": [
+      0.3374920179999208,
+      0.2860744889999296
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0004.flac",
+    "improvement": 14.701102524995804,
+    "si_sdr": 15.192955017089844,
+    "other_si_sdr": -21.081520080566406,
+    "oracle_improvement": 14.701102524995804,
+    "cosines": [
+      [
+        0.09300467302556677,
+        0.5743151721051151
+      ],
+      [
+        -0.13285372983442706,
+        0.4403918822688045
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15195490725000127,
+    "block_seconds": [
+      0.2909007749999546,
+      0.3169188540000505
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0004.flac",
+    "improvement": 14.64655876159668,
+    "si_sdr": 15.138402938842773,
+    "other_si_sdr": -21.694631576538086,
+    "oracle_improvement": 14.64655876159668,
+    "cosines": [
+      [
+        0.46240500087741965,
+        0.06693562712866846
+      ],
+      [
+        0.6674240070419268,
+        0.034666959203427286
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15195490725000127,
+    "block_seconds": [
+      0.2909007749999546,
+      0.3169188540000505
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0004.flac",
+    "improvement": 7.870338946580887,
+    "si_sdr": 7.523648262023926,
+    "other_si_sdr": -18.976442337036133,
+    "oracle_improvement": 7.870338946580887,
+    "cosines": [
+      [
+        0.09573862604727075,
+        0.3581440302435037
+      ],
+      [
+        -0.1310653167721386,
+        0.4176889697006768
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1474053987500099,
+    "block_seconds": [
+      0.2841669010000487,
+      0.3054546939999909
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0004.flac",
+    "improvement": 11.222535014152527,
+    "si_sdr": 10.870589256286621,
+    "other_si_sdr": -21.467411041259766,
+    "oracle_improvement": 11.222535014152527,
+    "cosines": [
+      [
+        0.3247783455518962,
+        0.1528087204553501
+      ],
+      [
+        0.40417569903844525,
+        0.05250544937995675
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1474053987500099,
+    "block_seconds": [
+      0.2841669010000487,
+      0.3054546939999909
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0004.flac",
+    "improvement": -0.4959334582090378,
+    "si_sdr": 0.214102640748024,
+    "other_si_sdr": -11.066253662109375,
+    "oracle_improvement": -0.4959334582090378,
+    "cosines": [
+      [
+        0.29829866296507646,
+        0.18608859346597667
+      ],
+      [
+        -0.08148521881718111,
+        0.3057087271456097
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14664391075001504,
+    "block_seconds": [
+      0.2769379180000442,
+      0.30963772500001596
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0004.flac",
+    "improvement": 1.5618873536586761,
+    "si_sdr": 1.6564006805419922,
+    "other_si_sdr": -3.868107557296753,
+    "oracle_improvement": 1.5618873536586761,
+    "cosines": [
+      [
+        0.09283992785595149,
+        0.16567886069535454
+      ],
+      [
+        0.3636820166825987,
+        0.02754743334149557
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14664391075001504,
+    "block_seconds": [
+      0.2769379180000442,
+      0.30963772500001596
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0004.flac",
+    "improvement": 2.9293144941329956,
+    "si_sdr": 0.49804961681365967,
+    "other_si_sdr": -8.829756736755371,
+    "oracle_improvement": 3.7750433683395386,
+    "cosines": [
+      [
+        0.41422497601556524,
+        0.20222640386366877
+      ],
+      [
+        -0.06841937408821329,
+        0.0770959874206314
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14600556549999055,
+    "block_seconds": [
+      0.28758848899997247,
+      0.29643377299998974
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0004.flac",
+    "improvement": -0.4106600284576416,
+    "si_sdr": -2.9952340126037598,
+    "other_si_sdr": 1.3437784910202026,
+    "oracle_improvement": -0.4106600284576416,
+    "cosines": [
+      [
+        0.12174346074900286,
+        0.05487303366135132
+      ],
+      [
+        0.38920540564561784,
+        0.11060687874840038
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14600556549999055,
+    "block_seconds": [
+      0.28758848899997247,
+      0.29643377299998974
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0004.flac",
+    "improvement": null,
+    "si_sdr": -42.44002914428711,
+    "other_si_sdr": -35.83283233642578,
+    "oracle_improvement": 3.7685813903808594,
+    "cosines": [
+      [
+        0.014706788644194176,
+        0.21342921896763906
+      ],
+      [
+        -0.10121630376903296,
+        0.04606696534242095
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.16253538349997143,
+    "block_seconds": [
+      0.3418384869999045,
+      0.30830304699998123
+    ]
+  },
+  {
+    "pair": 3,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4992/23283/4992-23283-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0004.flac",
+    "improvement": 17.791312049143016,
+    "si_sdr": 17.776073455810547,
+    "other_si_sdr": -24.409194946289062,
+    "oracle_improvement": 17.791312049143016,
+    "cosines": [
+      [
+        0.6192966148575749,
+        0.101241506231834
+      ],
+      [
+        0.6437691129479365,
+        0.1968089724538211
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.16253538349997143,
+    "block_seconds": [
+      0.3418384869999045,
+      0.30830304699998123
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0004.flac",
+    "improvement": 16.375578459817916,
+    "si_sdr": 16.380985260009766,
+    "other_si_sdr": -32.35403823852539,
+    "oracle_improvement": 16.375578459817916,
+    "cosines": [
+      [
+        0.684512163274292,
+        0.03578278514771195
+      ],
+      [
+        0.6975493237572822,
+        0.019970293093049214
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.16144201225000643,
+    "block_seconds": [
+      0.30640778800000135,
+      0.33936026100002437
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0004.flac",
+    "improvement": 16.375395515933633,
+    "si_sdr": 16.380800247192383,
+    "other_si_sdr": -32.38167953491211,
+    "oracle_improvement": 16.375395515933633,
+    "cosines": [
+      [
+        0.022322438559006272,
+        0.6293595003867843
+      ],
+      [
+        0.043691676432159404,
+        0.6569219943569684
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.16144201225000643,
+    "block_seconds": [
+      0.30640778800000135,
+      0.33936026100002437
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0004.flac",
+    "improvement": 9.661187171936035,
+    "si_sdr": 8.879802703857422,
+    "other_si_sdr": -31.578781127929688,
+    "oracle_improvement": 9.661187171936035,
+    "cosines": [
+      [
+        0.3372810353837658,
+        0.028466065428688053
+      ],
+      [
+        0.3754126674840485,
+        0.013443355447814467
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14778101674997401,
+    "block_seconds": [
+      0.30208013799995115,
+      0.2890439289999449
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0004.flac",
+    "improvement": 11.060627102851868,
+    "si_sdr": 10.272623062133789,
+    "other_si_sdr": -27.14919662475586,
+    "oracle_improvement": 11.060627102851868,
+    "cosines": [
+      [
+        0.11056326706839675,
+        0.5621750423697076
+      ],
+      [
+        -0.024861025138109616,
+        0.4142164145188618
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14778101674997401,
+    "block_seconds": [
+      0.30208013799995115,
+      0.2890439289999449
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0004.flac",
+    "improvement": 9.249107390642166,
+    "si_sdr": 8.8845796585083,
+    "other_si_sdr": -19.585962295532227,
+    "oracle_improvement": 9.249107390642166,
+    "cosines": [
+      [
+        0.45203101595931294,
+        0.039009575430409504
+      ],
+      [
+        0.5265383192377942,
+        -0.003143230515218951
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15641001225003492,
+    "block_seconds": [
+      0.29738523700007136,
+      0.32825481200006834
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0004.flac",
+    "improvement": 8.852865010499954,
+    "si_sdr": 9.184792518615723,
+    "other_si_sdr": -22.31978416442871,
+    "oracle_improvement": 8.852865010499954,
+    "cosines": [
+      [
+        -0.024514483676841677,
+        0.46514954554029764
+      ],
+      [
+        0.06110979397048329,
+        0.35922133134000733
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15641001225003492,
+    "block_seconds": [
+      0.29738523700007136,
+      0.32825481200006834
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0004.flac",
+    "improvement": 6.393464803695679,
+    "si_sdr": 3.6228418350219727,
+    "other_si_sdr": -27.912282943725586,
+    "oracle_improvement": 6.393464803695679,
+    "cosines": [
+      [
+        0.4551514202051805,
+        0.0219810162687707
+      ],
+      [
+        0.6304284849015229,
+        -0.024724329315299005
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14621275150000201,
+    "block_seconds": [
+      0.2982419200000095,
+      0.28660908599999857
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0004.flac",
+    "improvement": 4.571625709533691,
+    "si_sdr": 1.371626853942871,
+    "other_si_sdr": -22.193302154541016,
+    "oracle_improvement": 4.571625709533691,
+    "cosines": [
+      [
+        -0.032467577304253016,
+        0.360964654933692
+      ],
+      [
+        -0.004030232018554243,
+        0.48373812021186174
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14621275150000201,
+    "block_seconds": [
+      0.2982419200000095,
+      0.28660908599999857
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0004.flac",
+    "improvement": null,
+    "si_sdr": -61.82720947265625,
+    "other_si_sdr": 10.472029685974121,
+    "oracle_improvement": 3.015674591064453,
+    "cosines": [
+      [
+        -0.009757148713560284,
+        0.08362406663666967
+      ],
+      [
+        0.06437212425071705,
+        -0.0789286890387028
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.15750932099996362,
+    "block_seconds": [
+      0.30674203899991426,
+      0.3232952449999402
+    ]
+  },
+  {
+    "pair": 4,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/6829/68769/6829-68769-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0004.flac",
+    "improvement": 10.576418988406658,
+    "si_sdr": 10.472029685974121,
+    "other_si_sdr": -61.82720947265625,
+    "oracle_improvement": 10.576418988406658,
+    "cosines": [
+      [
+        0.23577373447779917,
+        0.6670984710528911
+      ],
+      [
+        0.6139612948446833,
+        0.15944648548468052
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.15750932099996362,
+    "block_seconds": [
+      0.30674203899991426,
+      0.3232952449999402
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0005.flac",
+    "improvement": 17.47376672923565,
+    "si_sdr": 17.347299575805664,
+    "other_si_sdr": -40.604095458984375,
+    "oracle_improvement": 17.47376672923565,
+    "cosines": [
+      [
+        0.2547602042892654,
+        0.640139908231826
+      ],
+      [
+        0.18906092565961352,
+        0.6521729469626556
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1408457487499959,
+    "block_seconds": [
+      0.2841419110000061,
+      0.2792410839999775
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0004.flac",
+    "improvement": 17.438075989484787,
+    "si_sdr": 17.311565399169922,
+    "other_si_sdr": -40.942283630371094,
+    "oracle_improvement": 17.438075989484787,
+    "cosines": [
+      [
+        0.5238500589111508,
+        0.15752297321734104
+      ],
+      [
+        0.5262969130875246,
+        0.1586199768703731
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1408457487499959,
+    "block_seconds": [
+      0.2841419110000061,
+      0.2792410839999775
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0005.flac",
+    "improvement": 11.098379135131836,
+    "si_sdr": 10.202921867370605,
+    "other_si_sdr": -29.070987701416016,
+    "oracle_improvement": 11.098379135131836,
+    "cosines": [
+      [
+        0.1760913435704887,
+        0.24902585967419355
+      ],
+      [
+        0.09684592008385591,
+        0.28291389328861
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14196639400000777,
+    "block_seconds": [
+      0.2802558160000217,
+      0.2876097600000094
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0004.flac",
+    "improvement": 10.161539494991302,
+    "si_sdr": 9.246152877807617,
+    "other_si_sdr": -40.344970703125,
+    "oracle_improvement": 10.161539494991302,
+    "cosines": [
+      [
+        0.3609465631634323,
+        0.04590462504360232
+      ],
+      [
+        0.25620798450127263,
+        0.17123514387505961
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14196639400000777,
+    "block_seconds": [
+      0.2802558160000217,
+      0.2876097600000094
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0005.flac",
+    "improvement": 4.033812433481216,
+    "si_sdr": 4.5,
+    "other_si_sdr": -10.960277557373047,
+    "oracle_improvement": 4.033812433481216,
+    "cosines": [
+      [
+        0.22175540857820533,
+        0.40014031592522514
+      ],
+      [
+        0.2590303118007983,
+        0.380853880520592
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14414605200002484,
+    "block_seconds": [
+      0.2888851360000899,
+      0.28769907200000944
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0004.flac",
+    "improvement": 4.218620538711548,
+    "si_sdr": 3.4195806980133057,
+    "other_si_sdr": -12.968796730041504,
+    "oracle_improvement": 4.218620538711548,
+    "cosines": [
+      [
+        0.4244754999741931,
+        0.005968106373910972
+      ],
+      [
+        0.20778602534044754,
+        0.053252543646475164
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14414605200002484,
+    "block_seconds": [
+      0.2888851360000899,
+      0.28769907200000944
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0005.flac",
+    "improvement": 4.3501657247543335,
+    "si_sdr": 0.9270275831222534,
+    "other_si_sdr": -4.856868743896484,
+    "oracle_improvement": 4.3501657247543335,
+    "cosines": [
+      [
+        0.13469672877387237,
+        0.3980416931718118
+      ],
+      [
+        0.10757216131308588,
+        0.5324144922890495
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14083140049999088,
+    "block_seconds": [
+      0.2674600379999674,
+      0.2958655639999961
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0004.flac",
+    "improvement": -5.255358457565308,
+    "si_sdr": -8.182148933410645,
+    "other_si_sdr": -25.019548416137695,
+    "oracle_improvement": 0.05296945571899414,
+    "cosines": [
+      [
+        0.3248823052727676,
+        0.056297480065340855
+      ],
+      [
+        0.2102465275111481,
+        0.2015197024875643
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14083140049999088,
+    "block_seconds": [
+      0.2674600379999674,
+      0.2958655639999961
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0005.flac",
+    "improvement": null,
+    "si_sdr": -37.081626892089844,
+    "other_si_sdr": 16.756391525268555,
+    "oracle_improvement": -0.31375694274902344,
+    "cosines": [
+      [
+        0.07161193120183501,
+        0.264539589738652
+      ],
+      [
+        0.08174662063431741,
+        0.2146043504791117
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14092479450002315,
+    "block_seconds": [
+      0.2819908360000909,
+      0.2817083420000017
+    ]
+  },
+  {
+    "pair": 5,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8230/279154/8230-279154-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0004.flac",
+    "improvement": 16.666901260614395,
+    "si_sdr": 16.756391525268555,
+    "other_si_sdr": -37.081626892089844,
+    "oracle_improvement": 16.666901260614395,
+    "cosines": [
+      [
+        0.03575756800440756,
+        0.6499762949760828
+      ],
+      [
+        0.18539604112065244,
+        0.5533169564529464
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14092479450002315,
+    "block_seconds": [
+      0.2819908360000909,
+      0.2817083420000017
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0004.flac",
+    "improvement": 17.035307601094246,
+    "si_sdr": 16.918428421020508,
+    "other_si_sdr": -42.9862060546875,
+    "oracle_improvement": 17.035307601094246,
+    "cosines": [
+      [
+        -0.017825132221933437,
+        0.47304015719944553
+      ],
+      [
+        0.06025533145520873,
+        0.6783328566823578
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1449598000000094,
+    "block_seconds": [
+      0.28845121200004087,
+      0.29138798799999677
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0004.flac",
+    "improvement": 17.099945463240147,
+    "si_sdr": 16.98306655883789,
+    "other_si_sdr": -43.351112365722656,
+    "oracle_improvement": 17.099945463240147,
+    "cosines": [
+      [
+        0.5064101240125981,
+        -0.03113728088695082
+      ],
+      [
+        0.4646327344239927,
+        -0.01240282799467756
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1449598000000094,
+    "block_seconds": [
+      0.28845121200004087,
+      0.29138798799999677
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0004.flac",
+    "improvement": 9.527234613895416,
+    "si_sdr": 8.642057418823242,
+    "other_si_sdr": -33.525230407714844,
+    "oracle_improvement": 9.527234613895416,
+    "cosines": [
+      [
+        -0.0044754064443405525,
+        0.20378042185658757
+      ],
+      [
+        -0.03878661752815599,
+        0.4157489122707028
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14124801999997771,
+    "block_seconds": [
+      0.26758499699997174,
+      0.2974070829999391
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0004.flac",
+    "improvement": 12.440545201301575,
+    "si_sdr": 11.523652076721191,
+    "other_si_sdr": -39.065216064453125,
+    "oracle_improvement": 12.440545201301575,
+    "cosines": [
+      [
+        0.2052226706618208,
+        0.025426937385120148
+      ],
+      [
+        0.22214786909355677,
+        0.02501567222531465
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14124801999997771,
+    "block_seconds": [
+      0.26758499699997174,
+      0.2974070829999391
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0004.flac",
+    "improvement": 10.59218442440033,
+    "si_sdr": 10.45464038848877,
+    "other_si_sdr": -23.332141876220703,
+    "oracle_improvement": 10.59218442440033,
+    "cosines": [
+      [
+        0.06377291171363635,
+        0.35186485196461836
+      ],
+      [
+        -0.011939173181223844,
+        0.38321373939334014
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1442508107500089,
+    "block_seconds": [
+      0.29386887400005435,
+      0.28313436899998123
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0004.flac",
+    "improvement": 10.637132793664932,
+    "si_sdr": 10.334569931030273,
+    "other_si_sdr": -25.661762237548828,
+    "oracle_improvement": 10.637132793664932,
+    "cosines": [
+      [
+        0.3649153363620432,
+        -0.05046923308284953
+      ],
+      [
+        0.23880186818929683,
+        0.0371073037549698
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1442508107500089,
+    "block_seconds": [
+      0.29386887400005435,
+      0.28313436899998123
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0004.flac",
+    "improvement": 4.629023194313049,
+    "si_sdr": 1.4903939962387085,
+    "other_si_sdr": -30.346967697143555,
+    "oracle_improvement": 4.629023194313049,
+    "cosines": [
+      [
+        0.10782123188460592,
+        0.33122499091350316
+      ],
+      [
+        0.11136461923562366,
+        0.30182118205878805
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1452238409999893,
+    "block_seconds": [
+      0.28886606100002155,
+      0.2920293029999357
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0004.flac",
+    "improvement": 6.778432130813599,
+    "si_sdr": 3.6696038246154785,
+    "other_si_sdr": -28.570234298706055,
+    "oracle_improvement": 6.778432130813599,
+    "cosines": [
+      [
+        0.41745706834808033,
+        0.14437297017993606
+      ],
+      [
+        0.3833053171081592,
+        0.045091192288025994
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1452238409999893,
+    "block_seconds": [
+      0.28886606100002155,
+      0.2920293029999357
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0004.flac",
+    "improvement": null,
+    "si_sdr": -54.230010986328125,
+    "other_si_sdr": -33.38518142700195,
+    "oracle_improvement": 4.432594299316406,
+    "cosines": [
+      [
+        0.010718724524243675,
+        0.1709717222408089
+      ],
+      [
+        0.11635368057326155,
+        0.15108250994120778
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.13752657349999708,
+    "block_seconds": [
+      0.27654965900001116,
+      0.2735566349999772
+    ]
+  },
+  {
+    "pair": 6,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0004.flac",
+    "improvement": 17.052435360848904,
+    "si_sdr": 17.069917678833008,
+    "other_si_sdr": -35.837623596191406,
+    "oracle_improvement": 17.052435360848904,
+    "cosines": [
+      [
+        0.4590269683435544,
+        0.047619117239790246
+      ],
+      [
+        0.4646936166196697,
+        0.1409352302189567
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.13752657349999708,
+    "block_seconds": [
+      0.27654965900001116,
+      0.2735566349999772
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0004.flac",
+    "improvement": 16.897213365882635,
+    "si_sdr": 16.928224563598633,
+    "other_si_sdr": -31.152454376220703,
+    "oracle_improvement": 16.897213365882635,
+    "cosines": [
+      [
+        0.6395632796496515,
+        0.04382743232144017
+      ],
+      [
+        0.6918117323174138,
+        0.032307496111365935
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15739907174997825,
+    "block_seconds": [
+      0.3430746709999539,
+      0.28652161599995907
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0004.flac",
+    "improvement": 16.919958740538277,
+    "si_sdr": 16.92001724243164,
+    "other_si_sdr": -33.47725296020508,
+    "oracle_improvement": 16.919958740538277,
+    "cosines": [
+      [
+        -0.08449980661434989,
+        0.6784317321093222
+      ],
+      [
+        -0.16317338079083132,
+        0.5872630413608765
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15739907174997825,
+    "block_seconds": [
+      0.3430746709999539,
+      0.28652161599995907
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0004.flac",
+    "improvement": 11.788151264190674,
+    "si_sdr": 11.018997192382812,
+    "other_si_sdr": -28.218679428100586,
+    "oracle_improvement": 11.788151264190674,
+    "cosines": [
+      [
+        0.313523169211642,
+        0.134364728984641
+      ],
+      [
+        0.4279191690920145,
+        0.04977032791059623
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15450835924997364,
+    "block_seconds": [
+      0.30558709799993267,
+      0.3124463389999619
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0004.flac",
+    "improvement": 9.604934573173523,
+    "si_sdr": 8.818689346313477,
+    "other_si_sdr": -32.0256462097168,
+    "oracle_improvement": 9.604934573173523,
+    "cosines": [
+      [
+        -0.08515280561544897,
+        0.43071516451148417
+      ],
+      [
+        -0.21721374008254138,
+        0.31842947165396485
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15450835924997364,
+    "block_seconds": [
+      0.30558709799993267,
+      0.3124463389999619
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0004.flac",
+    "improvement": 8.018318235874176,
+    "si_sdr": 7.974796772003174,
+    "other_si_sdr": -16.45749282836914,
+    "oracle_improvement": 8.018318235874176,
+    "cosines": [
+      [
+        0.35478539481635996,
+        -0.07487225303052407
+      ],
+      [
+        0.40089806136217754,
+        -0.019747970183017775
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1491956762500024,
+    "block_seconds": [
+      0.2955500610000854,
+      0.3012326439999242
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0004.flac",
+    "improvement": 7.7718982100486755,
+    "si_sdr": 8.07149600982666,
+    "other_si_sdr": -19.043888092041016,
+    "oracle_improvement": 7.7718982100486755,
+    "cosines": [
+      [
+        -0.021944339542709003,
+        0.5525005844133106
+      ],
+      [
+        -0.12605512442804365,
+        0.2893702894198634
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1491956762500024,
+    "block_seconds": [
+      0.2955500610000854,
+      0.3012326439999242
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0004.flac",
+    "improvement": -0.726055383682251,
+    "si_sdr": -3.6581010818481445,
+    "other_si_sdr": -11.419727325439453,
+    "oracle_improvement": -0.726055383682251,
+    "cosines": [
+      [
+        0.30434554423407234,
+        0.22188706655553528
+      ],
+      [
+        0.13893912206790518,
+        0.15864371079759676
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.15035951774999035,
+    "block_seconds": [
+      0.31029297800000677,
+      0.2911450929999546
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0004.flac",
+    "improvement": 3.43735009431839,
+    "si_sdr": 0.4481056332588196,
+    "other_si_sdr": -4.338391304016113,
+    "oracle_improvement": 3.43735009431839,
+    "cosines": [
+      [
+        0.12671033218438812,
+        0.4356532799029015
+      ],
+      [
+        0.02340610672104408,
+        0.24616497536132403
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15035951774999035,
+    "block_seconds": [
+      0.31029297800000677,
+      0.2911450929999546
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0004.flac",
+    "improvement": null,
+    "si_sdr": -44.550724029541016,
+    "other_si_sdr": -10.129064559936523,
+    "oracle_improvement": -17.290874481201172,
+    "cosines": [
+      [
+        0.10207616064425137,
+        0.026536821915620373
+      ],
+      [
+        -0.01366738997332011,
+        0.018640221136926326
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.15320730424997464,
+    "block_seconds": [
+      0.3198857769999677,
+      0.2929434399999309
+    ]
+  },
+  {
+    "pair": 7,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0004.flac",
+    "improvement": 17.240390446037054,
+    "si_sdr": 17.289592742919922,
+    "other_si_sdr": -58.846092224121094,
+    "oracle_improvement": 17.240390446037054,
+    "cosines": [
+      [
+        0.21308664887460016,
+        0.7240527558135219
+      ],
+      [
+        0.08705738224911759,
+        0.6863890876434793
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15320730424997464,
+    "block_seconds": [
+      0.3198857769999677,
+      0.2929434399999309
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0004.flac",
+    "improvement": 14.359159719198942,
+    "si_sdr": 14.380806922912598,
+    "other_si_sdr": -25.229909896850586,
+    "oracle_improvement": 14.359159719198942,
+    "cosines": [
+      [
+        0.4319096200778947,
+        -0.17267198195563166
+      ],
+      [
+        0.33698231105681553,
+        -0.19955005260124412
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1480453210000121,
+    "block_seconds": [
+      0.298081848000038,
+      0.29409943600001043
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0004.flac",
+    "improvement": 14.376981049776077,
+    "si_sdr": 14.398576736450195,
+    "other_si_sdr": -29.9211483001709,
+    "oracle_improvement": 14.376981049776077,
+    "cosines": [
+      [
+        0.03667940485659053,
+        0.7568803214045314
+      ],
+      [
+        0.04614513264845871,
+        0.7599786236328976
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1480453210000121,
+    "block_seconds": [
+      0.298081848000038,
+      0.29409943600001043
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0004.flac",
+    "improvement": 8.594151139259338,
+    "si_sdr": 7.827243328094482,
+    "other_si_sdr": -17.512845993041992,
+    "oracle_improvement": 8.594151139259338,
+    "cosines": [
+      [
+        0.31495762437892094,
+        -0.18794763740199702
+      ],
+      [
+        -0.12171859286699122,
+        0.2876816644213116
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14421191975000625,
+    "block_seconds": [
+      0.2941368900000043,
+      0.28271078900002067
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0004.flac",
+    "improvement": 8.425517439842224,
+    "si_sdr": 7.635932445526123,
+    "other_si_sdr": -29.606475830078125,
+    "oracle_improvement": 8.425517439842224,
+    "cosines": [
+      [
+        0.14578858554826757,
+        0.4850380103410225
+      ],
+      [
+        0.4429358672911735,
+        0.014766474764341918
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14421191975000625,
+    "block_seconds": [
+      0.2941368900000043,
+      0.28271078900002067
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0004.flac",
+    "improvement": 7.400257151573896,
+    "si_sdr": 7.441761016845703,
+    "other_si_sdr": -12.65307331085205,
+    "oracle_improvement": 7.400257151573896,
+    "cosines": [
+      [
+        0.319597656867337,
+        -0.11550223094401815
+      ],
+      [
+        0.18033029468426653,
+        -0.09728410348650712
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.13722367775000066,
+    "block_seconds": [
+      0.2740555540000287,
+      0.27483915699997397
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0004.flac",
+    "improvement": 7.457866806536913,
+    "si_sdr": 7.438544273376465,
+    "other_si_sdr": -20.027698516845703,
+    "oracle_improvement": 7.457866806536913,
+    "cosines": [
+      [
+        0.09200486616840028,
+        0.38357080209115124
+      ],
+      [
+        -0.04005903261671935,
+        0.3774678029129389
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.13722367775000066,
+    "block_seconds": [
+      0.2740555540000287,
+      0.27483915699997397
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0004.flac",
+    "improvement": -3.3118247985839844,
+    "si_sdr": -6.513369560241699,
+    "other_si_sdr": -13.731304168701172,
+    "oracle_improvement": -1.3791875839233398,
+    "cosines": [
+      [
+        -0.11855481329084269,
+        0.004272047635848061
+      ],
+      [
+        -0.0926714496442638,
+        -0.05721883179332689
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1456223742499958,
+    "block_seconds": [
+      0.29633700299996235,
+      0.28615249400002085
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0004.flac",
+    "improvement": 3.8703917264938354,
+    "si_sdr": 0.9874292612075806,
+    "other_si_sdr": -5.279681205749512,
+    "oracle_improvement": 3.8703917264938354,
+    "cosines": [
+      [
+        0.486576967830459,
+        0.060538242228693105
+      ],
+      [
+        0.168136471570201,
+        0.07100390759325564
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1456223742499958,
+    "block_seconds": [
+      0.29633700299996235,
+      0.28615249400002085
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0004.flac",
+    "improvement": null,
+    "si_sdr": -32.32590866088867,
+    "other_si_sdr": -31.423931121826172,
+    "oracle_improvement": 3.8268470764160156,
+    "cosines": [
+      [
+        -0.1688652395385387,
+        0.05668831517028326
+      ],
+      [
+        -0.2132469743238981,
+        -0.01773360413527896
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14103364624997994,
+    "block_seconds": [
+      0.2740514939999912,
+      0.2900830909999286
+    ]
+  },
+  {
+    "pair": 8,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/3729/6852/3729-6852-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0004.flac",
+    "improvement": 16.615180196706206,
+    "si_sdr": 16.61319351196289,
+    "other_si_sdr": -54.167449951171875,
+    "oracle_improvement": 16.615180196706206,
+    "cosines": [
+      [
+        0.754490201151056,
+        -0.060402613709770805
+      ],
+      [
+        0.7718194175143281,
+        -0.07082230648465632
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14103364624997994,
+    "block_seconds": [
+      0.2740514939999912,
+      0.2900830909999286
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0007.flac",
+    "improvement": 17.23806931823492,
+    "si_sdr": 17.20798683166504,
+    "other_si_sdr": -36.68861770629883,
+    "oracle_improvement": 17.23806931823492,
+    "cosines": [
+      [
+        0.810187206318679,
+        -0.010645553956540557
+      ],
+      [
+        0.6727684787596186,
+        -0.08326649627873131
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.13964299975000927,
+    "block_seconds": [
+      0.2745932680001033,
+      0.28397873099993376
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0004.flac",
+    "improvement": 17.203062187880278,
+    "si_sdr": 17.17298126220703,
+    "other_si_sdr": -35.99216079711914,
+    "oracle_improvement": 17.203062187880278,
+    "cosines": [
+      [
+        -0.13512248107978392,
+        0.47660300991244936
+      ],
+      [
+        -0.014407963490222006,
+        0.6248914102380919
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.13964299975000927,
+    "block_seconds": [
+      0.2745932680001033,
+      0.28397873099993376
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0007.flac",
+    "improvement": 10.973480999469757,
+    "si_sdr": 10.171422958374023,
+    "other_si_sdr": -36.55073928833008,
+    "oracle_improvement": 10.973480999469757,
+    "cosines": [
+      [
+        0.40252280209491376,
+        -0.1198027513947702
+      ],
+      [
+        0.3881179193050357,
+        -0.04721221756514066
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1448187002499992,
+    "block_seconds": [
+      0.3032388889999993,
+      0.27603591199999755
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0004.flac",
+    "improvement": 10.39659559726715,
+    "si_sdr": 9.576395988464355,
+    "other_si_sdr": -30.200664520263672,
+    "oracle_improvement": 10.39659559726715,
+    "cosines": [
+      [
+        -0.09381172790249584,
+        0.4553819163018592
+      ],
+      [
+        -0.06463098627557787,
+        0.5195749701980581
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1448187002499992,
+    "block_seconds": [
+      0.3032388889999993,
+      0.27603591199999755
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0007.flac",
+    "improvement": 6.966962417587638,
+    "si_sdr": 6.988182544708252,
+    "other_si_sdr": -19.8424129486084,
+    "oracle_improvement": 6.966962417587638,
+    "cosines": [
+      [
+        0.5523549596306636,
+        0.19986032224049444
+      ],
+      [
+        0.5091341439157232,
+        0.07333535903145
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14179706950000082,
+    "block_seconds": [
+      0.2760862709999401,
+      0.29110200700006317
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0004.flac",
+    "improvement": 7.211433172225952,
+    "si_sdr": 6.996696472167969,
+    "other_si_sdr": -15.150960922241211,
+    "oracle_improvement": 7.211433172225952,
+    "cosines": [
+      [
+        -0.016317820426631494,
+        0.14156120360523278
+      ],
+      [
+        -0.047112976944141974,
+        0.35820635885282426
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14179706950000082,
+    "block_seconds": [
+      0.2760862709999401,
+      0.29110200700006317
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0007.flac",
+    "improvement": 1.1087807416915894,
+    "si_sdr": -1.957844614982605,
+    "other_si_sdr": -0.46173256635665894,
+    "oracle_improvement": 1.1087807416915894,
+    "cosines": [
+      [
+        0.6122489215259175,
+        -0.05358662492380403
+      ],
+      [
+        0.1477767947144786,
+        -0.05212019983169224
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.13614929774999496,
+    "block_seconds": [
+      0.2711863650000623,
+      0.2734108259999175
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0004.flac",
+    "improvement": -5.47828221321106,
+    "si_sdr": -8.567770004272461,
+    "other_si_sdr": -4.668702602386475,
+    "oracle_improvement": 2.6277552247047424,
+    "cosines": [
+      [
+        -0.02767429166020812,
+        0.030055865518321255
+      ],
+      [
+        0.19430019220378247,
+        -0.02021173355951325
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.13614929774999496,
+    "block_seconds": [
+      0.2711863650000623,
+      0.2734108259999175
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0007.flac",
+    "improvement": null,
+    "si_sdr": -43.053367614746094,
+    "other_si_sdr": -30.594829559326172,
+    "oracle_improvement": -0.8109474182128906,
+    "cosines": [
+      [
+        -0.03881070897064165,
+        0.04151699046549686
+      ],
+      [
+        -0.04967222607863988,
+        -0.026110471148260823
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1407827554999983,
+    "block_seconds": [
+      0.28332656199995654,
+      0.27980446000003667
+    ]
+  },
+  {
+    "pair": 9,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5142/33396/5142-33396-0006.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0004.flac",
+    "improvement": 13.06837310642004,
+    "si_sdr": 12.985769271850586,
+    "other_si_sdr": -46.85588836669922,
+    "oracle_improvement": 13.06837310642004,
+    "cosines": [
+      [
+        0.47284328184324365,
+        0.0038408983468914693
+      ],
+      [
+        0.5309306306307311,
+        0.031116160015977938
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1407827554999983,
+    "block_seconds": [
+      0.28332656199995654,
+      0.27980446000003667
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0004.flac",
+    "improvement": 16.530560977756977,
+    "si_sdr": 16.48469352722168,
+    "other_si_sdr": -33.16474151611328,
+    "oracle_improvement": 16.530560977756977,
+    "cosines": [
+      [
+        0.003384874782489014,
+        0.40841461368129733
+      ],
+      [
+        0.0873403237565172,
+        0.5551670300304519
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1500246329999868,
+    "block_seconds": [
+      0.28925070799994046,
+      0.31084782400000677
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0004.flac",
+    "improvement": 16.514304511249065,
+    "si_sdr": 16.46811866760254,
+    "other_si_sdr": -34.806697845458984,
+    "oracle_improvement": 16.514304511249065,
+    "cosines": [
+      [
+        0.6893000221009848,
+        -0.04006585525495367
+      ],
+      [
+        0.7346357111260697,
+        -0.06605141211950098
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1500246329999868,
+    "block_seconds": [
+      0.28925070799994046,
+      0.31084782400000677
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0004.flac",
+    "improvement": 10.692146599292755,
+    "si_sdr": 9.865697860717773,
+    "other_si_sdr": -24.727275848388672,
+    "oracle_improvement": 10.692146599292755,
+    "cosines": [
+      [
+        0.0806354447676557,
+        0.25128158639800535
+      ],
+      [
+        0.11114537654604342,
+        0.3238829672286083
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14287412525001741,
+    "block_seconds": [
+      0.2937989460000381,
+      0.27769755500003157
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0004.flac",
+    "improvement": 9.937538504600525,
+    "si_sdr": 9.083491325378418,
+    "other_si_sdr": -33.882633209228516,
+    "oracle_improvement": 9.937538504600525,
+    "cosines": [
+      [
+        0.5243554220387239,
+        -0.04354952289818237
+      ],
+      [
+        0.5271410758327306,
+        0.036133916239613754
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14287412525001741,
+    "block_seconds": [
+      0.2937989460000381,
+      0.27769755500003157
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0004.flac",
+    "improvement": 1.0863432735204697,
+    "si_sdr": 1.1747972965240479,
+    "other_si_sdr": -8.066144943237305,
+    "oracle_improvement": 1.8512908071279526,
+    "cosines": [
+      [
+        0.2608679918362593,
+        -0.06892738751318682
+      ],
+      [
+        0.11912059188203691,
+        0.15331958095768827
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14499397424998506,
+    "block_seconds": [
+      0.2860240499999236,
+      0.29395184700001664
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0004.flac",
+    "improvement": 2.0076241195201874,
+    "si_sdr": 1.8757762908935547,
+    "other_si_sdr": -8.840934753417969,
+    "oracle_improvement": 2.0076241195201874,
+    "cosines": [
+      [
+        -0.028840498607731288,
+        0.5071604050440017
+      ],
+      [
+        0.11363296517901168,
+        0.1362623149218284
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14499397424998506,
+    "block_seconds": [
+      0.2860240499999236,
+      0.29395184700001664
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0004.flac",
+    "improvement": 2.0133506059646606,
+    "si_sdr": -0.9614006280899048,
+    "other_si_sdr": -24.809783935546875,
+    "oracle_improvement": 2.0133506059646606,
+    "cosines": [
+      [
+        0.19118237151848594,
+        0.0287909220869617
+      ],
+      [
+        0.11490445881920983,
+        0.24560854923766537
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.1746672975000081,
+    "block_seconds": [
+      0.33870751400002064,
+      0.3599616760000117
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0004.flac",
+    "improvement": 11.383591651916504,
+    "si_sdr": 8.24410343170166,
+    "other_si_sdr": -19.4975643157959,
+    "oracle_improvement": 11.383591651916504,
+    "cosines": [
+      [
+        -0.06190863617073694,
+        0.5692599627991127
+      ],
+      [
+        0.6448305742058915,
+        -0.09833640992119153
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.1746672975000081,
+    "block_seconds": [
+      0.33870751400002064,
+      0.3599616760000117
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0004.flac",
+    "improvement": null,
+    "si_sdr": -62.184635162353516,
+    "other_si_sdr": -3.410369873046875,
+    "oracle_improvement": 2.269390106201172,
+    "cosines": [
+      [
+        0.05848249852384277,
+        0.01033456908861173
+      ],
+      [
+        -0.0072501202606314475,
+        0.010921044031836094
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.1558868754999878,
+    "block_seconds": [
+      0.32724106499995287,
+      0.29630643699999837
+    ]
+  },
+  {
+    "pair": 10,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7021/79730/7021-79730-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0004.flac",
+    "improvement": 14.070704124867916,
+    "si_sdr": 14.014446258544922,
+    "other_si_sdr": -49.920127868652344,
+    "oracle_improvement": 14.070704124867916,
+    "cosines": [
+      [
+        -0.08838268308929081,
+        0.7206611926333051
+      ],
+      [
+        -0.14938079189163922,
+        0.6497317656400883
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1558868754999878,
+    "block_seconds": [
+      0.32724106499995287,
+      0.29630643699999837
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0004.flac",
+    "improvement": 15.678915619850159,
+    "si_sdr": 15.608741760253906,
+    "other_si_sdr": -33.74554443359375,
+    "oracle_improvement": 15.678915619850159,
+    "cosines": [
+      [
+        -0.06429129369902004,
+        0.6712127079781566
+      ],
+      [
+        0.07566916051211109,
+        0.6459728330475032
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15501386824996644,
+    "block_seconds": [
+      0.28326577099994665,
+      0.3367897019999191
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0004.flac",
+    "improvement": 15.68178565055132,
+    "si_sdr": 15.611505508422852,
+    "other_si_sdr": -33.984676361083984,
+    "oracle_improvement": 15.68178565055132,
+    "cosines": [
+      [
+        0.7126603493498259,
+        -0.06294156881737276
+      ],
+      [
+        0.4565799838479273,
+        -0.04680216807182043
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15501386824996644,
+    "block_seconds": [
+      0.28326577099994665,
+      0.3367897019999191
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0004.flac",
+    "improvement": 9.803176164627075,
+    "si_sdr": 8.891162872314453,
+    "other_si_sdr": -28.711374282836914,
+    "oracle_improvement": 9.803176164627075,
+    "cosines": [
+      [
+        0.0417764780051507,
+        0.4102796212380433
+      ],
+      [
+        0.03057699758330604,
+        0.3013004579741013
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1552755335000029,
+    "block_seconds": [
+      0.2891032269999414,
+      0.3319989070000702
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0004.flac",
+    "improvement": 11.160183250904083,
+    "si_sdr": 10.355314254760742,
+    "other_si_sdr": -32.16201400756836,
+    "oracle_improvement": 11.160183250904083,
+    "cosines": [
+      [
+        0.3785985050127339,
+        0.015475127866262942
+      ],
+      [
+        0.23811761888604935,
+        -0.07575684784836223
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1552755335000029,
+    "block_seconds": [
+      0.2891032269999414,
+      0.3319989070000702
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0004.flac",
+    "improvement": 7.115374594926834,
+    "si_sdr": 6.876613616943359,
+    "other_si_sdr": -14.065823554992676,
+    "oracle_improvement": 7.115374594926834,
+    "cosines": [
+      [
+        0.07065147698681581,
+        0.3764801191316074
+      ],
+      [
+        0.10202897849712658,
+        0.5061975078428358
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1414522547500212,
+    "block_seconds": [
+      0.2785668020000003,
+      0.28724221700008457
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0004.flac",
+    "improvement": 6.9991379380226135,
+    "si_sdr": 7.077236652374268,
+    "other_si_sdr": -16.846874237060547,
+    "oracle_improvement": 6.9991379380226135,
+    "cosines": [
+      [
+        0.41250122983924553,
+        -0.019879870423011786
+      ],
+      [
+        0.31998494884733275,
+        -0.03275007325123854
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1414522547500212,
+    "block_seconds": [
+      0.2785668020000003,
+      0.28724221700008457
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0004.flac",
+    "improvement": 3.265771809965372,
+    "si_sdr": -0.05146842822432518,
+    "other_si_sdr": -11.77206039428711,
+    "oracle_improvement": 3.265771809965372,
+    "cosines": [
+      [
+        0.06460787698415835,
+        0.2715379973361689
+      ],
+      [
+        0.06047141399962827,
+        0.4350445120799519
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14415451825001924,
+    "block_seconds": [
+      0.2784554529999923,
+      0.29816262000008464
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0004.flac",
+    "improvement": 3.7379536032676697,
+    "si_sdr": 0.839735209941864,
+    "other_si_sdr": -14.695981979370117,
+    "oracle_improvement": 3.7379536032676697,
+    "cosines": [
+      [
+        0.5308402529478995,
+        0.13907217403866864
+      ],
+      [
+        0.3324476209201046,
+        -0.007501886095506793
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14415451825001924,
+    "block_seconds": [
+      0.2784554529999923,
+      0.29816262000008464
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0004.flac",
+    "improvement": null,
+    "si_sdr": -32.196189880371094,
+    "other_si_sdr": -19.46746063232422,
+    "oracle_improvement": 3.080554962158203,
+    "cosines": [
+      [
+        0.17737941817334846,
+        -0.025563140216771144
+      ],
+      [
+        0.017214359958649658,
+        -0.004482674910757167
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15474646375000134,
+    "block_seconds": [
+      0.31583539799999016,
+      0.3031504570000152
+    ]
+  },
+  {
+    "pair": 11,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/8463/287645/8463-287645-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/4970/29093/4970-29093-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0004.flac",
+    "improvement": 8.855127513408661,
+    "si_sdr": 8.940217971801758,
+    "other_si_sdr": -43.635986328125,
+    "oracle_improvement": 8.855127513408661,
+    "cosines": [
+      [
+        0.2595036899472012,
+        0.6990951215188455
+      ],
+      [
+        0.20197504226970905,
+        0.619028863265146
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15474646375000134,
+    "block_seconds": [
+      0.31583539799999016,
+      0.3031504570000152
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0004.flac",
+    "improvement": 14.96067751571536,
+    "si_sdr": 14.99604606628418,
+    "other_si_sdr": -31.895652770996094,
+    "oracle_improvement": 14.96067751571536,
+    "cosines": [
+      [
+        0.6309374543230856,
+        0.24236734772185647
+      ],
+      [
+        0.5957537912117771,
+        0.29888845858509294
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15440744749997748,
+    "block_seconds": [
+      0.32514617599997564,
+      0.2924836139999343
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0004.flac",
+    "improvement": 14.955729197710752,
+    "si_sdr": 14.923393249511719,
+    "other_si_sdr": -31.27285385131836,
+    "oracle_improvement": 14.955729197710752,
+    "cosines": [
+      [
+        0.11364533107212632,
+        0.7047851844821464
+      ],
+      [
+        0.015949796198137682,
+        0.7910185892222272
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15440744749997748,
+    "block_seconds": [
+      0.32514617599997564,
+      0.2924836139999343
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0004.flac",
+    "improvement": 11.060970604419708,
+    "si_sdr": 10.309065818786621,
+    "other_si_sdr": -29.249073028564453,
+    "oracle_improvement": 11.060970604419708,
+    "cosines": [
+      [
+        0.46297702751986747,
+        0.23855859730604848
+      ],
+      [
+        0.4609224681907872,
+        0.36212317045253917
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15808657275002247,
+    "block_seconds": [
+      0.29271388100005424,
+      0.33963241000003563
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0004.flac",
+    "improvement": 9.269603490829468,
+    "si_sdr": 8.40780258178711,
+    "other_si_sdr": -29.183454513549805,
+    "oracle_improvement": 9.269603490829468,
+    "cosines": [
+      [
+        0.09192855195065039,
+        0.4909066177495237
+      ],
+      [
+        -0.014995691778756197,
+        0.5660411414125572
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15808657275002247,
+    "block_seconds": [
+      0.29271388100005424,
+      0.33963241000003563
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0004.flac",
+    "improvement": -2.139228582382202,
+    "si_sdr": -1.8329299688339233,
+    "other_si_sdr": -6.880145072937012,
+    "oracle_improvement": 8.045703530311584,
+    "cosines": [
+      [
+        0.26904390846240356,
+        0.2535836966004635
+      ],
+      [
+        0.2467205779501913,
+        0.2819501327750359
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14315448125000785,
+    "block_seconds": [
+      0.2921367320000172,
+      0.2804811930000142
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0004.flac",
+    "improvement": 8.118312276899815,
+    "si_sdr": 8.082498550415039,
+    "other_si_sdr": -19.36118507385254,
+    "oracle_improvement": 8.118312276899815,
+    "cosines": [
+      [
+        0.13859975528061647,
+        0.3905442233240173
+      ],
+      [
+        0.08162810451011396,
+        0.5759453754276633
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14315448125000785,
+    "block_seconds": [
+      0.2921367320000172,
+      0.2804811930000142
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0004.flac",
+    "improvement": 8.303834199905396,
+    "si_sdr": 5.161097049713135,
+    "other_si_sdr": -12.948898315429688,
+    "oracle_improvement": 8.303834199905396,
+    "cosines": [
+      [
+        0.5529340473428703,
+        0.21406873247159502
+      ],
+      [
+        0.5570857944093339,
+        0.05924368548593094
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.16247174049999558,
+    "block_seconds": [
+      0.3183714259999988,
+      0.3315155359999835
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0004.flac",
+    "improvement": 0.36443519592285156,
+    "si_sdr": -2.494715690612793,
+    "other_si_sdr": -29.27680206298828,
+    "oracle_improvement": 1.1307331323623657,
+    "cosines": [
+      [
+        0.14891886103349458,
+        0.6163073972570445
+      ],
+      [
+        0.14999868302189012,
+        0.3191829033579777
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.16247174049999558,
+    "block_seconds": [
+      0.3183714259999988,
+      0.3315155359999835
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0004.flac",
+    "improvement": null,
+    "si_sdr": -52.417091369628906,
+    "other_si_sdr": 2.3916730880737305,
+    "oracle_improvement": -7.97821044921875,
+    "cosines": [
+      [
+        0.19278511430756323,
+        0.22602841876112065
+      ],
+      [
+        0.20989968393445507,
+        -0.041952023776821085
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.1458447862499952,
+    "block_seconds": [
+      0.2900796879999916,
+      0.29329945699998916
+    ]
+  },
+  {
+    "pair": 12,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/672/122797/672-122797-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4077/13751/4077-13751-0004.flac",
+    "improvement": 0.3217744678258896,
+    "si_sdr": 0.43209803104400635,
+    "other_si_sdr": -51.98465347290039,
+    "oracle_improvement": 2.2813495248556137,
+    "cosines": [
+      [
+        0.6692834705523084,
+        0.4578987384033743
+      ],
+      [
+        0.6867327235885641,
+        0.1020041770842659
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1458447862499952,
+    "block_seconds": [
+      0.2900796879999916,
+      0.29329945699998916
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0004.flac",
+    "improvement": 15.59093102812767,
+    "si_sdr": 15.754623413085938,
+    "other_si_sdr": -26.838159561157227,
+    "oracle_improvement": 15.59093102812767,
+    "cosines": [
+      [
+        0.4159797452667977,
+        0.05972980844770885
+      ],
+      [
+        0.4061388471763374,
+        0.06819041519092649
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14483607124998343,
+    "block_seconds": [
+      0.28294509399995604,
+      0.2963991909999777
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0004.flac",
+    "improvement": 15.595585033297539,
+    "si_sdr": 15.759286880493164,
+    "other_si_sdr": -27.127779006958008,
+    "oracle_improvement": 15.595585033297539,
+    "cosines": [
+      [
+        0.15601251449529985,
+        0.552243729530055
+      ],
+      [
+        0.23136670647052818,
+        0.578773395434524
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14483607124998343,
+    "block_seconds": [
+      0.28294509399995604,
+      0.2963991909999777
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0004.flac",
+    "improvement": 9.932151317596436,
+    "si_sdr": 9.322286605834961,
+    "other_si_sdr": -25.633987426757812,
+    "oracle_improvement": 9.932151317596436,
+    "cosines": [
+      [
+        0.43536407938592947,
+        0.05833454583185735
+      ],
+      [
+        0.3341111498412047,
+        0.0060916684089427076
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1523612330000219,
+    "block_seconds": [
+      0.30194957100002284,
+      0.3074953610000648
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0004.flac",
+    "improvement": 10.419966101646423,
+    "si_sdr": 9.76101303100586,
+    "other_si_sdr": -26.25644874572754,
+    "oracle_improvement": 10.419966101646423,
+    "cosines": [
+      [
+        0.11337291715500167,
+        0.351724424465476
+      ],
+      [
+        0.14919687515834384,
+        0.4245589885377085
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1523612330000219,
+    "block_seconds": [
+      0.30194957100002284,
+      0.3074953610000648
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0004.flac",
+    "improvement": 8.991734728217125,
+    "si_sdr": 8.842227935791016,
+    "other_si_sdr": -17.966394424438477,
+    "oracle_improvement": 8.991734728217125,
+    "cosines": [
+      [
+        0.39366616440293206,
+        0.15485385300362373
+      ],
+      [
+        0.30803739107849476,
+        0.08092417833681978
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15879869450000683,
+    "block_seconds": [
+      0.32888014800005294,
+      0.3063146299999744
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0004.flac",
+    "improvement": 8.768206655979156,
+    "si_sdr": 9.176149368286133,
+    "other_si_sdr": -18.080045700073242,
+    "oracle_improvement": 8.768206655979156,
+    "cosines": [
+      [
+        0.08312984628748288,
+        0.40936250497011717
+      ],
+      [
+        0.22330695156445124,
+        0.4040771393007351
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15879869450000683,
+    "block_seconds": [
+      0.32888014800005294,
+      0.3063146299999744
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0004.flac",
+    "improvement": 3.1030401289463043,
+    "si_sdr": 0.34857121109962463,
+    "other_si_sdr": -28.51935577392578,
+    "oracle_improvement": 3.1030401289463043,
+    "cosines": [
+      [
+        0.2672933174317711,
+        0.17461437637156121
+      ],
+      [
+        0.33991838063205265,
+        0.09581333177635537
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1566158154999755,
+    "block_seconds": [
+      0.3299922199998946,
+      0.2964710420000074
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0004.flac",
+    "improvement": 8.28629994392395,
+    "si_sdr": 5.332324504852295,
+    "other_si_sdr": -18.31450080871582,
+    "oracle_improvement": 8.28629994392395,
+    "cosines": [
+      [
+        0.20785203075813768,
+        0.525451044191863
+      ],
+      [
+        0.23578266686346394,
+        0.48052577553165554
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1566158154999755,
+    "block_seconds": [
+      0.3299922199998946,
+      0.2964710420000074
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0004.flac",
+    "improvement": null,
+    "si_sdr": -36.60150146484375,
+    "other_si_sdr": 0.7479027509689331,
+    "oracle_improvement": 0.7439842224121094,
+    "cosines": [
+      [
+        0.05378464609007095,
+        0.13329386493094503
+      ],
+      [
+        0.09708538773837071,
+        0.0811325627641715
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14429911274999085,
+    "block_seconds": [
+      0.2922867169999108,
+      0.2849097340000526
+    ]
+  },
+  {
+    "pair": 13,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8224/274381/8224-274381-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5639/40744/5639-40744-0004.flac",
+    "improvement": 15.80627889931202,
+    "si_sdr": 15.725467681884766,
+    "other_si_sdr": -34.29045104980469,
+    "oracle_improvement": 15.80627889931202,
+    "cosines": [
+      [
+        0.15551789463261279,
+        0.5948263015580693
+      ],
+      [
+        0.14336309744167994,
+        0.5286955777721272
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14429911274999085,
+    "block_seconds": [
+      0.2922867169999108,
+      0.2849097340000526
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0005.flac",
+    "improvement": 15.656720411032438,
+    "si_sdr": 15.696133613586426,
+    "other_si_sdr": -32.400028228759766,
+    "oracle_improvement": 15.656720411032438,
+    "cosines": [
+      [
+        0.5991934875621319,
+        0.10933814944329552
+      ],
+      [
+        0.2866710432976345,
+        -0.06614684428413056
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14863245800000868,
+    "block_seconds": [
+      0.30131811700005073,
+      0.293211714999984
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0004.flac",
+    "improvement": 15.674596071243286,
+    "si_sdr": 15.70043659210205,
+    "other_si_sdr": -29.33452606201172,
+    "oracle_improvement": 15.674596071243286,
+    "cosines": [
+      [
+        -0.08936214208764437,
+        0.6208950528389298
+      ],
+      [
+        -0.11042856178069668,
+        0.7720275243935956
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14863245800000868,
+    "block_seconds": [
+      0.30131811700005073,
+      0.293211714999984
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0005.flac",
+    "improvement": 11.167994737625122,
+    "si_sdr": 10.40031909942627,
+    "other_si_sdr": -29.22907829284668,
+    "oracle_improvement": 11.167994737625122,
+    "cosines": [
+      [
+        0.5031935392392247,
+        0.12120635746176273
+      ],
+      [
+        0.2598156085341481,
+        -0.007126919317418958
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15179827074999253,
+    "block_seconds": [
+      0.2950197749999006,
+      0.3121733080000695
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0004.flac",
+    "improvement": 9.76024478673935,
+    "si_sdr": 9.007791519165039,
+    "other_si_sdr": -27.432697296142578,
+    "oracle_improvement": 9.76024478673935,
+    "cosines": [
+      [
+        -0.09887035405657381,
+        0.571471995189081
+      ],
+      [
+        -0.08729640487719569,
+        0.6636890844884616
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15179827074999253,
+    "block_seconds": [
+      0.2950197749999006,
+      0.3121733080000695
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0005.flac",
+    "improvement": 8.17922556400299,
+    "si_sdr": 8.48079776763916,
+    "other_si_sdr": -15.050399780273438,
+    "oracle_improvement": 8.17922556400299,
+    "cosines": [
+      [
+        0.41130628564072097,
+        -0.051041640080081115
+      ],
+      [
+        0.13086908767915184,
+        0.005893448045006161
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.17524073174999444,
+    "block_seconds": [
+      0.35256652199996097,
+      0.3483964050000168
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0004.flac",
+    "improvement": 8.401242315769196,
+    "si_sdr": 8.115643501281738,
+    "other_si_sdr": -21.584678649902344,
+    "oracle_improvement": 8.401242315769196,
+    "cosines": [
+      [
+        -0.11130911450610442,
+        0.42321407430081703
+      ],
+      [
+        0.05212325162621862,
+        0.5731573834032322
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17524073174999444,
+    "block_seconds": [
+      0.35256652199996097,
+      0.3483964050000168
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0005.flac",
+    "improvement": 2.3934741020202637,
+    "si_sdr": -0.5715732574462891,
+    "other_si_sdr": -29.999372482299805,
+    "oracle_improvement": 2.3934741020202637,
+    "cosines": [
+      [
+        0.240790545647523,
+        0.05110515357577319
+      ],
+      [
+        0.2841186919028506,
+        -0.06526864099068085
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.17407957574997113,
+    "block_seconds": [
+      0.33340693499997087,
+      0.36291136799991364
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0004.flac",
+    "improvement": 10.63799786567688,
+    "si_sdr": 7.651342391967773,
+    "other_si_sdr": -20.09832191467285,
+    "oracle_improvement": 10.63799786567688,
+    "cosines": [
+      [
+        0.17791259141239155,
+        0.46697173231935835
+      ],
+      [
+        0.03335453117547668,
+        0.7267525249833129
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.17407957574997113,
+    "block_seconds": [
+      0.33340693499997087,
+      0.36291136799991364
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0005.flac",
+    "improvement": null,
+    "si_sdr": -66.30872344970703,
+    "other_si_sdr": -31.482154846191406,
+    "oracle_improvement": 0.5639076232910156,
+    "cosines": [
+      [
+        0.15403045427878514,
+        0.0287082977004047
+      ],
+      [
+        0.11949314874859626,
+        -0.08448762985381522
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.19135670749997757,
+    "block_seconds": [
+      0.34794219399998383,
+      0.41748463599992647
+    ]
+  },
+  {
+    "pair": 14,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/4446/2271/4446-2271-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7127/75946/7127-75946-0004.flac",
+    "improvement": 15.986876953393221,
+    "si_sdr": 15.98338508605957,
+    "other_si_sdr": -46.55876922607422,
+    "oracle_improvement": 15.986876953393221,
+    "cosines": [
+      [
+        0.16333861977257674,
+        0.6454578605037304
+      ],
+      [
+        0.13147797987190013,
+        0.7387288491570818
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.19135670749997757,
+    "block_seconds": [
+      0.34794219399998383,
+      0.41748463599992647
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0005.flac",
+    "improvement": 13.416718423366547,
+    "si_sdr": 13.608847618103027,
+    "other_si_sdr": -26.17034912109375,
+    "oracle_improvement": 13.416718423366547,
+    "cosines": [
+      [
+        0.6475296589112006,
+        0.34423652027738094
+      ],
+      [
+        0.7197544964028497,
+        0.3246589959622894
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15832768650000162,
+    "block_seconds": [
+      0.30856385599997793,
+      0.32474689000002854
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0004.flac",
+    "improvement": 13.438476040959358,
+    "si_sdr": 13.63061809539795,
+    "other_si_sdr": -22.1827335357666,
+    "oracle_improvement": 13.438476040959358,
+    "cosines": [
+      [
+        0.18735091779899055,
+        0.5074562384105137
+      ],
+      [
+        0.3018381635053716,
+        0.451111398739774
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15832768650000162,
+    "block_seconds": [
+      0.30856385599997793,
+      0.32474689000002854
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0005.flac",
+    "improvement": 9.413162767887115,
+    "si_sdr": 8.769780158996582,
+    "other_si_sdr": -27.05460548400879,
+    "oracle_improvement": 9.413162767887115,
+    "cosines": [
+      [
+        0.4562712860428539,
+        0.380665104828546
+      ],
+      [
+        0.50249115674035,
+        0.2719494644166629
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14977516000001856,
+    "block_seconds": [
+      0.2973408150000978,
+      0.30175982499997644
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0004.flac",
+    "improvement": 9.260372996330261,
+    "si_sdr": 8.672286033630371,
+    "other_si_sdr": -20.15056800842285,
+    "oracle_improvement": 9.260372996330261,
+    "cosines": [
+      [
+        0.03749522596124376,
+        0.35551907470916316
+      ],
+      [
+        0.16777966162695648,
+        0.27229308467983654
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14977516000001856,
+    "block_seconds": [
+      0.2973408150000978,
+      0.30175982499997644
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0005.flac",
+    "improvement": 2.1818769425153732,
+    "si_sdr": 2.110651969909668,
+    "other_si_sdr": -7.883602142333984,
+    "oracle_improvement": 2.1818769425153732,
+    "cosines": [
+      [
+        0.3927628244734832,
+        0.367796648848797
+      ],
+      [
+        0.39776311188877067,
+        0.32995763256666877
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14665708699999414,
+    "block_seconds": [
+      0.2937517499999558,
+      0.29287659800002075
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0004.flac",
+    "improvement": 1.599637657403946,
+    "si_sdr": 1.967691421508789,
+    "other_si_sdr": -10.2411470413208,
+    "oracle_improvement": 1.599637657403946,
+    "cosines": [
+      [
+        0.13243158496248003,
+        0.45597898835565376
+      ],
+      [
+        0.17288529579863424,
+        0.2767524178413546
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14665708699999414,
+    "block_seconds": [
+      0.2937517499999558,
+      0.29287659800002075
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0005.flac",
+    "improvement": -2.40252423286438,
+    "si_sdr": -5.324504852294922,
+    "other_si_sdr": -5.446349143981934,
+    "oracle_improvement": -2.40252423286438,
+    "cosines": [
+      [
+        0.3745236560171047,
+        0.5888213953703976
+      ],
+      [
+        0.4176566588015663,
+        0.40535523940756113
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.1515098872500289,
+    "block_seconds": [
+      0.30498251500000606,
+      0.3010570340001095
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0004.flac",
+    "improvement": 4.5738844871521,
+    "si_sdr": 1.8490242958068848,
+    "other_si_sdr": -6.708727836608887,
+    "oracle_improvement": 4.5738844871521,
+    "cosines": [
+      [
+        0.12645643139328572,
+        0.40230271674801965
+      ],
+      [
+        0.07242097869499561,
+        0.3027274636694356
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1515098872500289,
+    "block_seconds": [
+      0.30498251500000606,
+      0.3010570340001095
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0005.flac",
+    "improvement": null,
+    "si_sdr": -33.15121841430664,
+    "other_si_sdr": 15.660504341125488,
+    "oracle_improvement": 7.272666931152344,
+    "cosines": [
+      [
+        0.15343544648839672,
+        0.3874449894764016
+      ],
+      [
+        0.019599633436337117,
+        0.2516388984365364
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1510718147499972,
+    "block_seconds": [
+      0.29247840699997596,
+      0.31180885200001285
+    ]
+  },
+  {
+    "pair": 15,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/5683/32865/5683-32865-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/8555/284447/8555-284447-0004.flac",
+    "improvement": 15.602977022528648,
+    "si_sdr": 15.660504341125488,
+    "other_si_sdr": -33.15121841430664,
+    "oracle_improvement": 15.602977022528648,
+    "cosines": [
+      [
+        0.060173503273423634,
+        0.5218086668668346
+      ],
+      [
+        -0.01794093895653715,
+        0.5617999734490331
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1510718147499972,
+    "block_seconds": [
+      0.29247840699997596,
+      0.31180885200001285
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0004.flac",
+    "improvement": 16.681600883603096,
+    "si_sdr": 16.807409286499023,
+    "other_si_sdr": -29.37137794494629,
+    "oracle_improvement": 16.681600883603096,
+    "cosines": [
+      [
+        0.5850206096431823,
+        0.1270694300169408
+      ],
+      [
+        0.7535586093092786,
+        0.012551821263557979
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14990133300000252,
+    "block_seconds": [
+      0.3029545560000315,
+      0.2966507759999786
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0004.flac",
+    "improvement": 16.71826907992363,
+    "si_sdr": 16.83647346496582,
+    "other_si_sdr": -28.98946762084961,
+    "oracle_improvement": 16.71826907992363,
+    "cosines": [
+      [
+        0.34939769804306053,
+        0.7645081172294013
+      ],
+      [
+        0.2855041504533699,
+        0.761497631428141
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14990133300000252,
+    "block_seconds": [
+      0.3029545560000315,
+      0.2966507759999786
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0004.flac",
+    "improvement": 10.855324745178223,
+    "si_sdr": 10.189348220825195,
+    "other_si_sdr": -28.32845687866211,
+    "oracle_improvement": 10.855324745178223,
+    "cosines": [
+      [
+        0.404676641273475,
+        0.20293951099638075
+      ],
+      [
+        0.4971422843052173,
+        0.06999676687303874
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14374626850002414,
+    "block_seconds": [
+      0.29028991500001666,
+      0.2846951590000799
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0004.flac",
+    "improvement": 10.308286547660828,
+    "si_sdr": 9.615080833435059,
+    "other_si_sdr": -26.541126251220703,
+    "oracle_improvement": 10.308286547660828,
+    "cosines": [
+      [
+        0.1561145677793363,
+        0.2481166996948486
+      ],
+      [
+        0.17328811651786674,
+        0.3673007588377073
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14374626850002414,
+    "block_seconds": [
+      0.29028991500001666,
+      0.2846951590000799
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0004.flac",
+    "improvement": 9.058456346392632,
+    "si_sdr": 8.846572875976562,
+    "other_si_sdr": -18.456165313720703,
+    "oracle_improvement": 9.058456346392632,
+    "cosines": [
+      [
+        0.4157523605903357,
+        0.11635765130824764
+      ],
+      [
+        0.4844313434258027,
+        -0.015429574796182531
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14537663174999693,
+    "block_seconds": [
+      0.2841013219999695,
+      0.2974052050000182
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0004.flac",
+    "improvement": 8.702447474002838,
+    "si_sdr": 9.22422981262207,
+    "other_si_sdr": -19.93863296508789,
+    "oracle_improvement": 8.702447474002838,
+    "cosines": [
+      [
+        0.15660456976015286,
+        0.40924722118518403
+      ],
+      [
+        0.19301618714806146,
+        0.48105010883231375
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14537663174999693,
+    "block_seconds": [
+      0.2841013219999695,
+      0.2974052050000182
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0004.flac",
+    "improvement": -1.4301683902740479,
+    "si_sdr": -4.388169288635254,
+    "other_si_sdr": -6.5068206787109375,
+    "oracle_improvement": -1.4301683902740479,
+    "cosines": [
+      [
+        0.24817893568223198,
+        0.20653460753423591
+      ],
+      [
+        0.14448253216303955,
+        0.3910746438428059
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14351301575001685,
+    "block_seconds": [
+      0.2946986570000263,
+      0.2793534060000411
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0004.flac",
+    "improvement": 6.102153062820435,
+    "si_sdr": 3.2286226749420166,
+    "other_si_sdr": -8.2033052444458,
+    "oracle_improvement": 6.102153062820435,
+    "cosines": [
+      [
+        0.031422932559701536,
+        0.5688739013568245
+      ],
+      [
+        0.09819923117569024,
+        0.5060506884844587
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14351301575001685,
+    "block_seconds": [
+      0.2946986570000263,
+      0.2793534060000411
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0004.flac",
+    "improvement": null,
+    "si_sdr": -35.78076934814453,
+    "other_si_sdr": 18.6483097076416,
+    "oracle_improvement": 2.274028778076172,
+    "cosines": [
+      [
+        -0.025517968892391864,
+        0.1582711821839528
+      ],
+      [
+        0.005661239279158473,
+        0.10563970362504782
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14612836649999394,
+    "block_seconds": [
+      0.28513619199998175,
+      0.29937727399999403
+    ]
+  },
+  {
+    "pair": 16,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/7176/88083/7176-88083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/3575/170457/3575-170457-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0004.flac",
+    "improvement": 18.67499114573002,
+    "si_sdr": 18.6483097076416,
+    "other_si_sdr": -35.78076934814453,
+    "oracle_improvement": 18.67499114573002,
+    "cosines": [
+      [
+        0.08416222952298272,
+        0.7273857981776601
+      ],
+      [
+        -0.019335590538161883,
+        0.7217371697681707
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14612836649999394,
+    "block_seconds": [
+      0.28513619199998175,
+      0.29937727399999403
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0005.flac",
+    "improvement": 16.521662332117558,
+    "si_sdr": 16.595125198364258,
+    "other_si_sdr": -30.93500328063965,
+    "oracle_improvement": 16.521662332117558,
+    "cosines": [
+      [
+        0.1398427520378733,
+        0.6873995908587696
+      ],
+      [
+        -0.03447863626538059,
+        0.4736861486876702
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15354910775002395,
+    "block_seconds": [
+      0.28155505900008393,
+      0.33264137200001187
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0004.flac",
+    "improvement": 16.521373476833105,
+    "si_sdr": 16.547727584838867,
+    "other_si_sdr": -31.861431121826172,
+    "oracle_improvement": 16.521373476833105,
+    "cosines": [
+      [
+        0.5902029662693983,
+        -0.061896589426585935
+      ],
+      [
+        0.5709806939351108,
+        0.013647345493988744
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15354910775002395,
+    "block_seconds": [
+      0.28155505900008393,
+      0.33264137200001187
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0005.flac",
+    "improvement": 9.509416460990906,
+    "si_sdr": 8.773847579956055,
+    "other_si_sdr": -27.971956253051758,
+    "oracle_improvement": 9.509416460990906,
+    "cosines": [
+      [
+        0.03350203997094538,
+        0.45778069571677643
+      ],
+      [
+        -0.008145594815926516,
+        0.4511894440571276
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15266452349999327,
+    "block_seconds": [
+      0.2866828420000047,
+      0.32397525199996835
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0004.flac",
+    "improvement": 11.48726773262024,
+    "si_sdr": 10.714841842651367,
+    "other_si_sdr": -29.86029624938965,
+    "oracle_improvement": 11.48726773262024,
+    "cosines": [
+      [
+        0.41310190666760616,
+        -0.12086188660193971
+      ],
+      [
+        0.23609516400146505,
+        -0.15424892459946132
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15266452349999327,
+    "block_seconds": [
+      0.2866828420000047,
+      0.32397525199996835
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0005.flac",
+    "improvement": 8.539975188672543,
+    "si_sdr": 8.613258361816406,
+    "other_si_sdr": -17.587284088134766,
+    "oracle_improvement": 8.539975188672543,
+    "cosines": [
+      [
+        0.21149921595384935,
+        0.6488362762672227
+      ],
+      [
+        0.12787513685325907,
+        0.34679307054297576
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14504019725001172,
+    "block_seconds": [
+      0.2913683230000288,
+      0.28879246600001807
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0004.flac",
+    "improvement": 8.499494194984436,
+    "si_sdr": 8.546566009521484,
+    "other_si_sdr": -19.392797470092773,
+    "oracle_improvement": 8.499494194984436,
+    "cosines": [
+      [
+        0.35417242737345467,
+        -0.0015110950445361149
+      ],
+      [
+        0.3430744993918736,
+        0.017981896703782148
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14504019725001172,
+    "block_seconds": [
+      0.2913683230000288,
+      0.28879246600001807
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0005.flac",
+    "improvement": 1.4259719848632812,
+    "si_sdr": -1.4224085807800293,
+    "other_si_sdr": -32.29576873779297,
+    "oracle_improvement": 1.4259719848632812,
+    "cosines": [
+      [
+        0.1622778845336933,
+        0.38082284485012624
+      ],
+      [
+        -0.09200808659589985,
+        0.2517019435953726
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.15035002874998327,
+    "block_seconds": [
+      0.28564755200000036,
+      0.3157525629999327
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0004.flac",
+    "improvement": 8.75883936882019,
+    "si_sdr": 5.654550552368164,
+    "other_si_sdr": -15.03441333770752,
+    "oracle_improvement": 8.75883936882019,
+    "cosines": [
+      [
+        0.46089692006101657,
+        0.006674540519211042
+      ],
+      [
+        0.3740434894081483,
+        0.003218983958406141
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.15035002874998327,
+    "block_seconds": [
+      0.28564755200000036,
+      0.3157525629999327
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0005.flac",
+    "improvement": null,
+    "si_sdr": -49.84415054321289,
+    "other_si_sdr": -37.73845672607422,
+    "oracle_improvement": -7.857452392578125,
+    "cosines": [
+      [
+        -0.013846394625439584,
+        0.01614166422138162
+      ],
+      [
+        -0.09342263255853991,
+        -0.04277334849830396
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14416925949998927,
+    "block_seconds": [
+      0.2900584720000552,
+      0.2866185659999019
+    ]
+  },
+  {
+    "pair": 17,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/908/157963/908-157963-0004.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/5105/28233/5105-28233-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2830/3979/2830-3979-0004.flac",
+    "improvement": 17.17491652816534,
+    "si_sdr": 17.057716369628906,
+    "other_si_sdr": -43.22911071777344,
+    "oracle_improvement": 17.17491652816534,
+    "cosines": [
+      [
+        0.5118233605340676,
+        0.24216355147107424
+      ],
+      [
+        0.4702198263893643,
+        0.2626812728096197
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14416925949998927,
+    "block_seconds": [
+      0.2900584720000552,
+      0.2866185659999019
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0004.flac",
+    "improvement": 13.380728101357818,
+    "si_sdr": 13.365680694580078,
+    "other_si_sdr": -28.065385818481445,
+    "oracle_improvement": 13.380728101357818,
+    "cosines": [
+      [
+        0.08898097429859717,
+        0.5516223269105555
+      ],
+      [
+        0.06870561568099232,
+        0.6726236551559668
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1546039287499923,
+    "block_seconds": [
+      0.3288053600000467,
+      0.2896103549999225
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0004.flac",
+    "improvement": 13.410118688829243,
+    "si_sdr": 13.395065307617188,
+    "other_si_sdr": -28.488052368164062,
+    "oracle_improvement": 13.410118688829243,
+    "cosines": [
+      [
+        0.34897935445179623,
+        -0.0013314454847199592
+      ],
+      [
+        0.44376425392555474,
+        0.177650412644971
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1546039287499923,
+    "block_seconds": [
+      0.3288053600000467,
+      0.2896103549999225
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0004.flac",
+    "improvement": 9.715882122516632,
+    "si_sdr": 8.879392623901367,
+    "other_si_sdr": -29.51714324951172,
+    "oracle_improvement": 9.715882122516632,
+    "cosines": [
+      [
+        0.0938208983814527,
+        0.3955711971873819
+      ],
+      [
+        0.04427734865700198,
+        0.5169400404263016
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14171025249999047,
+    "block_seconds": [
+      0.2784871479999538,
+      0.2883538620000081
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0004.flac",
+    "improvement": 9.197394371032715,
+    "si_sdr": 8.425699234008789,
+    "other_si_sdr": -24.38657569885254,
+    "oracle_improvement": 9.197394371032715,
+    "cosines": [
+      [
+        0.20967783720734348,
+        -0.04655222782352067
+      ],
+      [
+        0.3280569957968846,
+        0.172492171011211
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14171025249999047,
+    "block_seconds": [
+      0.2784871479999538,
+      0.2883538620000081
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0004.flac",
+    "improvement": 7.565444839186966,
+    "si_sdr": 7.555944919586182,
+    "other_si_sdr": -19.066341400146484,
+    "oracle_improvement": 7.565444839186966,
+    "cosines": [
+      [
+        -0.012104335186951747,
+        0.43967414664533266
+      ],
+      [
+        0.4191774656847091,
+        0.16579451346169607
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14984436175001292,
+    "block_seconds": [
+      0.3176163880000331,
+      0.2817610590000186
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0004.flac",
+    "improvement": 7.611229371279478,
+    "si_sdr": 7.628300189971924,
+    "other_si_sdr": -15.618828773498535,
+    "oracle_improvement": 7.611229371279478,
+    "cosines": [
+      [
+        0.1577377499229996,
+        0.05881019723165468
+      ],
+      [
+        0.12350751224037443,
+        0.31682032046708375
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14984436175001292,
+    "block_seconds": [
+      0.3176163880000331,
+      0.2817610590000186
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0004.flac",
+    "improvement": -3.374685287475586,
+    "si_sdr": -6.39080810546875,
+    "other_si_sdr": -9.328567504882812,
+    "oracle_improvement": 2.8639386147260666,
+    "cosines": [
+      [
+        0.09365630261106694,
+        0.040957876884117325
+      ],
+      [
+        0.07821926196560075,
+        0.522333657814908
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14060917725001332,
+    "block_seconds": [
+      0.28619987000001856,
+      0.2762368390000347
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0004.flac",
+    "improvement": -6.281804800033569,
+    "si_sdr": -9.328567504882812,
+    "other_si_sdr": -6.39080810546875,
+    "oracle_improvement": 6.90668511390686,
+    "cosines": [
+      [
+        0.03520797941195053,
+        -0.25432863941505635
+      ],
+      [
+        -0.12457171019777448,
+        -0.02653006560309443
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14060917725001332,
+    "block_seconds": [
+      0.28619987000001856,
+      0.2762368390000347
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0004.flac",
+    "improvement": null,
+    "si_sdr": -43.715576171875,
+    "other_si_sdr": -8.406929016113281,
+    "oracle_improvement": 3.9185714721679688,
+    "cosines": [
+      [
+        0.08818085604514518,
+        0.07447799396286085
+      ],
+      [
+        -0.048201785811122354,
+        0.19608133966206892
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14493135649996702,
+    "block_seconds": [
+      0.28837199299994154,
+      0.29135343299992655
+    ]
+  },
+  {
+    "pair": 18,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/6930/75918/6930-75918-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/4507/16021/4507-16021-0004.flac",
+    "improvement": 17.486675878986716,
+    "si_sdr": 17.464330673217773,
+    "other_si_sdr": -53.23274612426758,
+    "oracle_improvement": 17.486675878986716,
+    "cosines": [
+      [
+        0.3721595028198915,
+        -0.1570156040443545
+      ],
+      [
+        0.34992441931443596,
+        -0.10102651175573094
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14493135649996702,
+    "block_seconds": [
+      0.28837199299994154,
+      0.29135343299992655
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "clean",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 11.36685999110341,
+    "si_sdr": 11.399665832519531,
+    "other_si_sdr": -21.28447723388672,
+    "oracle_improvement": 11.36685999110341,
+    "cosines": [
+      [
+        -0.011832717102804095,
+        0.4491735161216367
+      ],
+      [
+        0.659321985710493,
+        -0.013908401940064735
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14144894475001024,
+    "block_seconds": [
+      0.2944442920000938,
+      0.27135148699994716
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "clean",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0004.flac",
+    "improvement": 11.406817944720387,
+    "si_sdr": 11.436518669128418,
+    "other_si_sdr": -25.084575653076172,
+    "oracle_improvement": 11.406817944720387,
+    "cosines": [
+      [
+        0.7522643539380811,
+        0.09791835841354238
+      ],
+      [
+        0.030334960171417027,
+        0.583660141636059
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14144894475001024,
+    "block_seconds": [
+      0.2944442920000938,
+      0.27135148699994716
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "noise10",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 10.448943972587585,
+    "si_sdr": 9.669266700744629,
+    "other_si_sdr": -27.75312614440918,
+    "oracle_improvement": 10.448943972587585,
+    "cosines": [
+      [
+        -0.004463141033459413,
+        0.33815744446707496
+      ],
+      [
+        0.50041094617959,
+        0.11640033140368355
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14847475925000708,
+    "block_seconds": [
+      0.2749727679999978,
+      0.3189262690000305
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "noise10",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0004.flac",
+    "improvement": 9.838489532470703,
+    "si_sdr": 9.090546607971191,
+    "other_si_sdr": -27.20532989501953,
+    "oracle_improvement": 9.838489532470703,
+    "cosines": [
+      [
+        0.5572140088977892,
+        0.052883597772810334
+      ],
+      [
+        0.07991158956534877,
+        0.5677119861961205
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14847475925000708,
+    "block_seconds": [
+      0.2749727679999978,
+      0.3189262690000305
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "reverb",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 7.936731159687042,
+    "si_sdr": 8.102265357971191,
+    "other_si_sdr": -15.58411979675293,
+    "oracle_improvement": 7.936731159687042,
+    "cosines": [
+      [
+        0.046842545778740016,
+        0.32448018581017
+      ],
+      [
+        0.05479181709270262,
+        0.437765198478097
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.14716237050001268,
+    "block_seconds": [
+      0.2899129270000458,
+      0.29873655500000496
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "reverb",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0004.flac",
+    "improvement": 7.87380407564342,
+    "si_sdr": 7.879371166229248,
+    "other_si_sdr": -20.508193969726562,
+    "oracle_improvement": 7.87380407564342,
+    "cosines": [
+      [
+        0.6301241227808296,
+        0.24440669798192802
+      ],
+      [
+        0.5636118575153781,
+        0.11837902489046985
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.14716237050001268,
+    "block_seconds": [
+      0.2899129270000458,
+      0.29873655500000496
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "three",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": 5.520227670669556,
+    "si_sdr": 2.4559500217437744,
+    "other_si_sdr": -7.5110697746276855,
+    "oracle_improvement": 5.520227670669556,
+    "cosines": [
+      [
+        0.030228938884210747,
+        0.3028400384158766
+      ],
+      [
+        0.30465894890489525,
+        0.04958889028184728
+      ]
+    ],
+    "choices": [
+      1,
+      0
+    ],
+    "rtf": 0.14231399400003397,
+    "block_seconds": [
+      0.2846785200000568,
+      0.2845774560000791
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "three",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0004.flac",
+    "improvement": -2.863386631011963,
+    "si_sdr": -5.717363357543945,
+    "other_si_sdr": -26.667634963989258,
+    "oracle_improvement": -1.9606809616088867,
+    "cosines": [
+      [
+        0.6828770654899963,
+        0.18357508865090055
+      ],
+      [
+        0.10987292556323497,
+        0.2557743851407865
+      ]
+    ],
+    "choices": [
+      0,
+      1
+    ],
+    "rtf": 0.14231399400003397,
+    "block_seconds": [
+      0.2846785200000568,
+      0.2845774560000791
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "absent",
+    "target": 0,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0004.flac",
+    "improvement": null,
+    "si_sdr": -51.1888542175293,
+    "other_si_sdr": -12.531427383422852,
+    "oracle_improvement": 26.700050354003906,
+    "cosines": [
+      [
+        -0.0005405818499537012,
+        0.02325705552814654
+      ],
+      [
+        -0.0920564032042311,
+        0.08751655793040161
+      ]
+    ],
+    "choices": [
+      1,
+      1
+    ],
+    "rtf": 0.1448442110000201,
+    "block_seconds": [
+      0.2892527630000359,
+      0.2901240810000445
+    ]
+  },
+  {
+    "pair": 19,
+    "case": "absent",
+    "target": 1,
+    "source_a": "fixtures/LibriSpeech/test-clean/2961/960/2961-960-0003.flac",
+    "source_b": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0003.flac",
+    "source_c": "fixtures/LibriSpeech/test-clean/8455/210777/8455-210777-0003.flac",
+    "enroll": "fixtures/LibriSpeech/test-clean/61/70968/61-70968-0004.flac",
+    "improvement": 4.32070954144001,
+    "si_sdr": 4.4311370849609375,
+    "other_si_sdr": -50.73470687866211,
+    "oracle_improvement": 4.32070954144001,
+    "cosines": [
+      [
+        0.6352569290622194,
+        0.5217334729970505
+      ],
+      [
+        0.4334635608233416,
+        0.16491040542445912
+      ]
+    ],
+    "choices": [
+      0,
+      0
+    ],
+    "rtf": 0.1448442110000201,
+    "block_seconds": [
+      0.2892527630000359,
+      0.2901240810000445
+    ]
+  }
+]
