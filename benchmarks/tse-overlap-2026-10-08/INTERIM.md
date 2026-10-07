@@ -54,3 +54,12 @@ Host evaluation with Android-like frozen enrollment supports .35 cosine / .10
 margin as experimental initial controls: clean 23/24 accepted, noisy 10/24,
 absent/other-only/silence 0/24. Small synthetic evaluation, not phone proof or
 calibrated field acceptance guarantee. The defaults already match #12 eb550fb.
+
+## Native runtime integration
+#12 compiled/tests passed but failed mergeDebugNativeLibs: duplicate ORT core.
+Inspected official sherpa-onnx 1.13.8 AAR: arm64 libonnxruntime.so version string
+1.28.2. ORT Android 1.20.0 4j JNI links to libonnxruntime.so and requests C API 20.
+Fetch script removes only older duplicate core from Java frontend AAR, leaving
+sherpa's newer core as single provider. C API backward compatibility is expected,
+but Android native loading and inference remain untested and must be checked on
+phone. No arbitrary pickFirst; no replacement of stable sherpa's native core.

@@ -65,7 +65,7 @@ android {
 
 dependencies {
     implementation(files("libs/sherpa-onnx.aar"))
-    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.20.0")
+    implementation(files("libs/onnxruntime-android-java-jni.aar"))
 
     val composeBom = platform("androidx.compose:compose-bom:2024.09.02")
     implementation(composeBom)
