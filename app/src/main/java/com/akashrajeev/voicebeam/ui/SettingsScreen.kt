@@ -75,6 +75,14 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
                 SectionHeader("Testing")
                 SwitchRow("Demo feed (testing)", "Plays a recorded two-person clip instead of the camera and mic", s.debugFeed) { v -> engine.updateSettings { it.copy(debugFeed = v) } }
             }
+            SectionHeader("Optional wearer voice veto")
+            Text("Experimental. Speak alone for three clean 3-second phrases. Voice template stays in RAM, clears when models close. This cannot separate overlapping voices.", color = Muted, fontSize = 12.sp)
+            Text(if (state.wearerLearned) "Wearer voice learned" else if (state.wearerEnrollmentActive)
+                "Learning ${(state.wearerEnrollmentProgress * 100).roundToInt()}% - only you speak"
+                else "No wearer template", color = Muted, fontSize = 12.sp)
+            Text("Start Learn my voice on the listening screen so the microphone stays active.", color = Muted, fontSize = 12.sp)
+            SwitchRow("Veto high-confidence wearer voice", "Off by default. May block a similar target; requires target voice learned too.", state.wearerVetoEnabled) { engine.setWearerVeto(it) }
+            Button(onClick = { engine.clearWearerVoice() }) { Text("Clear my voice") }
             SectionHeader("Live diagnostics")
             Text("Local technical logs only. No audio, captions or uploads. Share sends a text file only when you choose an app.", color = Muted, fontSize = 12.sp)
             Row {

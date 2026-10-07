@@ -18,6 +18,8 @@ class VoiceLearner(
     private val scoreBuf = FloatArray(chunk)
     private var scoreFill = 0
     private val prints = mutableListOf<FloatArray>()
+    @Volatile var lastQueryEmbedding: FloatArray? = null
+        private set
     @Volatile var enrollmentEnabled = false
         private set
     @Volatile var centroid: FloatArray? = null
@@ -51,6 +53,7 @@ class VoiceLearner(
         if (scoreFill < chunk) return null
         scoreFill = 0
         val e = embed(scoreBuf.copyOf()) ?: return null
+        lastQueryEmbedding = e
         val c = centroid ?: return null
         val score = VoiceMatch.score(VoiceMatch.cosine(e, c))
         // Lab: freeze enrolment; self-confirming adaptation can learn a distractor.
@@ -64,5 +67,5 @@ class VoiceLearner(
     }
 
     @Synchronized
-    fun reset() { enrollmentEnabled = false; prints.clear(); centroid = null; enrollFill = 0; scoreFill = 0 }
+    fun reset() { lastQueryEmbedding = null; enrollmentEnabled = false; prints.clear(); centroid = null; enrollFill = 0; scoreFill = 0 }
 }

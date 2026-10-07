@@ -72,3 +72,16 @@ mixture RMS cannot establish target/distractor separation.
    self-monitoring alone is not that evidence. Don't regress Bluetooth call mode.
 
 No audio/caption content, credentials or personal voice embeddings in this file.
+
+## Explicit enrollment / wearer veto
+
+75b0fce / #9 compiled and unit tests passed, not phone/UI-tested. Target voice
+learning is deliberate with visible progress, not silent auto-enrollment.
+Optional wearer veto iteration: separate RAM-only wearer template, opt-in and
+clearable, off by default. Learn my voice on the listening screen while only
+wearer speaks; target learning pauses. Both target/wearer scores use the same
+TitaNet query embedding, no duplicate extraction per query. Both templates
+required to veto; wearer score >.9 and margin over target >.15. These are
+conservative uncalibrated policies, not "never-pass" guarantees. 3-second query
+windows cannot identify an immediate turn change or separate overlap. Validate
+similar voices and target false rejection on phone before enabling in a demo.

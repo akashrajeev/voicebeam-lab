@@ -255,7 +255,13 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
             // Status + caption + controls.
             Column(Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(horizontal = 18.dp, vertical = 12.dp)) {
                 StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned, state.voiceMatch) { engine.unlock() }
-                if (state.lockedId != null && !state.voiceLearned) {
+                if (state.wearerEnrollmentActive) {
+                    Text("Learning YOUR voice ${(state.wearerEnrollmentProgress * 100).roundToInt()}%: only you speak. Target learning paused.", color = Muted, fontSize = 12.sp)
+                }
+                if (!state.wearerLearned && !state.wearerEnrollmentActive) {
+                    Button(onClick = { engine.beginWearerEnrollment() }) { Text("Learn my voice (optional)") }
+                }
+                if (state.lockedId != null && !state.voiceLearned && !state.wearerEnrollmentActive) {
                     Text(if (state.voiceEnrollmentActive)
                         "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks, face visible. Need 3 clean 3-second phrases."
                         else "Face locked, voice not learned. Ask the target to speak alone, then start voice learning.", color = Muted, fontSize = 12.sp)

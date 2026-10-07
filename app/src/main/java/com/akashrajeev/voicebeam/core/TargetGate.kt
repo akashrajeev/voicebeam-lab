@@ -13,6 +13,8 @@ data class GateInputs(
     val voiceActive: Boolean,    // is there speech energy in this frame
     val lockedVisible: Boolean = true, // is the locked face in view right now
     val audioOnly: Boolean = false, // use speaker embedding only; no camera fallback
+    val wearerMatch: Float? = null, // fresh score of deliberately enrolled wearer, optional
+    val wearerVetoEnabled: Boolean = false,
 )
 
 /**
@@ -51,6 +53,7 @@ class TargetGate(
             !i.hasLock -> TargetState.UNLOCKED
             i.audioOnly && (i.voiceMatch ?: 0f) <= 0.8f -> TargetState.OTHER
             !i.voiceActive -> TargetState.UNCERTAIN
+            wearerVeto(i) -> TargetState.OTHER
             i.voiceMatch != null && i.voiceMatch <= 0.8f -> TargetState.OTHER
             i.lockedSpeaking > 0.55f && i.othersSpeaking > 0.55f -> TargetState.OVERLAP
             i.othersSpeaking > 0.55f && i.lockedSpeaking < 0.3f -> TargetState.OTHER
@@ -67,6 +70,12 @@ class TargetGate(
             TargetState.OVERLAP -> 0.5f // A scalar gate cannot remove an overlapping voice.
             TargetState.UNCERTAIN -> 0f // no positive evidence: do not open for off-camera voices
         }
+    }
+
+    private fun wearerVeto(i: GateInputs): Boolean {
+        val wearer = i.wearerMatch ?: return false
+        val target = i.voiceMatch ?: return false // never block from unconfirmed wearer similarity alone
+        return i.wearerVetoEnabled && wearer > 0.9f && wearer - target > 0.15f
     }
 
     fun process(i: GateInputs): Float {

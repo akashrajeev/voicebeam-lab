@@ -1,5 +1,5 @@
 name: lab-apk-hardening
-# Explicit target voice enrollment progress and test notes. Bluetooth unchanged.
+# Optional local wearer voice veto, off by default. Bluetooth unchanged.
 on:
   push:
     branches: [lab/hardening-2026-10-07]

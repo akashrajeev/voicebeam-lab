@@ -245,7 +245,7 @@ class AudioPipeline(
                         " micSamples=" + input.size + " level=" + sqrt(e / n) +
                         " quietOthers=" + quietOthers + " locked=" + s.hasLock + " visible=" + s.lockedVisible +
                         " lockedLips=" + s.lockedSpeaking + " otherLips=" + s.othersSpeaking +
-                        " voiceMatch=" + s.voiceMatch + " boostAllowed=" + gate.boostAllowed +
+                        " voiceMatch=" + s.voiceMatch + " wearerMatch=" + s.wearerMatch + " wearerVeto=" + s.wearerVetoEnabled + " boostAllowed=" + gate.boostAllowed +
                         " appliedBoost=" + boost +
                         " gate=" + gate.state + " gain=" + g + " probability=" + gate.probability +
                         " vad=" + voice + " written=" + written +
