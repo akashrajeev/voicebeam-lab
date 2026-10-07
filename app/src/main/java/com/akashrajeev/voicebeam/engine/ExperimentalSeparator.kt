@@ -20,15 +20,16 @@ class ExperimentalSeparator(
     private val threshold: () -> Float,
     private val margin: () -> Float,
 ) {
-    private val input = DropOldestQueue<FloatArray>(1) // one active worker + one pending block
-    private val output = DropOldestQueue<FloatArray>(1)
+    private data class Packet(val audio: FloatArray, val template: FloatArray?)
+    private val input = DropOldestQueue<Packet>(1) // one active worker + one pending block
+    private val output = DropOldestQueue<Packet>(1)
     private val running = AtomicBoolean(true)
     private val env = OrtEnvironment.getEnvironment()
     private val options = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2); setInterOpNumThreads(1) }
     private val session: OrtSession
     private val staging = FloatArray(32000)
     private var fill = 0
-    private var playing: FloatArray? = null
+    private var playing: Packet? = null
     private var playOffset = 0
     private val times = ArrayList<Long>()
     private val worker: Thread
@@ -45,12 +46,13 @@ class ExperimentalSeparator(
         while (offset < raw.size) {
             val n = minOf(raw.size-offset, staging.size-fill)
             System.arraycopy(raw, offset, staging, fill, n); offset += n; fill += n
-            if (fill == staging.size) { input.offer(staging.copyOf()); fill = 0 }
+            if (fill == staging.size) { input.offer(Packet(staging.copyOf(), centroid())); fill = 0 }
         }
-        if (playing == null || playOffset >= playing!!.size) { playing = output.poll(0); playOffset = 0 }
-        val block = playing
+        if (playing == null || playOffset >= playing!!.audio.size) { playing = output.poll(0); playOffset = 0 }
+        val packet = playing
         out.fill(0f)
-        if (block == null) return false
+        if (packet == null || packet.template == null || packet.template !== centroid()) { playing=null; return false }
+        val block = packet.audio
         val n = minOf(out.size, block.size-playOffset)
         System.arraycopy(block, playOffset, out, 0, n); playOffset += n
         return true
@@ -58,10 +60,11 @@ class ExperimentalSeparator(
     private fun loop() {
         try {
             while (running.get()) {
-                val raw = input.poll(200) ?: continue
+                val packet = input.poll(200) ?: continue
+                val raw = packet.audio
                 val currentTemplate = centroid()
                 val target = currentTemplate?.copyOf()
-                if (target == null) { output.offer(FloatArray(32000)); Diagnostics.event("TSE muted=no_target_template"); continue }
+                if (target == null || packet.template !== currentTemplate) { output.offer(Packet(FloatArray(32000), currentTemplate)); Diagnostics.event("TSE muted=no_target_template"); continue }
                 val start = SystemClock.elapsedRealtimeNanos()
                 val separated: Array<FloatArray> = OnnxTensor.createTensor(env, FloatBuffer.wrap(raw), longArrayOf(1,32000)).use { tensor ->
                     session.run(mapOf(session.inputNames.first() to tensor)).use { result ->
@@ -71,7 +74,7 @@ class ExperimentalSeparator(
                     }
                 }
                 // A target change while processing must not play the previous person's block.
-                if (centroid() !== currentTemplate) { output.offer(FloatArray(32000)); continue }
+                if (centroid() !== currentTemplate) { output.offer(Packet(FloatArray(32000), currentTemplate)); continue }
                 val sepEnd = SystemClock.elapsedRealtimeNanos()
                 val scores = separated.map { source ->
                     // Protect extractor and playback from unexpected model scale/nonfinite values.
@@ -81,18 +84,19 @@ class ExperimentalSeparator(
                 }
                 val speakerEnd = SystemClock.elapsedRealtimeNanos()
                 val best = if (scores[0] >= scores[1]) 0 else 1
-                val accepted = scores[best] >= threshold() && scores[best] - scores[1-best] >= margin()
+                val accepted = currentTemplate === centroid() && running.get() &&
+                    scores.all { it.isFinite() } && scores[best] >= threshold() && scores[best] - scores[1-best] >= margin()
                 val selected = if (accepted) separated[best] else FloatArray(32000)
                 var peak = 0f; for (v in selected) peak = maxOf(peak,abs(v))
                 if (peak > 0.95f) for (k in selected.indices) selected[k] *= 0.95f/peak
-                output.offer(selected)
+                output.offer(Packet(selected,currentTemplate))
                 val ms = (speakerEnd-start)/1000000
                 times.add(ms); if (times.size>50) times.removeAt(0)
                 val sorted=times.sorted()
                 val p50=sorted[(sorted.size-1)/2]; val p95=sorted[((sorted.size-1)*95)/100]
                 val rt=Runtime.getRuntime()
                 Diagnostics.event("TSE sepMs="+(sepEnd-start)/1000000+" speakerMs="+(speakerEnd-sepEnd)/1000000+
-                    " p50Ms="+p50+" p95Ms="+p95+" usedHeapMB="+(rt.totalMemory()-rt.freeMemory())/1048576+
+                    " p50Ms="+p50+" p95Ms="+p95+" nativeHeapMB="+android.os.Debug.getNativeHeapAllocatedSize()/1048576+" usedHeapMB="+(rt.totalMemory()-rt.freeMemory())/1048576+
                     " droppedInput="+input.dropped+" droppedOutput="+output.dropped+" cosine0="+scores[0]+" cosine1="+scores[1]+
                     " threshold="+threshold()+" margin="+margin()+" accepted="+accepted+" peak="+peak)
             }

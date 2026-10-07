@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Optional local wearer voice veto, off by default. Bluetooth unchanged.
+# Private two-source feasibility build v2, stale target output invalidated. Bluetooth unchanged.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
