@@ -1,5 +1,5 @@
 name: lab-apk-hardening
-# Bluetooth media route fix plus restored original audio permission; one lab APK build.
+# Target-turn suppression fix; Bluetooth path unchanged. One lab APK build.
 on:
   push:
     branches: [lab/hardening-2026-10-07]

@@ -204,7 +204,7 @@ class AudioPipeline(
                 val s = signals()
                 gate.quietOthers = quietOthers
                 val g = gate.process(s.copy(voiceActive = voice))
-                val boost = TargetGate.dbToLinear(boostDb)
+                val boost = if (gate.boostAllowed) TargetGate.dbToLinear(boostDb) else 1f
                 val e = FrameDsp.gateAndBoost(clean, n, g, boost, gated, out)
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
@@ -243,6 +243,10 @@ class AudioPipeline(
                         " boostDb=" + boostDb + " rawRms=" + sqrt(rawEnergy / input.size) +
                         " outputRms=" + sqrt(outputEnergy / n) +
                         " micSamples=" + input.size + " level=" + sqrt(e / n) +
+                        " quietOthers=" + quietOthers + " locked=" + s.hasLock + " visible=" + s.lockedVisible +
+                        " lockedLips=" + s.lockedSpeaking + " otherLips=" + s.othersSpeaking +
+                        " voiceMatch=" + s.voiceMatch + " boostAllowed=" + gate.boostAllowed +
+                        " appliedBoost=" + boost +
                         " gate=" + gate.state + " gain=" + g + " probability=" + gate.probability +
                         " vad=" + voice + " written=" + written +
                         " denoiseUs=" + (vadStart - denoiseStart) / 1000 +

@@ -132,10 +132,10 @@ class CoreTest {
         assertTrue(g.gain > 0.85f)
     }
 
-    @Test fun hiddenLockedFaceIsNotMuted() {
+    @Test fun hiddenLockedFaceDoesNotOpenForUnknownSpeech() {
         val g = TargetGate()
         val p = g.targetProbability(GateInputs(true, 0f, 0f, null, true, lockedVisible = false))
-        assertTrue(p >= 0.5f)
+        assertEquals(0f, p, 0f)
     }
 
     @Test fun audioOnlyNeverUsesStaleLipOrUnverifiedVoice() {

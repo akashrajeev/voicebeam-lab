@@ -18,8 +18,8 @@ data class GateInputs(
 /**
  * Decides, frame by frame, how likely the sound is to be the locked person,
  * and turns that into a smooth gain. Others are turned down by [quietOthers]
- * (0 = leave them, 1 = fully mute). Gain moves up fast and down slowly so
- * the locked person's words are never clipped.
+ * (0 = leave them, 1 = fully mute). Unknown turns are attenuated without boost.
+ * This is turn gating, not separation of overlapping speakers.
  */
 enum class TargetState { UNLOCKED, TARGET, OTHER, UNCERTAIN, OVERLAP }
 
@@ -37,6 +37,9 @@ class TargetGate(
     var gain: Float = 1f
         private set
     private var holdLeft = 0f
+    private var hadLock = false
+    var boostAllowed: Boolean = true
+        private set
 
     fun targetProbability(i: GateInputs): Float {
         if (i.hasLock && i.audioOnly) {
@@ -48,6 +51,7 @@ class TargetGate(
             !i.hasLock -> TargetState.UNLOCKED
             i.audioOnly && (i.voiceMatch ?: 0f) <= 0.8f -> TargetState.OTHER
             !i.voiceActive -> TargetState.UNCERTAIN
+            i.voiceMatch != null && i.voiceMatch <= 0.8f -> TargetState.OTHER
             i.lockedSpeaking > 0.55f && i.othersSpeaking > 0.55f -> TargetState.OVERLAP
             i.othersSpeaking > 0.55f && i.lockedSpeaking < 0.3f -> TargetState.OTHER
             i.lockedVisible && i.lockedSpeaking > 0.55f -> TargetState.TARGET
@@ -61,31 +65,48 @@ class TargetGate(
             TargetState.TARGET -> 0.95f
             TargetState.OTHER -> 0f
             TargetState.OVERLAP -> 0.5f // A scalar gate cannot remove an overlapping voice.
-            TargetState.UNCERTAIN -> if (!i.lockedVisible && !i.audioOnly) 0.6f else 0.25f
+            TargetState.UNCERTAIN -> 0f // no positive evidence: do not open for off-camera voices
         }
     }
 
     fun process(i: GateInputs): Float {
+        // A new lock must not inherit the open, boosted UNLOCKED monitor.
+        if (i.hasLock && !hadLock) { gain = 0f; probability = 0f; holdLeft = 0f }
+        hadLock = i.hasLock
         val p = targetProbability(i)
-        if (i.voiceActive || !i.hasLock) {
+        if (!i.hasLock) {
+            probability = 1f; holdLeft = 0f
+        } else if (i.voiceActive) {
             probability = p
-            holdLeft = when {
-                p > 0.5f -> holdMs
-                p < 0.3f -> 0f              // someone else is clearly talking: end the hold now
-                else -> (holdLeft - frameMs).coerceAtLeast(0f)
-            }
+            holdLeft = if (state == TargetState.TARGET) holdMs else 0f
         } else {
             holdLeft = (holdLeft - frameMs).coerceAtLeast(0f)
+            // A short gap may hold the last target turn. It must expire, not retain .95 forever.
+            if (holdLeft <= 0f) probability = 0f
         }
-        val effective = if (holdLeft > 0f) maxOf(probability, 0.9f) else probability
-        val wanted = 1f - quietOthers * (1f - effective)
-        val tau = if (wanted > gain) attackMs else releaseMs
+        val confirmed = !i.hasLock ||
+            (i.voiceActive && state == TargetState.TARGET) || (!i.voiceActive && holdLeft > 0f)
+        boostAllowed = confirmed
+        val strength = quietOthers.coerceIn(0f, 1f)
+        // Squared residual gives useful suppression despite proximity to the phone mic.
+        // At 80% the unconfirmed residual is 4%, without hearing boost; at 100% it is zero.
+        val residual = (1f - strength) * (1f - strength)
+        val wanted = when {
+            !i.hasLock -> 1f
+            confirmed -> 1f - strength * (1f - probability)
+            state == TargetState.OVERLAP && i.voiceActive -> maxOf(residual, 0.5f)
+            else -> residual
+        }
+        val tau = if (wanted > gain) attackMs else minOf(releaseMs, 80f)
         val alpha = 1f - exp(-frameMs / tau)
         gain += (wanted - gain) * alpha
         return gain
     }
 
-    fun reset() { state = TargetState.UNLOCKED; probability = 1f; gain = 1f; holdLeft = 0f }
+    fun reset() {
+        state = TargetState.UNLOCKED; probability = 1f; gain = 1f; holdLeft = 0f
+        hadLock = false; boostAllowed = true
+    }
 
     companion object {
         fun dbToLinear(db: Float): Float = 10f.pow(db / 20f)
