@@ -255,6 +255,9 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
             // Status + caption + controls.
             Column(Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(horizontal = 18.dp, vertical = 12.dp)) {
                 StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned, state.voiceMatch) { engine.unlock() }
+                if (state.earphones == null && state.listening && !demoFeed) {
+                    Text("Live audio needs a media earphone route (Bluetooth Media audio or wired/USB). Call-only SCO audio is not supported.", color = Muted, fontSize = 12.sp)
+                }
                 Spacer(Modifier.height(8.dp))
                 val latest = state.partial.ifBlank { state.segments.lastOrNull()?.text ?: "" }
                 val latestTarget = if (state.partial.isNotBlank()) state.partialIsTarget else state.segments.lastOrNull()?.isTarget ?: true

@@ -14,6 +14,7 @@ import android.os.SystemClock
 import android.util.Log
 import com.akashrajeev.voicebeam.core.DropOldestQueue
 import com.akashrajeev.voicebeam.core.MonitorOutput
+import com.akashrajeev.voicebeam.core.MonitorRoute
 import com.akashrajeev.voicebeam.core.FrameDsp
 import com.akashrajeev.voicebeam.core.GateInputs
 import com.akashrajeev.voicebeam.core.TargetGate
@@ -123,14 +124,25 @@ class AudioPipeline(
                 .setPerformanceMode(AudioTrack.PERFORMANCE_MODE_LOW_LATENCY)
                 .build()
         }
-        // Prefer a physical earphone route; never open monitor audio to the speaker.
-        val headset = (app.getSystemService(android.content.Context.AUDIO_SERVICE) as android.media.AudioManager)
-            .getDevices(android.media.AudioManager.GET_DEVICES_OUTPUTS).firstOrNull {
-                it.type in setOf(AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_WIRED_HEADSET,
-                    AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_USB_DEVICE, AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
-                    AudioDeviceInfo.TYPE_BLUETOOTH_SCO, AudioDeviceInfo.TYPE_BLE_HEADSET)
-            }
-        if (headset != null) track?.preferredDevice = headset
+        val audioManager = app.getSystemService(android.content.Context.AUDIO_SERVICE) as android.media.AudioManager
+        fun mediaHeadset(): AudioDeviceInfo? {
+            val devices = audioManager.getDevices(android.media.AudioManager.GET_DEVICES_OUTPUTS)
+            val type = MonitorRoute.chooseType(devices.map { it.type })
+            return devices.firstOrNull { it.type == type }
+        }
+        // Media monitoring is A2DP/LE/wired/USB, never the first enumerated SCO device.
+        var preferredOutputId: Int? = null
+        val headset = mediaHeadset()
+        if (headset != null) {
+            val accepted = track?.setPreferredDevice(headset)
+            Diagnostics.event("prefer_output=" + headset.type + " accepted=" + accepted)
+            preferredOutputId = headset.id
+        }
+        // Listen to the scene through the phone, not the Bluetooth call microphone.
+        val phoneMic = audioManager.getDevices(android.media.AudioManager.GET_DEVICES_INPUTS)
+            .firstOrNull { it.type == AudioDeviceInfo.TYPE_BUILTIN_MIC }
+        if (phoneMic != null) Diagnostics.event("prefer_input=" + phoneMic.type + " accepted=" + rec?.setPreferredDevice(phoneMic))
+        track?.setVolume(1f)
         val input = FloatArray(frameShift)
         // Reused every frame. Only data handed to another thread is copied.
         val denoiseIn = FloatArray(frameShift)
@@ -199,12 +211,7 @@ class AudioPipeline(
                 // The actual routed output, not merely a paired headset, must be safe.
                 val playStart = SystemClock.elapsedRealtimeNanos()
                 val routed = track?.routedDevice
-                val headphoneRoute = routed != null && routed.type in setOf(
-                    AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_WIRED_HEADSET,
-                    AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_USB_DEVICE,
-                    AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
-                    AudioDeviceInfo.TYPE_BLE_HEADSET,
-                )
+                val headphoneRoute = MonitorRoute.isMediaHeadphone(routed?.type)
                 // Keep feeding silence for unknown/speaker routes so routing can settle and recover
                 // after headphones are connected. Only an ACTUAL headphone route receives speech.
                 val writeSpeech = monitorEnabled && headphoneRoute
@@ -218,7 +225,23 @@ class AudioPipeline(
                 val now = SystemClock.elapsedRealtime()
                 if (now - lastDiagnosticMs >= 1000L) {
                     val end = SystemClock.elapsedRealtimeNanos()
+                    val wantedHeadset = mediaHeadset()
+                    if (wantedHeadset?.id != preferredOutputId) {
+                        val accepted = track?.setPreferredDevice(wantedHeadset)
+                        Diagnostics.event("prefer_output=" + wantedHeadset?.type + " accepted=" + accepted)
+                        preferredOutputId = wantedHeadset?.id
+                    }
+                    var outputEnergy = 0f
+                    var rawEnergy = 0f
+                    for (k in 0 until n) outputEnergy += out[k] * out[k]
+                    for (sample in input) rawEnergy += sample * sample
                     Diagnostics.event("audio route=" + routed?.type + " monitor=" + writeSpeech +
+                        " inputRoute=" + rec?.routedDevice?.type +
+                        " mediaVolume=" + audioManager.getStreamVolume(android.media.AudioManager.STREAM_MUSIC) +
+                        "/" + audioManager.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC) +
+                        " mediaMuted=" + audioManager.isStreamMute(android.media.AudioManager.STREAM_MUSIC) +
+                        " boostDb=" + boostDb + " rawRms=" + sqrt(rawEnergy / input.size) +
+                        " outputRms=" + sqrt(outputEnergy / n) +
                         " micSamples=" + input.size + " level=" + sqrt(e / n) +
                         " gate=" + gate.state + " gain=" + g + " probability=" + gate.probability +
                         " vad=" + voice + " written=" + written +

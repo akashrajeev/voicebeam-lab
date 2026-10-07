@@ -367,13 +367,8 @@ class VoiceBeamEngine(private val app: Context) {
     fun earphoneName(): String? {
         val am = app.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val out = am.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
-        val d = out.firstOrNull {
-            it.type in setOf(
-                AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_WIRED_HEADSET,
-                AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
-                AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_USB_DEVICE, AudioDeviceInfo.TYPE_BLE_HEADSET,
-            )
-        } ?: return null
+        val wanted = com.akashrajeev.voicebeam.core.MonitorRoute.chooseType(out.map { it.type })
+        val d = out.firstOrNull { it.type == wanted } ?: return null
         return d.productName?.toString()?.takeIf { it.isNotBlank() } ?: "Earphones"
     }
 

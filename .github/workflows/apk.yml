@@ -1,5 +1,5 @@
 name: lab-apk-hardening
-# Audio route startup plus local shareable diagnostics; one lab debug APK build.
+# Bluetooth media route fix and input/output/volume diagnostics; one lab APK build.
 on:
   push:
     branches: [lab/hardening-2026-10-07]

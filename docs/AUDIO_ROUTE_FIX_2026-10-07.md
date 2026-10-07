@@ -43,3 +43,21 @@ There is no remote feed or upload endpoint. Settings > Share log exports a
 text snapshot through Android's chooser; select WhatsApp and the Instinct chat.
 Clear log clears RAM. Restarting the process also clears it. A previous exported
 snapshot can remain in app cache until replaced or the cache is cleared.
+
+## Follow-up: Bluetooth SCO in the phone log
+
+The user log from build 9e0df94 shows route type 7 (Bluetooth SCO), monitor=true,
+and write=256, with a running pipeline and nonzero audio levels. It disproves
+startup deadlock and an audio-thread crash for that particular test. It does not
+prove earbud audibility. The logged gain is gate attenuation, NOT hearing boost;
+the code applies boost separately (default +12 dB). No blind gain increase made.
+
+Code defect: the first enumerated headphone device could be SCO and the media
+monitor accepted it. SCO is a telephony route, whereas this track uses media.
+Now route selection prioritizes wired/USB then A2DP/LE media; SCO cannot receive
+live microphone speech via the media track. Request the built-in phone mic.
+Requests are preferences, not guarantees, so log their acceptance and actual
+input/output routes. Output RMS, raw RMS, boost setting and music stream volume/
+mute now distinguish silent DSP, low volume and unsupported Bluetooth routing.
+No system volume is changed. Earbuds with only call audio need Media audio
+turned on or a wired/USB alternative. Phone test still required.
