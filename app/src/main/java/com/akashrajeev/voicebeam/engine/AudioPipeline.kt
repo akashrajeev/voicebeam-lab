@@ -70,11 +70,13 @@ class AudioPipeline(
     @SuppressLint("MissingPermission")
     fun start(useSceneMic: Boolean) {
         if (running.getAndSet(true)) return
+        Diagnostics.event("audio_start sceneMic=" + useSceneMic)
         capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset()
         thread = Thread({
             try { loop(useSceneMic) }
             catch (t: Throwable) {
                 Log.e("VoiceBeamAudio", "audio loop failed", t)
+                Diagnostics.event("audio_error=" + t.javaClass.simpleName)
                 if (running.get()) onError(t)
             } finally {
                 running.set(false)
@@ -84,6 +86,7 @@ class AudioPipeline(
     }
 
     fun stop() {
+        Diagnostics.event("audio_stop")
         running.set(false)
         thread?.join(1500)
         thread = null
@@ -137,6 +140,7 @@ class AudioPipeline(
         val silence = FloatArray(frameShift)
         var lastRoute: Int? = null
         var routeLogged = false
+        var lastDiagnosticMs = 0L
         try {
             check(rec == null || rec.state == AudioRecord.STATE_INITIALIZED) { "Microphone could not initialize" }
             check(track == null || track.state == AudioTrack.STATE_INITIALIZED) { "Playback could not initialize" }
@@ -172,6 +176,7 @@ class AudioPipeline(
                 capturedSamples += input.size
                 rawWriter?.write(input)
 
+                val denoiseStart = SystemClock.elapsedRealtimeNanos()
                 System.arraycopy(input, 0, denoiseIn, 0, input.size)
                 val denoised = try { models.denoiser.process(denoiseIn) } catch (t: Throwable) { input }
                 val n = minOf(denoised.size, input.size)
@@ -181,7 +186,9 @@ class AudioPipeline(
                 // denoiser output may lag input by a frame; mixing uses aligned sizes
                 FrameDsp.mixDenoised(denoised, input, mix, clean, n)
 
+                val vadStart = SystemClock.elapsedRealtimeNanos()
                 val voice = vad.isVoice(clean.let { if (it.size == n) it else it.copyOf(n) })
+                val gateStart = SystemClock.elapsedRealtimeNanos()
                 val s = signals()
                 gate.quietOthers = quietOthers
                 val g = gate.process(s.copy(voiceActive = voice))
@@ -190,6 +197,7 @@ class AudioPipeline(
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
                 // The actual routed output, not merely a paired headset, must be safe.
+                val playStart = SystemClock.elapsedRealtimeNanos()
                 val routed = track?.routedDevice
                 val headphoneRoute = routed != null && routed.type in setOf(
                     AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_WIRED_HEADSET,
@@ -204,7 +212,22 @@ class AudioPipeline(
                 if (written != null && written < 0) error("Playback write failed: $written")
                 if (!routeLogged || lastRoute != routed?.id) {
                     Log.i("VoiceBeamAudio", "route type=" + routed?.type + " monitor=" + writeSpeech + " write=" + written)
+                    Diagnostics.event("route type=" + routed?.type + " monitor=" + writeSpeech + " write=" + written)
                     lastRoute = routed?.id; routeLogged = true
+                }
+                val now = SystemClock.elapsedRealtime()
+                if (now - lastDiagnosticMs >= 1000L) {
+                    val end = SystemClock.elapsedRealtimeNanos()
+                    Diagnostics.event("audio route=" + routed?.type + " monitor=" + writeSpeech +
+                        " micSamples=" + input.size + " level=" + sqrt(e / n) +
+                        " gate=" + gate.state + " gain=" + g + " probability=" + gate.probability +
+                        " vad=" + voice + " written=" + written +
+                        " denoiseUs=" + (vadStart - denoiseStart) / 1000 +
+                        " vadUs=" + (gateStart - vadStart) / 1000 +
+                        " gateUs=" + (playStart - gateStart) / 1000 +
+                        " playbackUs=" + (end - playStart) / 1000 +
+                        " droppedCaptionBlocks=" + asrQueue.dropped)
+                    lastDiagnosticMs = now
                 }
                 // Recognition needs speech, not the gate's sometimes 80%-attenuated output.
                 // Assign a caption to the target separately using the gate probability.

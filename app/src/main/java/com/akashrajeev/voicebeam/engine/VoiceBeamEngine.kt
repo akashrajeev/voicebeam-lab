@@ -117,9 +117,11 @@ class VoiceBeamEngine(private val app: Context) {
                 val m = AudioModels.load(app.assets)
                 models = m
                 learner = VoiceLearner({ m.voicePrint.embed(it) }, SAMPLE_RATE)
+                Diagnostics.event("models_ready")
                 _state.update { it.copy(modelsReady = true) }
             } catch (t: Throwable) {
                 Log.e(TAG, "model load failed", t)
+                Diagnostics.event("models_error=" + t.javaClass.simpleName)
                 _state.update { it.copy(modelError = t.message ?: t.javaClass.simpleName) }
             } finally {
                 loadingModels.set(false)
@@ -255,6 +257,8 @@ class VoiceBeamEngine(private val app: Context) {
         _state.update { it.copy(modelsReady = false) }
     }
 
+    private var diagnosticAsrBlocks = 0
+    private var diagnosticVoiceAt = 0L
     private var dbgBlocks = 0
     private var capWallStart = 0L
 
@@ -276,7 +280,11 @@ class VoiceBeamEngine(private val app: Context) {
                     System.arraycopy(f, off, block, fill, n); fill += n; off += n
                     if (fill == block.size) {
                         val speechy = packet.voiceActive
-                        val (text, ended) = try { m.asr.accept(block.copyOf()) } catch (t: Throwable) { Pair("", false) }
+                        val asrStart = SystemClock.elapsedRealtimeNanos()
+                        val (text, ended) = try { m.asr.accept(block.copyOf()) } catch (t: Throwable) {
+                            Diagnostics.event("asr_error=" + t.javaClass.simpleName); Pair("", false)
+                        }
+                        if (++diagnosticAsrBlocks % 10 == 0) Diagnostics.event("asrUs=" + (SystemClock.elapsedRealtimeNanos() - asrStart) / 1000 + " queue=" + p.asrQueue.size)
                         assembler.advanceTo(maxOf(0L, packet.captureMs * SAMPLE_RATE / 1000 - (f.size - off) - block.size))
                         val seg = assembler.onBlock(block.size, text, ended, packet.probability, speechy)
                         fill = 0
@@ -296,7 +304,15 @@ class VoiceBeamEngine(private val app: Context) {
                 val l = learner ?: continue
                 if (tracker.lockedId == null) continue
                 val wasLearned = l.learned
-                val score = try { l.feed(samples, lip) } catch (t: Throwable) { null }
+                val speakerStart = SystemClock.elapsedRealtimeNanos()
+                val score = try { l.feed(samples, lip) } catch (t: Throwable) {
+                    Diagnostics.event("speaker_error=" + t.javaClass.simpleName); null
+                }
+                val speakerNow = SystemClock.elapsedRealtime()
+                if (speakerNow - diagnosticVoiceAt >= 1000) {
+                    Diagnostics.event("speakerUs=" + (SystemClock.elapsedRealtimeNanos() - speakerStart) / 1000 + " learned=" + l.learned)
+                    diagnosticVoiceAt = speakerNow
+                }
                 if (score != null) { latestVoiceMatch = score; lastVoiceMatchAtMs = SystemClock.uptimeMillis() }
                 if (BuildConfig.DEBUG && (!wasLearned && l.learned || score != null)) Log.i("VoiceBeamEngine", "voice: learned=" + l.learned + " progress=" + l.progress + " score=" + score + " lip=" + lip)
                 if (l.learned != _state.value.voiceLearned || score != null) {

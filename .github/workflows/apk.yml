@@ -1,5 +1,5 @@
 name: lab-apk-hardening
-# Audio route startup fix: regression tests plus one lab debug APK build.
+# Audio route startup plus local shareable diagnostics; one lab debug APK build.
 on:
   push:
     branches: [lab/hardening-2026-10-07]

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -16,6 +17,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import android.content.Intent
+import androidx.core.content.FileProvider
+import com.akashrajeev.voicebeam.engine.Diagnostics
+import kotlinx.coroutines.delay
+import java.io.File
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +42,11 @@ import kotlin.math.roundToInt
 
 @Composable
 fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
+    val context = LocalContext.current
+    var diagnosticText by remember { mutableStateOf(Diagnostics.snapshot()) }
+    LaunchedEffect(Unit) {
+        while (true) { diagnosticText = Diagnostics.snapshot(); delay(1000) }
+    }
     val s by engine.settings.collectAsState()
     val state by engine.state.collectAsState()
     Column(Modifier.fillMaxSize().background(Bg)) {
@@ -59,6 +75,25 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
                 SectionHeader("Testing")
                 SwitchRow("Demo feed (testing)", "Plays a recorded two-person clip instead of the camera and mic", s.debugFeed) { v -> engine.updateSettings { it.copy(debugFeed = v) } }
             }
+            SectionHeader("Live diagnostics")
+            Text("Local technical logs only. No audio, captions or uploads. Share sends a text file only when you choose an app.", color = Muted, fontSize = 12.sp)
+            Row {
+                Button(onClick = {
+                    val dir = File(context.cacheDir, "exports").also { it.mkdirs() }
+                    val file = File(dir, "voicebeam-diagnostics.txt")
+                    file.writeText(Diagnostics.snapshot())
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.files", file)
+                    val send = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        clipData = android.content.ClipData.newRawUri("VoiceBeam diagnostics", uri)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    context.startActivity(Intent.createChooser(send, "Share VoiceBeam diagnostics"))
+                }) { Text("Share log") }
+                Button(onClick = { Diagnostics.clear(); diagnosticText = Diagnostics.snapshot() }) { Text("Clear log") }
+            }
+            Text(diagnosticText.lines().takeLast(12).joinToString("\n"), color = Muted, fontSize = 10.sp)
             SectionHeader("Privacy")
             Text("Speech recognition, noise removal, face tracking and voice matching all run on this phone. VoiceBeam has no account and uploads nothing. The only network use is the optional stage-caption page on your own Wi-Fi.",
                 color = Muted, fontSize = 13.sp, modifier = Modifier.padding(vertical = 8.dp))

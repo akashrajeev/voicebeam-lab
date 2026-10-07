@@ -32,3 +32,14 @@ This patch is not an overlap separator and makes no isolation-quality claim.
 
 Android routing contract:
 https://developer.android.com/reference/android/media/AudioRouting#getRoutedDevice()
+
+## Local diagnostics
+Settings > Live diagnostics updates once a second. The latest 300 technical
+events are held in RAM, with route type, audio RMS/gain/VAD/gate, write results,
+denoiser/VAD/gate/playback/ASR/speaker timings and caption backlog. Model and
+audio failures log only exception class, not arbitrary exception content.
+No audio samples, captions, face data, device names or identifiers are included.
+There is no remote feed or upload endpoint. Settings > Share log exports a
+text snapshot through Android's chooser; select WhatsApp and the Instinct chat.
+Clear log clears RAM. Restarting the process also clears it. A previous exported
+snapshot can remain in app cache until replaced or the cache is cleared.
