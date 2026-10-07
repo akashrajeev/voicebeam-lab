@@ -16,7 +16,7 @@ data class Settings(
     val onboarded: Boolean = false,
     val hd1080: Boolean = false,
     val experimentalSeparation: Boolean = false,
-    val separationLiveMode: Int = 0, // 0=1s/250ms; 1=2s/500ms; 2=2s blocks
+    val separationLiveMode: Int = 1, // 0=1s/250ms; 1=2s/500ms; 2=2s blocks
     val separationRaw: Boolean = false,
     val separationCosine: Float = 0.35f, // provisional experiment control, not calibrated
     val separationMargin: Float = 0.10f,
@@ -40,7 +40,7 @@ class SettingsStore(context: Context) {
         onboarded = p.getBoolean("onboarded", false),
         hd1080 = p.getBoolean("hd1080", false),
         experimentalSeparation = p.getBoolean("tse", false),
-        separationLiveMode = p.getInt("tseMode",0).coerceIn(0,2),
+        separationLiveMode = p.getInt("tseMode",1).coerceIn(0,2),
         separationRaw = p.getBoolean("tseRaw",false),
         separationCosine = p.getFloat("tseCos", 0.35f),
         separationMargin = p.getFloat("tseMargin", 0.10f),

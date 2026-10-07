@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Private two-source feasibility build v3: one native ORT core, deterministic packaging.
+# Private sliding probe v4: 1s/250ms, 2s/500ms, gated/raw comparison.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
