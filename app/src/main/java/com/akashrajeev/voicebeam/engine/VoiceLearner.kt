@@ -24,13 +24,15 @@ class VoiceLearner(
         private set
     @Volatile var centroid: FloatArray? = null
         private set
+    @Volatile var enrollmentMessage: String = "Voice not learned"
+        private set
     val learned: Boolean get() = centroid != null
     val progress: Float get() = if (learned) 1f else (prints.size + enrollFill / chunk.toFloat()) / needed.toFloat()
     val completedPhrases: Int get() = prints.size
 
     /** Deliberate clean target enrollment; retain frozen template until explicitly restarted. */
     @Synchronized fun beginEnrollment() {
-        reset(); enrollmentEnabled = true
+        reset(); enrollmentEnabled = true; enrollmentMessage="Learning: only this person speaks"
     }
 
     /** Feed voiced audio. [lipWeight] is how sure we are the locked person is the one talking. Returns a new match score when one is ready. */
@@ -42,9 +44,13 @@ class VoiceLearner(
                 enrollFill = append(enrollBuf, enrollFill, samples)
                 if (enrollFill >= chunk) {
                     var energy=0.0; for(v in enrollBuf) energy+=v*v
-                    if(kotlin.math.sqrt(energy/enrollBuf.size)>=.005) embed(enrollBuf.copyOf())?.let { prints.add(it) }
+                    if(kotlin.math.sqrt(energy/enrollBuf.size)>=.005) {
+                        val embedding=embed(enrollBuf.copyOf())
+                        if(embedding!=null) {prints.add(embedding);enrollmentMessage="Captured ${prints.size}/$needed phrases"}
+                        else enrollmentMessage="Embedding failed: try again"
+                    } else enrollmentMessage="Too quiet: move closer and speak alone"
                     enrollFill = 0
-                    if (prints.size >= needed) { centroid = VoiceMatch.average(prints); enrollmentEnabled = false }
+                    if (prints.size >= needed) { centroid = VoiceMatch.average(prints); enrollmentEnabled = false; enrollmentMessage="LEARNED" }
                 }
             }
             else { enrollFill = 0 }
@@ -68,5 +74,5 @@ class VoiceLearner(
     }
 
     @Synchronized
-    fun reset() { lastQueryEmbedding = null; enrollmentEnabled = false; prints.clear(); centroid = null; enrollFill = 0; scoreFill = 0 }
+    fun reset() { enrollmentMessage="Voice not learned (cleared/interrupted)"; lastQueryEmbedding = null; enrollmentEnabled = false; prints.clear(); centroid = null; enrollFill = 0; scoreFill = 0 }
 }

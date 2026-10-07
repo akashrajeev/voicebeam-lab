@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Enrollment usability and explicit raw passthrough while uncertain.
+# Enrollment status v2, mutual exclusion both ways, commit and mode header.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]

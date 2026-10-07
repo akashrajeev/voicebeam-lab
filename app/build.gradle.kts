@@ -12,8 +12,9 @@ android {
         applicationId = "com.akashrajeev.voicebeam.lab.tse"
         minSdk = 26
         targetSdk = 35
+        buildConfigField("String", "LAB_COMMIT", "\"" + (System.getenv("GITHUB_SHA") ?: "local") + "\"")
         versionCode = 1
-        versionName = "0.1.0-tse-experiment"
+        versionName = "0.1.0-tse-enrollment-v2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters += listOf("arm64-v8a")

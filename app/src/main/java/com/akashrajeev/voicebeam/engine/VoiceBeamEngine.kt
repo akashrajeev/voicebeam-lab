@@ -160,6 +160,8 @@ class VoiceBeamEngine(private val app: Context) {
         return id != null
     }
 
+    fun enrollmentMessage(): String = "Target: "+(learner?.enrollmentMessage ?: "Models not loaded")+" | Wearer: "+(wearerLearner?.enrollmentMessage ?: "Models not loaded")
+
     fun beginTargetEnrollment() {
         if (tracker.lockedId == null) return
         wearerLearner?.reset()
@@ -172,6 +174,7 @@ class VoiceBeamEngine(private val app: Context) {
 
     fun beginWearerEnrollment() {
         wearerVetoEnabled = false; latestWearerMatch = null
+        if(learner?.enrollmentEnabled==true) learner?.reset()
         wearerLearner?.beginEnrollment()
         Diagnostics.event("wearer_enrollment_begin")
         _state.update { it.copy(wearerEnrollmentActive = true, wearerLearned = false,
@@ -249,6 +252,7 @@ class VoiceBeamEngine(private val app: Context) {
             latestProbability = f.probability
             _state.update { it.copy(inputLevel = f.level, gain = f.gain, targetProbability = f.probability, earphones = f.monitorRoute) }
         }
+        Diagnostics.modeStatus="tse="+s.experimentalSeparation+",contextHop="+s.separationLiveMode+",raw="+s.separationRaw
         p.enrollmentActive = { learner?.enrollmentEnabled == true || wearerLearner?.enrollmentEnabled == true }
         p.enrollmentStatus = { "target:"+(learner?.completedPhrases ?: 0)+"/3,active:"+(learner?.enrollmentEnabled ?: false)+",learned:"+(learner?.learned ?: false) }
         p.quietOthers = s.quietOthers; p.boostDb = s.boostDb; p.denoiseMix = s.denoise
