@@ -254,16 +254,18 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
 
             // Status + caption + controls.
             Column(Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(horizontal = 18.dp, vertical = 12.dp)) {
+                Text("ENH-1 | Enhancement, not overlapping-voice separation", color = Muted, fontSize = 12.sp)
+                Text(engine.enrollmentMessage(), color = Muted, fontSize = 12.sp)
                 StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned, state.voiceMatch) { engine.unlock() }
                 if (state.wearerEnrollmentActive) {
                     Text("Learning YOUR voice ${(state.wearerEnrollmentProgress * 100).roundToInt()}%: only you speak. Target learning paused.", color = Muted, fontSize = 12.sp)
                 }
-                if (!state.wearerLearned && !state.wearerEnrollmentActive) {
+                if (!state.wearerLearned && !state.wearerEnrollmentActive && !state.voiceEnrollmentActive) {
                     Button(onClick = { engine.beginWearerEnrollment() }) { Text("Learn my voice (optional)") }
                 }
                 if (state.lockedId != null && !state.voiceLearned && !state.wearerEnrollmentActive) {
                     Text(if (state.voiceEnrollmentActive)
-                        "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks, face visible. Need 3 clean 3-second phrases."
+                        "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks. Capture 9 seconds; pauses and lip dips will not reset it."
                         else "Face locked, voice not learned. Ask the target to speak alone, then start voice learning.", color = Muted, fontSize = 12.sp)
                     Button(onClick = { engine.beginTargetEnrollment() }) {
                         Text(if (state.voiceEnrollmentActive) "Restart voice learning" else "Learn locked voice")

@@ -1,5 +1,5 @@
-name: lab-apk-hardening
-# Optional local wearer voice veto, off by default. Bluetooth unchanged.
+name: ENH-1-tested-apk
+# ENH-1: safe enhancement and enrollment. Bluetooth unchanged.
 on:
   push:
     branches: [lab/hardening-2026-10-07]
@@ -21,7 +21,7 @@ jobs:
       - name: Unit tests
         run: ./gradlew --no-daemon testDebugUnitTest -Dorg.gradle.jvmargs="-Xmx4g"
       - name: Build debug APK
-        run: ./gradlew --no-daemon assembleDebug -Dorg.gradle.jvmargs="-Xmx4g"
+        run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest -Dorg.gradle.jvmargs="-Xmx4g"
       - name: Show APK
         run: |
           ls -la app/build/outputs/apk/debug/
@@ -29,6 +29,8 @@ jobs:
           grep -ho 'tests="[0-9]*"' app/build/test-results/testDebugUnitTest/*.xml
       - uses: actions/upload-artifact@v4
         with:
-          name: voicebeam-lab-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          name: VoiceBeam-ENH-1-app-and-startup-test
+          path: |
+            app/build/outputs/apk/debug/*.apk
+            app/build/outputs/apk/androidTest/debug/*.apk
           retention-days: 1

@@ -15,12 +15,14 @@ data class GateInputs(
     val audioOnly: Boolean = false, // use speaker embedding only; no camera fallback
     val wearerMatch: Float? = null, // fresh score of deliberately enrolled wearer, optional
     val wearerVetoEnabled: Boolean = false,
+    val voiceLearned: Boolean = true, // complete frozen enrollment, supplied by engine
+
 )
 
 /**
  * Decides, frame by frame, how likely the sound is to be the locked person,
  * and turns that into a smooth gain. Others are turned down by [quietOthers]
- * (0 = leave them, 1 = fully mute). Unknown turns are attenuated without boost.
+ * (0 = leave them, 1 = fully mute). Unknown turns pass enhanced audio without boost.
  * This is turn gating, not separation of overlapping speakers.
  */
 enum class TargetState { UNLOCKED, TARGET, OTHER, UNCERTAIN, OVERLAP }
@@ -44,31 +46,27 @@ class TargetGate(
         private set
 
     fun targetProbability(i: GateInputs): Float {
-        if (i.hasLock && i.audioOnly) {
-            val score = i.voiceMatch ?: 0f
-            state = if (score > 0.8f) TargetState.TARGET else TargetState.OTHER
-            return score
-        }
         state = when {
             !i.hasLock -> TargetState.UNLOCKED
-            i.audioOnly && (i.voiceMatch ?: 0f) <= 0.8f -> TargetState.OTHER
+            !i.voiceLearned -> TargetState.UNCERTAIN
             !i.voiceActive -> TargetState.UNCERTAIN
             wearerVeto(i) -> TargetState.OTHER
-            i.voiceMatch != null && i.voiceMatch <= 0.8f -> TargetState.OTHER
+            // A 3-second query can contain several turns. Only a strong negative vetoes lips.
+            i.audioOnly -> if ((i.voiceMatch ?: 0f) > 0.8f) TargetState.TARGET else if (i.voiceMatch != null && i.voiceMatch < 0.2f) TargetState.OTHER else TargetState.UNCERTAIN
+            i.voiceMatch != null && i.voiceMatch < 0.2f -> TargetState.OTHER
             i.lockedSpeaking > 0.55f && i.othersSpeaking > 0.55f -> TargetState.OVERLAP
             i.othersSpeaking > 0.55f && i.lockedSpeaking < 0.3f -> TargetState.OTHER
             i.lockedVisible && i.lockedSpeaking > 0.55f -> TargetState.TARGET
-            i.audioOnly && (i.voiceMatch ?: 0f) > 0.8f -> TargetState.TARGET
             !i.lockedVisible -> TargetState.UNCERTAIN
             (i.voiceMatch ?: 0f) > 0.8f && i.lockedSpeaking > 0.3f -> TargetState.TARGET
             else -> TargetState.UNCERTAIN
         }
         return when (state) {
             TargetState.UNLOCKED -> 1f
-            TargetState.TARGET -> 0.95f
-            TargetState.OTHER -> 0f
+            TargetState.TARGET -> if (i.audioOnly) i.voiceMatch ?: 0.95f else 0.95f
+            TargetState.OTHER -> if (i.audioOnly) i.voiceMatch ?: 0f else 0f
             TargetState.OVERLAP -> 0.5f // A scalar gate cannot remove an overlapping voice.
-            TargetState.UNCERTAIN -> 0f // no positive evidence: do not open for off-camera voices
+            TargetState.UNCERTAIN -> 0f // not target-attributed; listening passes without boost
         }
     }
 
@@ -80,7 +78,7 @@ class TargetGate(
 
     fun process(i: GateInputs): Float {
         // A new lock must not inherit the open, boosted UNLOCKED monitor.
-        if (i.hasLock && !hadLock) { gain = 0f; probability = 0f; holdLeft = 0f }
+        if (i.hasLock && !hadLock) { gain = 1f; probability = 0f; holdLeft = 0f }
         hadLock = i.hasLock
         val p = targetProbability(i)
         if (!i.hasLock) {
@@ -94,7 +92,7 @@ class TargetGate(
             if (holdLeft <= 0f) probability = 0f
         }
         val confirmed = !i.hasLock ||
-            (i.voiceActive && state == TargetState.TARGET) || (!i.voiceActive && holdLeft > 0f)
+            (i.voiceLearned && i.voiceActive && state == TargetState.TARGET) || (i.voiceLearned && !i.voiceActive && holdLeft > 0f)
         boostAllowed = confirmed
         val strength = quietOthers.coerceIn(0f, 1f)
         // Squared residual gives useful suppression despite proximity to the phone mic.
@@ -103,7 +101,8 @@ class TargetGate(
         val wanted = when {
             !i.hasLock -> 1f
             confirmed -> 1f - strength * (1f - probability)
-            state == TargetState.OVERLAP && i.voiceActive -> maxOf(residual, 0.5f)
+            state == TargetState.UNCERTAIN -> 1f // safe unboosted enhancement passthrough
+            state == TargetState.OVERLAP && i.voiceActive -> 1f // cannot separate, preserve speech
             else -> residual
         }
         val tau = if (wanted > gain) attackMs else minOf(releaseMs, 80f)

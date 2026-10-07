@@ -41,6 +41,8 @@ class AudioPipeline(
     private var capturedSamples = 0L
     val droppedCaptionBlocks: Long get() = asrQueue.dropped
 
+    var enrollmentActive: () -> Boolean = { false }
+    var enrollmentStatus: () -> String = { "unknown" }
     @Volatile var quietOthers = 0.8f
     @Volatile var boostDb = 12f
     @Volatile var denoiseMix = 1f          // 0 = raw, 1 = fully denoised
@@ -243,6 +245,7 @@ class AudioPipeline(
                         " boostDb=" + boostDb + " rawRms=" + sqrt(rawEnergy / input.size) +
                         " outputRms=" + sqrt(outputEnergy / n) +
                         " micSamples=" + input.size + " level=" + sqrt(e / n) +
+                        " track=ENH tseEnabled=false enrollment=" + enrollmentStatus() +
                         " quietOthers=" + quietOthers + " locked=" + s.hasLock + " visible=" + s.lockedVisible +
                         " lockedLips=" + s.lockedSpeaking + " otherLips=" + s.othersSpeaking +
                         " voiceMatch=" + s.voiceMatch + " wearerMatch=" + s.wearerMatch + " wearerVeto=" + s.wearerVetoEnabled + " boostAllowed=" + gate.boostAllowed +
@@ -260,7 +263,9 @@ class AudioPipeline(
                 // Assign a caption to the target separately using the gate probability.
                 val captionBlock = CaptionBlock(input.copyOf(), capturedSamples * 1000 / SAMPLE_RATE, gate.probability, voice)
                 asrQueue.offer(captionBlock)
-                if (voice) {
+                if (enrollmentActive()) {
+                    voiceQueue.offer(Pair(input.copyOf(), 1f))
+                } else if (voice) {
                     // Copy: the consumer is on another thread and `clean` is reused next frame.
                     voiceQueue.offer(Pair(clean.copyOf(n), if (s.hasLock && s.othersSpeaking < 0.3f) s.lockedSpeaking else 0f))
                 }

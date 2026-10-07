@@ -14,15 +14,15 @@ class SuppressionTest {
         repeat(150) { g.process(self.copy(voiceActive = false)) }
         assertEquals(0f, g.probability, 0f)
         assertFalse(g.boostAllowed)
-        assertTrue(g.gain < 0.041f)
+        assertTrue(g.gain > 0.99f)
     }
-    @Test fun offCameraSelfVoiceGetsNoBoostAndStrongAttenuation() {
+    @Test fun uncertainVoiceGetsNoBoostButDoesNotDisappear() {
         val g = TargetGate(frameMs = 10f)
         repeat(100) { g.process(target) }
         repeat(100) { g.process(self) }
         assertEquals(TargetState.UNCERTAIN, g.state)
         assertFalse(g.boostAllowed)
-        assertTrue(g.gain < 0.041f)
+        assertTrue(g.gain > 0.99f)
     }
     @Test fun freshNegativeSpeakerMatchVetoesLipMotion() {
         val g = TargetGate()
@@ -32,7 +32,7 @@ class SuppressionTest {
     @Test fun fullyQuietOthersConvergesToMuteNotBoostedResidual() {
         val g = TargetGate(frameMs = 10f); g.quietOthers = 1f
         repeat(100) { g.process(target) }
-        repeat(150) { g.process(self) }
+        repeat(150) { g.process(self.copy(voiceMatch = 0.1f)) }
         assertTrue(g.gain < 0.000001f); assertFalse(g.boostAllowed)
     }
     @Test fun confirmedTargetStillPassesAndCanBeBoosted() {
@@ -40,13 +40,27 @@ class SuppressionTest {
         repeat(100) { g.process(target) }
         assertTrue(g.gain > 0.95f); assertTrue(g.boostAllowed)
     }
-    @Test fun newlyLockedQuietFaceDoesNotInheritOpenMonitor() {
+    @Test fun newlyLockedQuietFaceIsUnboostedPassthrough() {
         val g = TargetGate(); repeat(50) { g.process(self.copy(hasLock = false)) }
-        assertTrue(g.process(self) < 0.05f); assertFalse(g.boostAllowed)
+        assertTrue(g.process(self) > 0.99f); assertFalse(g.boostAllowed)
     }
     @Test fun overlapIsNotGivenTargetBoost() {
         val g = TargetGate(); g.process(target.copy(othersSpeaking = 0.9f))
         assertEquals(TargetState.OVERLAP, g.state); assertFalse(g.boostAllowed)
+    }
+    @Test fun incompleteEnrollmentNeverMutesOrBoosts() {
+        val g = TargetGate(); g.quietOthers = 1f
+        repeat(100) { g.process(target.copy(voiceLearned = false, voiceMatch = 0.01f)) }
+        assertEquals(TargetState.UNCERTAIN, g.state); assertTrue(g.gain > 0.99f); assertFalse(g.boostAllowed)
+    }
+    @Test fun ambiguousMatchDoesNotVetoVisibleTarget() {
+        val g = TargetGate()
+        repeat(100) { g.process(target.copy(voiceMatch = 0.5f)) }
+        assertEquals(TargetState.TARGET, g.state); assertTrue(g.gain > 0.95f)
+    }
+    @Test fun overlapPreservesBothVoicesWithoutBoost() {
+        val g = TargetGate(); repeat(100) { g.process(target.copy(othersSpeaking = 0.9f)) }
+        assertTrue(g.gain > 0.99f); assertFalse(g.boostAllowed)
     }
     @Test fun zeroSuppressionStillHonorsUserSlider() {
         val g = TargetGate(frameMs = 10f); g.quietOthers = 0f

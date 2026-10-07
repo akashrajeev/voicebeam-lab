@@ -32,16 +32,16 @@ class EngineLogicTest {
         assertNull(a.onBlock(1600, "", true, 0.5f, false))
     }
 
-    @Test fun learnerEnrollsOnlyFromLipConfirmedSpeechThenScores() {
+    @Test fun deliberateRawEnrollmentThenFrozenScoring() {
         var calls = 0
         val voiceA = floatArrayOf(1f, 0.1f, 0f)
         val voiceB = floatArrayOf(0f, 0.2f, 1f)
         var current = voiceA
         val l = VoiceLearner({ calls++; current }, sampleRate = 1000, chunkSeconds = 1f, needed = 2)
-        val block = FloatArray(250)
+        val block = FloatArray(250){.02f}
         l.beginEnrollment()
         // Speech while lips are not moving: never enrolls.
-        repeat(20) { l.feed(block, 0.1f) }
+        repeat(20) { l.feed(FloatArray(250), 0.1f) }
         assertEquals(0, calls); assertFalse(l.learned)
         // Lip-confirmed speech: 2 chunks of 1000 samples.
         repeat(8) { l.feed(block, 0.9f) }
