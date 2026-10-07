@@ -19,6 +19,7 @@ data class LiveState(
     val modelsReady: Boolean = false,
     val modelError: String? = null,
     val listening: Boolean = false,
+    val audioError: String? = null,
     val audioOnly: Boolean = false,
     val imageWidth: Int = 0,
     val imageHeight: Int = 0,

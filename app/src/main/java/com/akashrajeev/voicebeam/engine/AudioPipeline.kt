@@ -13,7 +13,7 @@ import android.os.Process
 import android.os.SystemClock
 import android.util.Log
 import com.akashrajeev.voicebeam.core.DropOldestQueue
-import com.akashrajeev.voicebeam.core.EnergyVad
+import com.akashrajeev.voicebeam.core.MonitorOutput
 import com.akashrajeev.voicebeam.core.FrameDsp
 import com.akashrajeev.voicebeam.core.GateInputs
 import com.akashrajeev.voicebeam.core.TargetGate
@@ -32,9 +32,10 @@ class AudioPipeline(
     private val models: AudioModels,
     private val app: android.content.Context,
     private val signals: () -> GateInputs,   // latest vision + voice info (voiceActive is filled here)
+    private val onError: (Throwable) -> Unit = {},
     private val onFrame: (FrameInfo) -> Unit,
 ) {
-    data class FrameInfo(val level: Float, val gain: Float, val probability: Float, val voiceActive: Boolean)
+    data class FrameInfo(val level: Float, val gain: Float, val probability: Float, val voiceActive: Boolean, val monitorRoute: String?)
     data class CaptionBlock(val samples: FloatArray, val captureMs: Long, val probability: Float, val voiceActive: Boolean)
     private var capturedSamples = 0L
     val droppedCaptionBlocks: Long get() = asrQueue.dropped
@@ -70,7 +71,16 @@ class AudioPipeline(
     fun start(useSceneMic: Boolean) {
         if (running.getAndSet(true)) return
         capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset()
-        thread = Thread({ loop(useSceneMic) }, "vb-audio").also { it.start() }
+        thread = Thread({
+            try { loop(useSceneMic) }
+            catch (t: Throwable) {
+                Log.e("VoiceBeamAudio", "audio loop failed", t)
+                if (running.get()) onError(t)
+            } finally {
+                running.set(false)
+                try { vad.release() } catch (_: Throwable) {}
+            }
+        }, "vb-audio").also { it.start() }
     }
 
     fun stop() {
@@ -114,7 +124,7 @@ class AudioPipeline(
         val headset = (app.getSystemService(android.content.Context.AUDIO_SERVICE) as android.media.AudioManager)
             .getDevices(android.media.AudioManager.GET_DEVICES_OUTPUTS).firstOrNull {
                 it.type in setOf(AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_WIRED_HEADSET,
-                    AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
+                    AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_USB_DEVICE, AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
                     AudioDeviceInfo.TYPE_BLUETOOTH_SCO, AudioDeviceInfo.TYPE_BLE_HEADSET)
             }
         if (headset != null) track?.preferredDevice = headset
@@ -124,8 +134,17 @@ class AudioPipeline(
         var clean = FloatArray(frameShift)
         var gated = FloatArray(frameShift)
         var out = FloatArray(frameShift)
+        val silence = FloatArray(frameShift)
+        var lastRoute: Int? = null
+        var routeLogged = false
         try {
+            check(rec == null || rec.state == AudioRecord.STATE_INITIALIZED) { "Microphone could not initialize" }
+            check(track == null || track.state == AudioTrack.STATE_INITIALIZED) { "Playback could not initialize" }
             rec?.startRecording()
+            check(rec == null || rec.recordingState == AudioRecord.RECORDSTATE_RECORDING) { "Microphone did not start" }
+            // Prime with SILENCE only. A real route may not exist until the track consumes data.
+            // Never use connected/preferred device as permission to send live microphone audio.
+            track?.write(silence, 0, silence.size, AudioTrack.WRITE_BLOCKING)
             track?.play()
             models.denoiser.reset()
             gate.reset()
@@ -144,7 +163,8 @@ class AudioPipeline(
                     var read = 0
                     while (read < frameShift && running.get()) {
                         val n = rec!!.read(input, read, frameShift - read, AudioRecord.READ_BLOCKING)
-                        if (n <= 0) break
+                        if (n < 0) error("Microphone read failed: $n")
+                        if (n == 0) break
                         read += n
                     }
                     if (read < frameShift) continue
@@ -177,7 +197,15 @@ class AudioPipeline(
                     AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
                     AudioDeviceInfo.TYPE_BLE_HEADSET,
                 )
-                if (monitorEnabled && headphoneRoute) track?.write(out, 0, n, AudioTrack.WRITE_NON_BLOCKING)
+                // Keep feeding silence for unknown/speaker routes so routing can settle and recover
+                // after headphones are connected. Only an ACTUAL headphone route receives speech.
+                val writeSpeech = monitorEnabled && headphoneRoute
+                val written = track?.write(MonitorOutput.samples(monitorEnabled, headphoneRoute, out, silence), 0, n, AudioTrack.WRITE_NON_BLOCKING)
+                if (written != null && written < 0) error("Playback write failed: $written")
+                if (!routeLogged || lastRoute != routed?.id) {
+                    Log.i("VoiceBeamAudio", "route type=" + routed?.type + " monitor=" + writeSpeech + " write=" + written)
+                    lastRoute = routed?.id; routeLogged = true
+                }
                 // Recognition needs speech, not the gate's sometimes 80%-attenuated output.
                 // Assign a caption to the target separately using the gate probability.
                 val captionBlock = CaptionBlock(input.copyOf(), capturedSamples * 1000 / SAMPLE_RATE, gate.probability, voice)
@@ -186,14 +214,13 @@ class AudioPipeline(
                     // Copy: the consumer is on another thread and `clean` is reused next frame.
                     voiceQueue.offer(Pair(clean.copyOf(n), if (s.hasLock && s.othersSpeaking < 0.3f) s.lockedSpeaking else 0f))
                 }
-                onFrame(FrameInfo(sqrt(e / n), g, gate.probability, voice))
+                onFrame(FrameInfo(sqrt(e / n), g, gate.probability, voice,
+                    routed?.productName?.toString().takeIf { headphoneRoute }))
                 if (com.akashrajeev.voicebeam.BuildConfig.DEBUG && ++dbgFrames % 400 == 0L) {
                     var er = 0f; for (k in 0 until input.size) er += input[k] * input[k]
-                    Log.i("VoiceBeamAudio", "audiodbg dbg=" + (dbg != null) + " in=" + kotlin.math.sqrt(er / input.size) + " clean=" + kotlin.math.sqrt(e / n) + " g=" + g)
+                    Log.i("VoiceBeamAudio", "audiodbg dbg=" + (dbg != null) + " in=" + kotlin.math.sqrt(er / input.size) + " clean=" + kotlin.math.sqrt(e / n) + " g=" + g + " route=" + routed?.type + " written=" + written + " monitor=" + writeSpeech)
                 }
             }
-        } catch (t: Throwable) {
-            Log.e("VoiceBeamAudio", "audio loop failed", t)
         } finally {
             try { rec?.stop() } catch (_: Throwable) {}
             rec?.release()

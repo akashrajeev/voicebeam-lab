@@ -193,9 +193,20 @@ class VoiceBeamEngine(private val app: Context) {
         if (!lifecycle.beginStart()) return
         try {
         if (BuildConfig.DEBUG) Log.i("VoiceBeamEngine", "startListening source=" + (if (wantDebug) "debug wav" else "mic"))
-        val p = AudioPipeline(m, app, ::gateInputs) { f ->
+        lateinit var p: AudioPipeline
+        p = AudioPipeline(m, app, ::gateInputs, onError = { t ->
+            // Stop/join from another thread, never join the failing audio thread from itself.
+            scope.launch {
+                synchronized(this@VoiceBeamEngine) {
+                    if (pipeline === p) {
+                        stopListening()
+                        _state.update { it.copy(audioError = t.message ?: "Audio stopped") }
+                    }
+                }
+            }
+        }) { f ->
             latestProbability = f.probability
-            _state.update { it.copy(inputLevel = f.level, gain = f.gain, targetProbability = f.probability) }
+            _state.update { it.copy(inputLevel = f.level, gain = f.gain, targetProbability = f.probability, earphones = f.monitorRoute) }
         }
         p.quietOthers = s.quietOthers; p.boostDb = s.boostDb; p.denoiseMix = s.denoise
         pipeline = p
@@ -206,7 +217,7 @@ class VoiceBeamEngine(private val app: Context) {
         }
         p.start(s.useSceneMic)
         startWorkers(p, m)
-        _state.update { it.copy(listening = true, earphones = earphoneName()) }
+        _state.update { it.copy(listening = true, audioError = null, earphones = earphoneName()) }
         lifecycle.finishStart()
         } catch (t: Throwable) {
             Log.e(TAG, "startListening failed", t)
@@ -343,7 +354,8 @@ class VoiceBeamEngine(private val app: Context) {
         val d = out.firstOrNull {
             it.type in setOf(
                 AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_WIRED_HEADSET,
-                AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_BLE_HEADSET,
+                AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
+                AudioDeviceInfo.TYPE_USB_HEADSET, AudioDeviceInfo.TYPE_USB_DEVICE, AudioDeviceInfo.TYPE_BLE_HEADSET,
             )
         } ?: return null
         return d.productName?.toString()?.takeIf { it.isNotBlank() } ?: "Earphones"

@@ -259,7 +259,8 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
                 val latest = state.partial.ifBlank { state.segments.lastOrNull()?.text ?: "" }
                 val latestTarget = if (state.partial.isNotBlank()) state.partialIsTarget else state.segments.lastOrNull()?.isTarget ?: true
                 Text(
-                    if (latest.isBlank()) (if (state.lockedId == null) "Tap a face to lock on. Captions appear here." else "Listening...") else latest,
+                    if (state.audioError != null) "Audio stopped: ${state.audioError}. Go back and start again."
+                    else if (latest.isBlank()) (if (state.lockedId == null) "Tap a face to lock on. Captions appear here." else "Listening...") else latest,
                     color = if (latest.isBlank()) Muted else if (latestTarget) Color.White else Color(0xFFB0B6BD),
                     fontSize = 21.sp, lineHeight = 28.sp, fontWeight = FontWeight.SemiBold, maxLines = 3,
                     modifier = Modifier.testTag("caption"),

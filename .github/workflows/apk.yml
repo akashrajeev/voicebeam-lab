@@ -1,5 +1,5 @@
 name: lab-apk-hardening
-# One-off debug APK build for the lab branch. Runs only when this file is pushed.
+# Audio route startup fix: regression tests plus one lab debug APK build.
 on:
   push:
     branches: [lab/hardening-2026-10-07]
@@ -9,7 +9,7 @@ permissions:
 jobs:
   apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -31,4 +31,4 @@ jobs:
         with:
           name: voicebeam-lab-debug-apk
           path: app/build/outputs/apk/debug/*.apk
-          retention-days: 7
+          retention-days: 1
