@@ -61,3 +61,14 @@ input/output routes. Output RMS, raw RMS, boost setting and music stream volume/
 mute now distinguish silent DSP, low volume and unsupported Bluetooth routing.
 No system volume is changed. Earbuds with only call audio need Media audio
 turned on or a wired/USB alternative. Phone test still required.
+
+## Earlier releases compared
+First source commit 4ed6e30 used USAGE_MEDIA, 16 kHz float PCM, CAMCORDER/
+VOICE_RECOGNITION mic and default OS output routing with unconditional writes.
+Commit d5daa41 on Sep 25 introduced first-enumerated headphone preference and
+actual-route checking. No BLUETOOTH_CONNECT or communication-device/mode calls
+were present in either the earlier main builds or this lab.
+Hardening 46c8081 removed MODIFY_AUDIO_SETTINGS; restore this normal permission
+to preserve the original audio capability. It is not proof that this permission
+caused the observed SCO playback failure. No exact last working Bluetooth APK
+has been established by a user test tied to a commit.
