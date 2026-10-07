@@ -29,3 +29,13 @@ doesn't prove sherpa or ORT JNI can load together. Errors display/log class.
 
 No UI screenshot/device verification yet. Both mode and native core are private
 experiments. Source/model notices and CC-BY-SA 3/4 conflict in LICENSE_NOTES.md.
+
+#14 actual phone log (Oct8 02:24): 300 retained events, 135 audio rows,
+voiceMatch null135/135, VAD false115/135. Target enrollment began but no phrase
+completed, progress max sampled0.00533 then resets. TSE rows absent so no TSE
+execution established. Enrollment repair: deliberately capture raw mic for three
+3-second buffers, minimum phrase RMS .005, no lip/VAD reset. Other speaker must
+stay silent; raw capture can enroll the wrong voice if protocol violated.
+Experimental incomplete/uncertain states pass raw mic/mix WITHOUT boost, visibly
+no isolation. Only complete-template low-score two-source negative can mute.
+This is a usability policy, not validated absence detector; false accepts remain.

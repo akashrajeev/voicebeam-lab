@@ -38,10 +38,11 @@ class VoiceLearner(
     fun feed(samples: FloatArray, lipWeight: Float): Float? {
         if (!learned) {
             if (!enrollmentEnabled) return null
-            if (lipWeight >= 0.75f) {
+            if (enrollmentEnabled) {
                 enrollFill = append(enrollBuf, enrollFill, samples)
                 if (enrollFill >= chunk) {
-                    embed(enrollBuf.copyOf())?.let { prints.add(it) }
+                    var energy=0.0; for(v in enrollBuf) energy+=v*v
+                    if(kotlin.math.sqrt(energy/enrollBuf.size)>=.005) embed(enrollBuf.copyOf())?.let { prints.add(it) }
                     enrollFill = 0
                     if (prints.size >= needed) { centroid = VoiceMatch.average(prints); enrollmentEnabled = false }
                 }

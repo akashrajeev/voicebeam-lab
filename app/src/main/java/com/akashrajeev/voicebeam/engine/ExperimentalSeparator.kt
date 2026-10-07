@@ -73,6 +73,11 @@ class ExperimentalSeparator(
             }
         }
         out.fill(0f)
+        if(centroid()==null) {
+            for(k in out.indices) out[k]=raw.getOrElse(k){0f}.coerceIn(-.95f,.95f)
+            Diagnostics.tseState="VOICE NOT LEARNED: raw mic passthrough, no isolation"
+            return true
+        }
         var written=0
         while(written < out.size) {
             if(playing == null || playOffset >= playing!!.audio.size) {
@@ -142,7 +147,9 @@ class ExperimentalSeparator(
                     val accepted=template === centroid() && scores.all { it.isFinite() } && scores[selectedIndex]>threshold() &&
                         scores[selectedIndex]-scores[1-selectedIndex]>margin()
                     val raw=rawSelection()
-                    val emitted=if((raw || accepted) && template === centroid()) selected.copyOfRange(context-hop,context) else FloatArray(hop)
+                    val strongOther = scores.all { it.isFinite() && it >= 0f } && scores.maxOrNull()!! < threshold()-.10f
+                    val emitted=if((raw || accepted) && template === centroid()) selected.copyOfRange(context-hop,context)
+                        else if(!strongOther) packet.audio.copyOfRange(context-hop,context) else FloatArray(hop)
                     var peak=0f; for(v in emitted) peak=maxOf(peak,abs(v))
                     if(peak>.95f) for(k in emitted.indices) emitted[k]*=.95f/peak
                     if(running.get()) output.offer(Packet(emitted,template,packet.endSample,packet.capturedNs))
@@ -150,7 +157,7 @@ class ExperimentalSeparator(
                     times.add(ms); if(times.size>1200) times.removeAt(0)
                     val sorted=times.sorted(); val p50=sorted[(sorted.size-1)/2]; val p95=sorted[(sorted.size-1)*95/100]
                     val runtime=Runtime.getRuntime()
-                    Diagnostics.tseState=if(raw) "RAW PROBE: target presence unverified" else if(accepted) "Provisional match" else "UNCERTAIN: muted"
+                    Diagnostics.tseState=if(raw) "RAW PROBE: target presence unverified" else if(accepted) "Provisional match" else if(strongOther) "Provisional non-target: muted" else "UNCERTAIN: raw mix passthrough"
                     Diagnostics.event("TSE sepMs="+(sepEnd-start)/1000000+" speakerMs="+(speakerEnd-sepEnd)/1000000+
                         " p50Ms=$p50 p95Ms=$p95 sustainSec="+(speakerEnd-startNs)/1000000000+" computeWithin200ms="+(p95<=200)+
                         " nativeHeapMB="+Debug.getNativeHeapAllocatedSize()/1048576+" usedHeapMB="+(runtime.totalMemory()-runtime.freeMemory())/1048576+

@@ -263,7 +263,7 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
                 }
                 if (state.lockedId != null && !state.voiceLearned && !state.wearerEnrollmentActive) {
                     Text(if (state.voiceEnrollmentActive)
-                        "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks, face visible. Need 3 clean 3-second phrases."
+                        "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks. Capture 9 seconds in a quiet room; raw mic, no lip/VAD reset."
                         else "Face locked, voice not learned. Ask the target to speak alone, then start voice learning.", color = Muted, fontSize = 12.sp)
                     Button(onClick = { engine.beginTargetEnrollment() }) {
                         Text(if (state.voiceEnrollmentActive) "Restart voice learning" else "Learn locked voice")

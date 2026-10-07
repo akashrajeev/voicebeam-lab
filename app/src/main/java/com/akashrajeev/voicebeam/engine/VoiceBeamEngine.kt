@@ -162,6 +162,7 @@ class VoiceBeamEngine(private val app: Context) {
 
     fun beginTargetEnrollment() {
         if (tracker.lockedId == null) return
+        wearerLearner?.reset()
         learner?.beginEnrollment()
         latestVoiceMatch = null; latestWearerMatch = null; lastVoiceMatchAtMs = 0L
         Diagnostics.event("target_enrollment_begin")
@@ -248,6 +249,8 @@ class VoiceBeamEngine(private val app: Context) {
             latestProbability = f.probability
             _state.update { it.copy(inputLevel = f.level, gain = f.gain, targetProbability = f.probability, earphones = f.monitorRoute) }
         }
+        p.enrollmentActive = { learner?.enrollmentEnabled == true || wearerLearner?.enrollmentEnabled == true }
+        p.enrollmentStatus = { "target:"+(learner?.completedPhrases ?: 0)+"/3,active:"+(learner?.enrollmentEnabled ?: false)+",learned:"+(learner?.learned ?: false) }
         p.quietOthers = s.quietOthers; p.boostDb = s.boostDb; p.denoiseMix = s.denoise
         if (s.experimentalSeparation) p.separator = ExperimentalSeparator(app, m.voicePrint,
             { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw },

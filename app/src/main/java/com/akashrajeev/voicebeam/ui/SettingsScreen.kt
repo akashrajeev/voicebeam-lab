@@ -52,6 +52,7 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
     Column(Modifier.fillMaxSize().background(Bg)) {
         Column(Modifier.weight(1f).statusBarsPadding().verticalScroll(rememberScrollState()).padding(horizontal = 18.dp)) {
             Text("Settings", color = Color.White, fontSize = 28.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 16.dp))
+            if(!state.voiceLearned) Text("VOICE NOT LEARNED: raw mic passes through, no isolation",color=Color.Yellow,fontSize=14.sp)
             SectionHeader("Listening")
             SliderRow("Noise removal", when { s.denoise < 0.05f -> "Off"; s.denoise < 0.6f -> "Light"; else -> "Strong" }, s.denoise, 0f..1f) { v -> engine.updateSettings { it.copy(denoise = v) } }
             SliderRow("Quiet others (default)", "${(s.quietOthers * 100).roundToInt()}%", s.quietOthers, 0f..1f) { v -> engine.updateSettings { it.copy(quietOthers = v) } }
@@ -83,7 +84,7 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
             SwitchRow("Two-speaker separation (experimental)", "OFF by default. Needs learned target. Delayed output; presence policy not reliable. Not safe for live hearing claims. Model CC-BY-SA version ambiguity remains.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
             Text("Context / hop", color=Color.White)
             Segmented(listOf("1s / 250ms", "2s / 500ms", "2s blocks"), s.separationLiveMode) { i -> engine.updateSettings { it.copy(separationLiveMode=i) } }
-            SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate with uncertain mute.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
+            SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate; uncertainty passes raw mix.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
             Text("State: " + Diagnostics.tseState, color=Muted, fontSize=12.sp)
             SliderRow("TSE cosine threshold (uncalibrated)", "${s.separationCosine}", s.separationCosine, 0.2f..0.7f) { v -> engine.updateSettings { it.copy(separationCosine=v) } }
             SliderRow("TSE source margin (uncalibrated)", "${s.separationMargin}", s.separationMargin, 0f..0.3f) { v -> engine.updateSettings { it.copy(separationMargin=v) } }

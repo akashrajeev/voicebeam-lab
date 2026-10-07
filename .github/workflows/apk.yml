@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Public fixture self-test and ARM instrumentation bundle.
+# Enrollment usability and explicit raw passthrough while uncertain.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
