@@ -255,6 +255,14 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
             // Status + caption + controls.
             Column(Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(horizontal = 18.dp, vertical = 12.dp)) {
                 StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned, state.voiceMatch) { engine.unlock() }
+                if (state.lockedId != null && !state.voiceLearned) {
+                    Text(if (state.voiceEnrollmentActive)
+                        "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks, face visible. Need 3 clean 3-second phrases."
+                        else "Face locked, voice not learned. Ask the target to speak alone, then start voice learning.", color = Muted, fontSize = 12.sp)
+                    Button(onClick = { engine.beginTargetEnrollment() }) {
+                        Text(if (state.voiceEnrollmentActive) "Restart voice learning" else "Learn locked voice")
+                    }
+                }
                 if (state.earphones == null && state.listening && !demoFeed) {
                     Text("Live audio needs a media earphone route (Bluetooth Media audio or wired/USB). Call-only SCO audio is not supported.", color = Muted, fontSize = 12.sp)
                 }
@@ -323,7 +331,7 @@ private fun StatusLine(locked: Boolean, speaking: Float, learned: Boolean, match
         if (locked) {
             Chip(if (speaking > 0.35f) "Speaking · locked" else "Locked", color = Accent.copy(alpha = 0.22f), dot = Accent)
             Spacer(Modifier.width(8.dp))
-            Chip(if (learned) "Voice learned" + (match?.let { " · ${(it * 100).roundToInt()}%" } ?: "") else "Learning voice...", color = Card)
+            Chip(if (learned) "Voice learned" + (match?.let { " · ${(it * 100).roundToInt()}%" } ?: "") else "Voice not learned", color = Card)
             Spacer(Modifier.weight(1f))
             Icon(Icons.Filled.LockOpen, "unlock", tint = Muted, modifier = Modifier.clip(CircleShape).clickable(onClick = onUnlock).padding(6.dp))
         } else {

@@ -1,5 +1,5 @@
 name: lab-apk-hardening
-# Target-turn suppression fix; Bluetooth path unchanged. One lab APK build.
+# Explicit target voice enrollment progress and test notes. Bluetooth unchanged.
 on:
   push:
     branches: [lab/hardening-2026-10-07]

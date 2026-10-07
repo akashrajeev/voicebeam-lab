@@ -30,6 +30,8 @@ data class LiveState(
     val targetProbability: Float = 1f,
     val gain: Float = 1f,
     val voiceLearned: Boolean = false,
+    val voiceEnrollmentActive: Boolean = false,
+    val voiceEnrollmentProgress: Float = 0f,
     val voiceMatch: Float? = null,
     val inputLevel: Float = 0f,
     val segments: List<CaptionSegment> = emptyList(),

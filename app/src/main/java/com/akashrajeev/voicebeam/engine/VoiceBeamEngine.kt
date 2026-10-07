@@ -150,13 +150,24 @@ class VoiceBeamEngine(private val app: Context) {
         val prev = tracker.lockedId
         val id = tracker.lockAt(nx, ny, SystemClock.uptimeMillis())
         if (id != prev) { learner?.reset(); latestVoiceMatch = null; lastVoiceMatchAtMs = 0L }
-        _state.update { it.copy(lockedId = id, voiceLearned = false, voiceMatch = null) }
+        _state.update { it.copy(lockedId = id, voiceLearned = learner?.learned == true,
+            voiceMatch = latestVoiceMatch, voiceEnrollmentActive = learner?.enrollmentEnabled == true,
+            voiceEnrollmentProgress = learner?.progress ?: 0f) }
         return id != null
+    }
+
+    fun beginTargetEnrollment() {
+        if (tracker.lockedId == null) return
+        learner?.beginEnrollment()
+        latestVoiceMatch = null; lastVoiceMatchAtMs = 0L
+        Diagnostics.event("target_enrollment_begin")
+        _state.update { it.copy(voiceLearned = false, voiceMatch = null,
+            voiceEnrollmentActive = true, voiceEnrollmentProgress = 0f) }
     }
 
     fun unlock() {
         audioOnly = false; tracker.unlock(); learner?.reset(); latestVoiceMatch = null; lastVoiceMatchAtMs = 0L
-        _state.update { it.copy(lockedId = null, voiceLearned = false, voiceMatch = null) }
+        _state.update { it.copy(lockedId = null, voiceLearned = false, voiceMatch = null, voiceEnrollmentActive = false, voiceEnrollmentProgress = 0f) }
     }
 
     private fun gateInputs(): GateInputs {
@@ -310,13 +321,13 @@ class VoiceBeamEngine(private val app: Context) {
                 }
                 val speakerNow = SystemClock.elapsedRealtime()
                 if (speakerNow - diagnosticVoiceAt >= 1000) {
-                    Diagnostics.event("speakerUs=" + (SystemClock.elapsedRealtimeNanos() - speakerStart) / 1000 + " learned=" + l.learned)
+                    Diagnostics.event("speakerUs=" + (SystemClock.elapsedRealtimeNanos() - speakerStart) / 1000 + " learned=" + l.learned + " enrollmentActive=" + l.enrollmentEnabled + " enrollmentProgress=" + l.progress + " completedPhrases=" + l.completedPhrases + " match=" + score)
                     diagnosticVoiceAt = speakerNow
                 }
                 if (score != null) { latestVoiceMatch = score; lastVoiceMatchAtMs = SystemClock.uptimeMillis() }
                 if (BuildConfig.DEBUG && (!wasLearned && l.learned || score != null)) Log.i("VoiceBeamEngine", "voice: learned=" + l.learned + " progress=" + l.progress + " score=" + score + " lip=" + lip)
-                if (l.learned != _state.value.voiceLearned || score != null) {
-                    _state.update { it.copy(voiceLearned = l.learned, voiceMatch = latestVoiceMatch) }
+                if (l.learned != _state.value.voiceLearned || score != null || l.progress != _state.value.voiceEnrollmentProgress || l.enrollmentEnabled != _state.value.voiceEnrollmentActive) {
+                    _state.update { it.copy(voiceLearned = l.learned, voiceMatch = latestVoiceMatch, voiceEnrollmentActive = l.enrollmentEnabled, voiceEnrollmentProgress = l.progress) }
                 }
             }
         }, "vb-voice").also { it.start() }
@@ -359,7 +370,7 @@ class VoiceBeamEngine(private val app: Context) {
         audioOnly = false
         // Camera retargeting needs a fresh tap; do not silently attach to a new face.
         tracker.reset(); learner?.reset(); latestVoiceMatch = null; lastVoiceMatchAtMs = 0L
-        _state.update { it.copy(audioOnly = false, lockedId = null, voiceLearned = false, voiceMatch = null) }
+        _state.update { it.copy(audioOnly = false, lockedId = null, voiceLearned = false, voiceMatch = null, voiceEnrollmentActive = false, voiceEnrollmentProgress = 0f) }
     }
 
     fun setMonitor(on: Boolean) { pipeline?.monitorEnabled = on }

@@ -39,6 +39,7 @@ class EngineLogicTest {
         var current = voiceA
         val l = VoiceLearner({ calls++; current }, sampleRate = 1000, chunkSeconds = 1f, needed = 2)
         val block = FloatArray(250)
+        l.beginEnrollment()
         // Speech while lips are not moving: never enrolls.
         repeat(20) { l.feed(block, 0.1f) }
         assertEquals(0, calls); assertFalse(l.learned)

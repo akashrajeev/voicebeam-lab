@@ -18,21 +18,30 @@ class VoiceLearner(
     private val scoreBuf = FloatArray(chunk)
     private var scoreFill = 0
     private val prints = mutableListOf<FloatArray>()
-    var centroid: FloatArray? = null
+    @Volatile var enrollmentEnabled = false
+        private set
+    @Volatile var centroid: FloatArray? = null
         private set
     val learned: Boolean get() = centroid != null
-    val progress: Float get() = if (learned) 1f else prints.size / needed.toFloat()
+    val progress: Float get() = if (learned) 1f else (prints.size + enrollFill / chunk.toFloat()) / needed.toFloat()
+    val completedPhrases: Int get() = prints.size
+
+    /** Deliberate clean target enrollment; retain frozen template until explicitly restarted. */
+    @Synchronized fun beginEnrollment() {
+        reset(); enrollmentEnabled = true
+    }
 
     /** Feed voiced audio. [lipWeight] is how sure we are the locked person is the one talking. Returns a new match score when one is ready. */
     @Synchronized
     fun feed(samples: FloatArray, lipWeight: Float): Float? {
         if (!learned) {
+            if (!enrollmentEnabled) return null
             if (lipWeight >= 0.75f) {
                 enrollFill = append(enrollBuf, enrollFill, samples)
                 if (enrollFill >= chunk) {
                     embed(enrollBuf.copyOf())?.let { prints.add(it) }
                     enrollFill = 0
-                    if (prints.size >= needed) centroid = VoiceMatch.average(prints)
+                    if (prints.size >= needed) { centroid = VoiceMatch.average(prints); enrollmentEnabled = false }
                 }
             }
             else { enrollFill = 0 }
@@ -55,5 +64,5 @@ class VoiceLearner(
     }
 
     @Synchronized
-    fun reset() { prints.clear(); centroid = null; enrollFill = 0; scoreFill = 0 }
+    fun reset() { enrollmentEnabled = false; prints.clear(); centroid = null; enrollFill = 0; scoreFill = 0 }
 }
