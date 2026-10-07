@@ -49,18 +49,20 @@ object SeparationSelfTest {
             val b=repeatNormalize(load(ctx,"1221-135767-0005.wav"),96000)
             val mix=FloatArray(a.size){a[it]+b[it]}
             val env=OrtEnvironment.getEnvironment()
-            for(context in listOf(16000,32000)) {
+            for(context in listOf(16000,32000)) for(threads in listOf(2,3,4)) for(slow in listOf(false,true)) {
+                if(!slow && threads!=2)continue
                 val hop=if(context==16000) 4000 else 8000
                 val name=if(context==16000) "convtasnet-1s-safe.onnx" else "convtasnet-2s-safe.onnx"
                 val path=File(ctx.cacheDir,name)
                 if(!path.exists())ctx.assets.open("models/$name").use {src->path.outputStream().use {src.copyTo(it)}}
-                val opts=OrtSession.SessionOptions().apply{setIntraOpNumThreads(2);setInterOpNumThreads(1)}
+                val opts=OrtSession.SessionOptions().apply{setIntraOpNumThreads(threads);setInterOpNumThreads(1);setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT)}
                 val loadStart=SystemClock.elapsedRealtimeNanos()
                 val session=env.createSession(path.absolutePath,opts)
                 val loadMs=(SystemClock.elapsedRealtimeNanos()-loadStart)/1000000
                 log("context=$context modelLoad=PASS loadMs=$loadMs nativeORT="+env.version)
                 try {
-                    val output=FloatArray(mix.size);val compute=ArrayList<Long>();var missed=0;var uncertain=0
+                    val output=FloatArray(mix.size);val compute=ArrayList<Long>();val sepTimes=ArrayList<Long>();val idTimes=ArrayList<Long>();val refreshTimes=ArrayList<Long>();var missed=0;var uncertain=0
+                    val identity=SlowIdentity(hop,context)
                     var previous:FloatArray?=null;var last=0f
                     for(end in hop..mix.size step hop) {
                         val window=FloatArray(context){k->val pos=end-context+k;if(pos>=0)mix[pos] else 0f}
@@ -72,7 +74,11 @@ object SeparationSelfTest {
                             }
                         }
                         check(sources.all{src->src.all{it.isFinite()}}){"Nonfinite separator output"}
-                        val scores=sources.map{src->voice.embed(src)?.let{VoiceMatch.cosine(it,template)} ?: -1f}
+                        val sepEnd=SystemClock.elapsedRealtimeNanos()
+                        val update=if(slow)identity.update(sources){src->voice.embed(src)?.let{VoiceMatch.cosine(it,template)} ?: -1f} else null
+                        val scores=update?.scores ?: sources.map{src->voice.embed(src)?.let{VoiceMatch.cosine(it,template)} ?: -1f}
+                        val idEnd=SystemClock.elapsedRealtimeNanos()
+                        sepTimes.add((sepEnd-start)/1000000);idTimes.add((idEnd-sepEnd)/1000000)
                         var best=if(scores[0]>=scores[1])0 else 1
                         val prev=previous
                         if(prev!=null && abs(scores[0]-scores[1])<.10f) {
@@ -84,12 +90,14 @@ object SeparationSelfTest {
                         if(scores[best]<=.35f || scores[best]-scores[1-best]<=.10f)uncertain++
                         val elapsed=(SystemClock.elapsedRealtimeNanos()-start)/1000000;compute.add(elapsed)
                         if(elapsed>hop/16)missed++
+                        if(update?.fresh==true)refreshTimes.add(elapsed)
                         for(k in 0 until hop){val v=sources[best][context-hop+k].coerceIn(-.95f,.95f);output[end-hop+k]=if(k<80)last*(1-k/80f)+v*(k/80f) else v}
                         last=output[end-1]
                     }
                     val times=compute.sorted();val p50=times[(times.size-1)/2];val p95=times[(times.size-1)*95/100]
                     val improvement=sdr(output.copyOfRange(context,output.size),a.copyOfRange(context,a.size))-sdr(mix.copyOfRange(context,mix.size),a.copyOfRange(context,a.size))
-                    val row="contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
+                    fun percentile(x:List<Long>,pct:Int):Long {val a=x.sorted();return if(a.isEmpty())0 else a[(a.size-1)*pct/100]}
+                    val row="threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
                     log(row);report.append(row).append('\n')
                 }finally{session.close();opts.close()}
             }

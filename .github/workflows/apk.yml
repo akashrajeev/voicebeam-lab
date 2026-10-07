@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# JNI ELF version-tag alignment with sherpa ORT1.28.2; device retest required.
+# Batched Pixel benchmark: 1Hz accumulated identity and ORT threads2/3/4.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
