@@ -13,6 +13,10 @@ import kotlin.math.*
 
 /** Public fixture only. No microphone, camera, private data or playback. */
 object SeparationSelfTest {
+    private data class Variant(val threads:Int,val slow:Boolean,val kind:String="fp32",val provider:String="CPU")
+    private val variants=listOf(Variant(2,false),Variant(2,true),Variant(3,true),Variant(4,true),
+        Variant(2,true,"int8"),Variant(4,true,"int8"),Variant(2,true,"fp16"),
+        Variant(2,true,"fp32","NNAPI"),Variant(2,true,"int8","NNAPI"),Variant(2,true,"fp32","XNNPACK"),Variant(2,true,"int8","XNNPACK"))
     @Volatile var status = "Not run"
     @Volatile private var busy = false
     @Synchronized fun start(ctx:Context) {
@@ -49,13 +53,16 @@ object SeparationSelfTest {
             val b=repeatNormalize(load(ctx,"1221-135767-0005.wav"),96000)
             val mix=FloatArray(a.size){a[it]+b[it]}
             val env=OrtEnvironment.getEnvironment()
-            for(context in listOf(16000,32000)) for(threads in listOf(2,3,4)) for(slow in listOf(false,true)) {
-                if(!slow && threads!=2)continue
+            for(context in listOf(16000,32000)) for(variant in variants) {
+                val threads=variant.threads;val slow=variant.slow
+                try {
                 val hop=if(context==16000) 4000 else 8000
-                val name=if(context==16000) "convtasnet-1s-safe.onnx" else "convtasnet-2s-safe.onnx"
+                val name="convtasnet-${context/16000}s-${if(variant.kind=="fp32") "safe" else variant.kind}.onnx"
                 val path=File(ctx.cacheDir,name)
                 if(!path.exists())ctx.assets.open("models/$name").use {src->path.outputStream().use {src.copyTo(it)}}
                 val opts=OrtSession.SessionOptions().apply{setIntraOpNumThreads(threads);setInterOpNumThreads(1);setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT)}
+                if(variant.provider=="NNAPI")opts.addNnapi()
+                if(variant.provider=="XNNPACK")opts.addXnnpack(mapOf("intra_op_num_threads" to threads.toString()))
                 val loadStart=SystemClock.elapsedRealtimeNanos()
                 val session=env.createSession(path.absolutePath,opts)
                 val loadMs=(SystemClock.elapsedRealtimeNanos()-loadStart)/1000000
@@ -97,9 +104,10 @@ object SeparationSelfTest {
                     val times=compute.sorted();val p50=times[(times.size-1)/2];val p95=times[(times.size-1)*95/100]
                     val improvement=sdr(output.copyOfRange(context,output.size),a.copyOfRange(context,a.size))-sdr(mix.copyOfRange(context,mix.size),a.copyOfRange(context,a.size))
                     fun percentile(x:List<Long>,pct:Int):Long {val a=x.sorted();return if(a.isEmpty())0 else a[(a.size-1)*pct/100]}
-                    val row="threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
+                    val row="kind=${variant.kind} provider=${variant.provider} threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
                     log(row);report.append(row).append('\n')
                 }finally{session.close();opts.close()}
+                } catch(t:Throwable) {val failure="VARIANT_FAILED contextMs=${context/16} kind=${variant.kind} provider=${variant.provider} threads=$threads error=${t.javaClass.simpleName}: ${t.message}";log(failure);report.append(failure).append('\n')}
             }
             status="PASS native models ran. Quality/speed: see log. Not room validated."
             log(status);report.append(status)

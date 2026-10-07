@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Batched Pixel benchmark: 1Hz accumulated identity and ORT threads2/3/4.
+# SEP-2: batched cadence/threads/QDQint8/fp16/NNAPI/XNNPACK benchmark.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
