@@ -47,3 +47,10 @@ Source changes during a computation invalidate its output block. Input/output
 queues each hold one pending block and count drops. A compute error disables the
 worker into silence and records error class. Peak clamp is .95. This is a PRIVATE
 phone feasibility experiment, not cleared commercial weights or final live hearing.
+
+## Updated worker validation
+See WORKER_UPDATE.md, frozen-metrics.json, validate_frozen.py and safe export parity.
+Host evaluation with Android-like frozen enrollment supports .35 cosine / .10
+margin as experimental initial controls: clean 23/24 accepted, noisy 10/24,
+absent/other-only/silence 0/24. Small synthetic evaluation, not phone proof or
+calibrated field acceptance guarantee. The defaults already match #12 eb550fb.
