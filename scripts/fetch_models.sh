@@ -44,4 +44,5 @@ ls -la "$ASSETS" "$ASSETS/asr"
 if [ ! -f app/libs/onnxruntime-android-java-jni.aar ]; then
   curl -fL -o app/libs/onnxruntime-android-java-jni.aar https://repo.maven.apache.org/maven2/com/microsoft/onnxruntime/onnxruntime-android/1.20.0/onnxruntime-android-1.20.0.aar
   zip -d app/libs/onnxruntime-android-java-jni.aar 'jni/*/libonnxruntime.so'
+  python3 scripts/native/patch_ort_symbol_version.py app/libs/onnxruntime-android-java-jni.aar
 fi

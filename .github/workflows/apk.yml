@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Enrollment status v2, mutual exclusion both ways, commit and mode header.
+# JNI ELF version-tag alignment with sherpa ORT1.28.2; device retest required.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
