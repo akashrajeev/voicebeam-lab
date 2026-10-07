@@ -1,0 +1,182 @@
+[
+  {
+    "pair": 0,
+    "target": "a",
+    "a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0001.flac",
+    "input_si_sdr": 0.03315214440226555,
+    "output_si_sdr": 0.5596148371696472,
+    "seconds": [
+      0.45257647799999745,
+      0.2255781220000017
+    ],
+    "rtf": 0.05639453050000043,
+    "improvement": 0.5264626927673817
+  },
+  {
+    "pair": 0,
+    "target": "b",
+    "a": "fixtures/LibriSpeech/test-clean/1089/134686/1089-134686-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1188/133604/1188-133604-0001.flac",
+    "input_si_sdr": 0.03317064046859741,
+    "output_si_sdr": -4.025848865509033,
+    "seconds": [
+      0.25950085499999886,
+      0.23409640900001705
+    ],
+    "rtf": 0.05852410225000426,
+    "improvement": -4.059019505977631
+  },
+  {
+    "pair": 1,
+    "target": "a",
+    "a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0001.flac",
+    "input_si_sdr": -0.20462699234485626,
+    "output_si_sdr": -0.49149346351623535,
+    "seconds": [
+      0.22799434899999937,
+      0.2751740459999894
+    ],
+    "rtf": 0.06879351149999735,
+    "improvement": -0.2868664711713791
+  },
+  {
+    "pair": 1,
+    "target": "b",
+    "a": "fixtures/LibriSpeech/test-clean/121/121726/121-121726-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1221/135766/1221-135766-0001.flac",
+    "input_si_sdr": -0.20514555275440216,
+    "output_si_sdr": 1.564225196838379,
+    "seconds": [
+      0.23223740500000645,
+      0.252027212999991
+    ],
+    "rtf": 0.06300680324999774,
+    "improvement": 1.769370749592781
+  },
+  {
+    "pair": 2,
+    "target": "a",
+    "a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0001.flac",
+    "input_si_sdr": 0.06051713973283768,
+    "output_si_sdr": 13.549880981445312,
+    "seconds": [
+      0.24460767100001135,
+      0.26371350799999504
+    ],
+    "rtf": 0.06592837699999876,
+    "improvement": 13.489363841712475
+  },
+  {
+    "pair": 2,
+    "target": "b",
+    "a": "fixtures/LibriSpeech/test-clean/1284/1180/1284-1180-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1320/122612/1320-122612-0001.flac",
+    "input_si_sdr": 0.05189552530646324,
+    "output_si_sdr": 12.67112922668457,
+    "seconds": [
+      0.25119629499999974,
+      0.2466879909999875
+    ],
+    "rtf": 0.061671997749996876,
+    "improvement": 12.619233701378107
+  },
+  {
+    "pair": 3,
+    "target": "a",
+    "a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0001.flac",
+    "input_si_sdr": -0.11904431879520416,
+    "output_si_sdr": 5.242681980133057,
+    "seconds": [
+      0.24835189999998875,
+      0.2407001770000079
+    ],
+    "rtf": 0.060175044250001974,
+    "improvement": 5.361726298928261
+  },
+  {
+    "pair": 3,
+    "target": "b",
+    "a": "fixtures/LibriSpeech/test-clean/1580/141083/1580-141083-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/1995/1826/1995-1826-0001.flac",
+    "input_si_sdr": -0.11903420090675354,
+    "output_si_sdr": 12.734745025634766,
+    "seconds": [
+      0.23935914499998034,
+      0.25026334399998973
+    ],
+    "rtf": 0.06256583599999743,
+    "improvement": 12.85377922654152
+  },
+  {
+    "pair": 4,
+    "target": "a",
+    "a": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0001.flac",
+    "input_si_sdr": -0.0026178602129220963,
+    "output_si_sdr": 4.629164695739746,
+    "seconds": [
+      0.2425875749999875,
+      0.2467480320000277
+    ],
+    "rtf": 0.061687008000006927,
+    "improvement": 4.631782555952668
+  },
+  {
+    "pair": 4,
+    "target": "b",
+    "a": "fixtures/LibriSpeech/test-clean/2094/142345/2094-142345-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/2300/131720/2300-131720-0001.flac",
+    "input_si_sdr": -0.0025189174339175224,
+    "output_si_sdr": 10.606178283691406,
+    "seconds": [
+      0.2404621059999954,
+      0.278412196000005
+    ],
+    "rtf": 0.06960304900000125,
+    "improvement": 10.608697201125324
+  },
+  {
+    "pair": 5,
+    "target": "a",
+    "a": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0001.flac",
+    "input_si_sdr": 0.002272193320095539,
+    "output_si_sdr": 13.549652099609375,
+    "seconds": [
+      0.237775728999992,
+      0.2644373389999828
+    ],
+    "rtf": 0.0661093347499957,
+    "improvement": 13.54737990628928
+  },
+  {
+    "pair": 5,
+    "target": "b",
+    "a": "fixtures/LibriSpeech/test-clean/237/126133/237-126133-0000.flac",
+    "b": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0000.flac",
+    "enrollment": "fixtures/LibriSpeech/test-clean/260/123286/260-123286-0001.flac",
+    "input_si_sdr": 0.0023373914882540703,
+    "output_si_sdr": 13.899678230285645,
+    "seconds": [
+      0.2726072230000227,
+      0.24665655199999037
+    ],
+    "rtf": 0.06166413799999759,
+    "improvement": 13.89734083879739
+  }
+]
