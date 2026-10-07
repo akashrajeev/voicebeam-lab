@@ -49,9 +49,10 @@ object SeparationSelfTest {
             val enrollment=load(ctx,"1089-134686-0013.wav")
             val template=voice.embed(enrollment.copyOfRange(0,minOf(enrollment.size,48000))) ?: error("TitaNet enrollment failed")
             log("TitaNet modelLoad=PASS embeddingDims="+template.size)
-            val a=repeatNormalize(load(ctx,"1089-134686-0002.wav"),96000)
-            val b=repeatNormalize(load(ctx,"1221-135767-0005.wav"),96000)
+            val a=repeatNormalize(load(ctx,"1089-134686-0002.wav"),64000)
+            val b=repeatNormalize(load(ctx,"1221-135767-0005.wav"),64000)
             val mix=FloatArray(a.size){a[it]+b[it]}
+            var successful=0
             val env=OrtEnvironment.getEnvironment()
             for(context in listOf(16000,32000)) for(variant in variants) {
                 val threads=variant.threads;val slow=variant.slow
@@ -105,10 +106,11 @@ object SeparationSelfTest {
                     val improvement=sdr(output.copyOfRange(context,output.size),a.copyOfRange(context,a.size))-sdr(mix.copyOfRange(context,mix.size),a.copyOfRange(context,a.size))
                     fun percentile(x:List<Long>,pct:Int):Long {val a=x.sorted();return if(a.isEmpty())0 else a[(a.size-1)*pct/100]}
                     val row="kind=${variant.kind} provider=${variant.provider} threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
-                    log(row);report.append(row).append('\n')
+                    successful++;log(row);report.append(row).append('\n')
                 }finally{session.close();opts.close()}
                 } catch(t:Throwable) {val failure="VARIANT_FAILED contextMs=${context/16} kind=${variant.kind} provider=${variant.provider} threads=$threads error=${t.javaClass.simpleName}: ${t.message}";log(failure);report.append(failure).append('\n')}
             }
+            check(successful>0){"No benchmark variant ran"}
             status="PASS native models ran. Quality/speed: see log. Not room validated."
             log(status);report.append(status)
             File(ctx.getExternalFilesDir(null),"voicebeam-selftest.txt").writeText(report.toString())
