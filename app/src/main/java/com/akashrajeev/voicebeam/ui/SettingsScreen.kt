@@ -75,6 +75,10 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
                 SectionHeader("Testing")
                 SwitchRow("Demo feed (testing)", "Plays a recorded two-person clip instead of the camera and mic", s.debugFeed) { v -> engine.updateSettings { it.copy(debugFeed = v) } }
             }
+            SectionHeader("Public-fixture self-test")
+            Text(com.akashrajeev.voicebeam.engine.SeparationSelfTest.status, color=Muted, fontSize=12.sp)
+            Button(onClick={engine.stopListening();com.akashrajeev.voicebeam.engine.SeparationSelfTest.start(context.applicationContext)}) { Text("Run separation self-test") }
+            Text("Stops live capture. No mic/camera/playback. Logs native load, synthetic SI-SDRi and compute. Share log after it finishes.",color=Muted,fontSize=12.sp)
             SectionHeader("PRIVATE separation experiment")
             SwitchRow("Two-speaker separation (experimental)", "OFF by default. Needs learned target. Delayed output; presence policy not reliable. Not safe for live hearing claims. Model CC-BY-SA version ambiguity remains.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
             Text("Context / hop", color=Color.White)

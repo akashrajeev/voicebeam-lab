@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# Private sliding probe v4: 1s/250ms, 2s/500ms, gated/raw comparison.
+# Public fixture self-test and ARM instrumentation bundle.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
@@ -21,7 +21,7 @@ jobs:
       - name: Unit tests
         run: ./gradlew --no-daemon testDebugUnitTest -Dorg.gradle.jvmargs="-Xmx4g"
       - name: Build debug APK
-        run: ./gradlew --no-daemon assembleDebug -Dorg.gradle.jvmargs="-Xmx4g"
+        run: ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest -Dorg.gradle.jvmargs="-Xmx4g"
       - name: Show APK
         run: |
           ls -la app/build/outputs/apk/debug/
@@ -30,5 +30,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: voicebeam-private-tse-experiment-apk
-          path: app/build/outputs/apk/debug/*.apk
+          path: |
+            app/build/outputs/apk/debug/*.apk
+            app/build/outputs/apk/androidTest/debug/*.apk
           retention-days: 1
