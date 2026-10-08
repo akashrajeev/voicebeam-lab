@@ -18,7 +18,7 @@ object SeparationPipelineProbe {
    val a=repeat(load("1089-134686-0002.wav"));val b=repeat(load("1221-135767-0005.wav"));val mix=FloatArray(a.size){a[it]+b[it]}
    val automatic=AutoVoiceReference();automatic.setTarget(1)
    var autoReady=false
-   for(i in 0..2){val phrase=load("1089-134686-0013.wav").copyOfRange(i*16000,(i+1)*16000);val captured=automatic.collect(phrase,true);autoReady=automatic.accept(captured?.let{voice.embed(it)})}
+   for(i in 0..2){val phrase=load("1089-134686-0013.wav").copyOfRange(i*32000,(i+1)*32000);val captured=automatic.collect(phrase,true);autoReady=automatic.accept(captured?.let{voice.embed(it)})}
    check(autoReady){"AUTO_REFERENCE fixture did not converge"}
    Log.i("VoiceBeamSelfTest","AUTO_REFERENCE scriptedVisualSolo=true ready=$autoReady phrases=${automatic.phrases} noCameraValidation=true")
    for(context in listOf(1000,2000)) {

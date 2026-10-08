@@ -34,6 +34,7 @@ class ExperimentalSeparator(
     private val automatic=AutoVoiceReference()
     private fun targetTemplate()=centroid() ?: automatic.centroid
     private var referencePending:FloatArray?=null
+    private var referenceTarget:Int?=null
     private val input = DropOldestQueue<Packet>(1)
     private val output = DropOldestQueue<Packet>(1)
     private val running = AtomicBoolean(true)
@@ -66,6 +67,7 @@ class ExperimentalSeparator(
     }
     /** Raw mic only. Zero-pad initial context. No pending compute when worker is behind. */
     fun process(raw: FloatArray, out: FloatArray): Boolean {
+        if(referenceTarget!=autoTarget()){referencePending=null;referenceTarget=autoTarget()}
         automatic.setTarget(autoTarget())
         if(centroid()==null && automatic.centroid==null){automatic.collect(raw,autoEligible())?.let{referencePending=it}}
         for(v in raw) {

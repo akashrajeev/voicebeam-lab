@@ -13,8 +13,8 @@ class AutoVoiceReference {
   if(centroid!=null)return null
   if(!eligible){samples.clear();return null}
   for(v in raw)samples.add(v)
-  if(samples.size<16000)return null
-  val a=samples.take(16000).toFloatArray();samples.clear()
+  if(samples.size<32000)return null
+  val a=samples.take(32000).toFloatArray();samples.clear()
   val rms=sqrt(a.fold(0.0){s,v->s+v*v}/a.size)
   return if(rms>=.005)a else null
  }
