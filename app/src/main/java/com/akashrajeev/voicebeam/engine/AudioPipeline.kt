@@ -46,7 +46,7 @@ class AudioPipeline(
     var enrollmentStatus: () -> String = { "unknown" }
     @Volatile var quietOthers = 0.8f
     @Volatile var boostDb = 6f
-    @Volatile var denoiseMix = 1f          // 0 = raw, 1 = fully denoised
+    @Volatile var denoiseMix = .8f          // 0 = raw, 1 = fully denoised
     @Volatile var monitorEnabled = true    // hard-limited to an actual headphone route
     @Volatile var rawWriter: WavWriter? = null
     @Volatile var cleanWriter: WavWriter? = null
@@ -87,6 +87,11 @@ class AudioPipeline(
                 try { vad.release() } catch (_: Throwable) {}
             }
         }, "vb-audio").also { it.start() }
+    }
+
+    private fun rmsForCaption(samples: FloatArray): Float {
+        var e = 0f; for (v in samples) e += v * v
+        return sqrt(e / samples.size.coerceAtLeast(1))
     }
 
     fun stop() {
@@ -149,6 +154,7 @@ class AudioPipeline(
         val input = FloatArray(frameShift)
         // Reused every frame. Only data handed to another thread is copied.
         val denoiseIn = FloatArray(frameShift)
+        val envelope = com.akashrajeev.voicebeam.core.ListenEnvelope(SAMPLE_RATE)
         val alignment = DenoiseAlignment(maxOf(4096, frameShift * 8))
         var clean = FloatArray(frameShift)
         var gated = FloatArray(frameShift)
@@ -200,7 +206,12 @@ class AudioPipeline(
                 }
                 val n = minOf(denoised.size, input.size)
                 val mix = denoiseMix
-                if (n == 0) continue
+                if (n == 0) {
+                    asrQueue.offer(CaptionBlock(input.copyOf(), capturedSamples * 1000 / SAMPLE_RATE,
+                        gate.probability, rmsForCaption(input) > .005f))
+                    if (enrollmentActive()) voiceQueue.offer(Pair(input.copyOf(), 1f))
+                    continue
+                }
                 if (clean.size < n) { clean = FloatArray(n); gated = FloatArray(n); out = FloatArray(n) }
                 // Streaming GTCRN has one warmup frame. Mix the matching buffered raw samples.
                 alignment.mix(denoised, mix, clean, n)
@@ -212,8 +223,8 @@ class AudioPipeline(
                 gate.quietOthers = quietOthers
                 val g = gate.process(s.copy(voiceActive = voice))
                 val requestedBoost = if (gate.boostAllowed) TargetGate.dbToLinear(boostDb) else 1f
-                val boost = FrameDsp.safeBoost(clean, n, g, requestedBoost)
-                val e = FrameDsp.gateAndBoost(clean, n, g, boost, gated, out)
+                val boost = FrameDsp.safeBoost(clean, n, g, requestedBoost) // diagnostic estimate; envelope limits actual output
+                val e = envelope.process(clean, n, g, requestedBoost, gated, out)
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
                 // The actual routed output, not merely a paired headset, must be safe.
@@ -265,10 +276,10 @@ class AudioPipeline(
                         " droppedCaptionBlocks=" + asrQueue.dropped)
                     lastDiagnosticMs = now
                 }
+                asrQueue.offer(CaptionBlock(input.copyOf(), capturedSamples * 1000 / SAMPLE_RATE,
+                    gate.probability, voice))
                 // Recognition needs speech, not the gate's sometimes 80%-attenuated output.
                 // Assign a caption to the target separately using the gate probability.
-                val captionBlock = CaptionBlock(input.copyOf(), capturedSamples * 1000 / SAMPLE_RATE, gate.probability, voice)
-                asrQueue.offer(captionBlock)
                 if (enrollmentActive()) {
                     voiceQueue.offer(Pair(input.copyOf(), 1f))
                 } else if (voice) {

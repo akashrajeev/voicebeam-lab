@@ -17,7 +17,7 @@ class WearerVetoTest {
     }
     @Test fun wearerVetoDoesNotAllowBoost() {
         val g=TargetGate()
-        repeat(100) { g.process(target.copy(wearerMatch=1f, wearerVetoEnabled=true, voiceMatch=0.81f)) }
+        repeat(150) { g.process(target.copy(wearerMatch=1f, wearerVetoEnabled=true, voiceMatch=0.81f)) }
         assertEquals(TargetState.OTHER,g.state); assertFalse(g.boostAllowed); assertTrue(g.gain<0.041f)
     }
 }

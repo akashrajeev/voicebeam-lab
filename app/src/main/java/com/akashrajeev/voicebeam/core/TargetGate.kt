@@ -22,7 +22,7 @@ data class GateInputs(
 /**
  * Decides, frame by frame, how likely the sound is to be the locked person,
  * and turns that into a smooth gain. Others are turned down by [quietOthers]
- * (0 = leave them, 1 = fully mute). Unknown turns pass enhanced audio without boost.
+ * (0 = leave them, 1 = maximum attenuation (safety floor)). Unknown turns pass enhanced audio without boost.
  * This is turn gating, not separation of overlapping speakers.
  */
 enum class TargetState { UNLOCKED, TARGET, OTHER, UNCERTAIN, OVERLAP }
@@ -30,7 +30,7 @@ enum class TargetState { UNLOCKED, TARGET, OTHER, UNCERTAIN, OVERLAP }
 class TargetGate(
     private val frameMs: Float = 10f,
     private val attackMs: Float = 25f,
-    private val releaseMs: Float = 220f,
+    private val releaseMs: Float = 160f,
     private val holdMs: Float = 300f,
 ) {
     var state: TargetState = TargetState.UNLOCKED
@@ -96,8 +96,8 @@ class TargetGate(
         boostAllowed = confirmed
         val strength = quietOthers.coerceIn(0f, 1f)
         // Squared residual gives useful suppression despite proximity to the phone mic.
-        // At 80% the unconfirmed residual is 4%, without hearing boost; at 100% it is zero.
-        val residual = (1f - strength) * (1f - strength)
+        // At80% residual is4%; max attenuation keeps2% to avoid completely lost speech.
+        val residual = maxOf(0.02f, (1f - strength) * (1f - strength))
         val wanted = when {
             !i.hasLock -> 1f
             confirmed -> 1f - strength * (1f - probability)
@@ -105,7 +105,7 @@ class TargetGate(
             state == TargetState.OVERLAP && i.voiceActive -> 1f // cannot separate, preserve speech
             else -> residual
         }
-        val tau = if (wanted > gain) attackMs else minOf(releaseMs, 80f)
+        val tau = if (wanted > gain) attackMs else releaseMs
         val alpha = 1f - exp(-frameMs / tau)
         gain += (wanted - gain) * alpha
         return gain

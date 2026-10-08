@@ -29,11 +29,11 @@ class SuppressionTest {
         assertEquals(0f, g.targetProbability(target.copy(voiceMatch = 0.1f)), 0f)
         assertEquals(TargetState.UNCERTAIN, g.state)
     }
-    @Test fun fullyQuietOthersConvergesToMuteNotBoostedResidual() {
+    @Test fun fullyQuietOthersKeepsSafetyFloorNotBoostedResidual() {
         val g = TargetGate(frameMs = 10f); g.quietOthers = 1f
         repeat(100) { g.process(target) }
         repeat(150) { g.process(self.copy(voiceMatch = 0.1f)) }
-        assertTrue(g.gain < 0.000001f); assertFalse(g.boostAllowed)
+        assertEquals(.02f,g.gain,.0001f); assertFalse(g.boostAllowed)
     }
     @Test fun confirmedTargetStillPassesAndCanBeBoosted() {
         val g = TargetGate(frameMs = 10f)
