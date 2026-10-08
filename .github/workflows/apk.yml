@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-7: queue-underflow raw fallback,1s/500ms hop, diagnostic export. Not phone validated.
+# SEP-8: indexed fixed-delay raw/SEP rendering,1s software delay. Host tested, not phone validated.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]

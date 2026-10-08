@@ -9,7 +9,7 @@ import android.os.Build
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
-import com.akashrajeev.voicebeam.core.SeparationFallback
+import com.akashrajeev.voicebeam.core.IndexedSeparationRenderer
 import com.akashrajeev.voicebeam.core.DropOldestQueue
 import com.akashrajeev.voicebeam.core.VoiceMatch
 import com.akashrajeev.voicebeam.ml.VoicePrint
@@ -49,10 +49,9 @@ class ExperimentalSeparator(
     private var write = 0
     private var hopFill = 0
     private var captured = 0L
-    private var playing: Packet? = null
-    private var playOffset = 0
-    private var previousSample = 0f
-    private var previousTemplate: FloatArray? = null
+    private val renderer=IndexedSeparationRenderer(hop+8000)
+    private var renderedTemplate:FloatArray?=null
+    @Volatile var warmupSamples=0;private set
     private var droppedBusy = 0L
     private var staleOutput = 0L
     private val times = ArrayList<Long>()
@@ -65,7 +64,7 @@ class ExperimentalSeparator(
         val path = File(app.cacheDir, name)
         if (!path.exists()) app.assets.open("models/$name").use { src -> path.outputStream().use { src.copyTo(it) } }
         session = env.createSession(path.absolutePath, options)
-        Diagnostics.event("TSE enabled model=int8 identityHz=1 failOpenNoMute=true contextMs=$contextMs hopMs=$hopMs nativeORT="+env.version)
+        Diagnostics.event("TSE enabled model=int8 identityHz=1 failOpenNoMute=true contextMs=$contextMs hopMs=$hopMs fixedPlaybackDelayMs="+(hop+8000)/16+" nativeORT="+env.version)
         worker = Thread({ loop() }, "vb-tse").also { it.start() }
     }
     /** Raw mic only. Zero-pad initial context. No pending compute when worker is behind. */
@@ -83,42 +82,21 @@ class ExperimentalSeparator(
                 } else droppedBusy++
             }
         }
-        out.fill(0f);selectedOutput=false;underflowSamples=0
-        if(targetTemplate()==null) {
-            for(k in out.indices) out[k]=raw.getOrElse(k){0f}.coerceIn(-.95f,.95f)
-            Diagnostics.tseState="AUTO REFERENCE ${automatic.phrases}/3: wait for locked face solo speech; raw passthrough"
-            return true
+        renderer.push(raw)
+        val template=targetTemplate()
+        if(template !== renderedTemplate){renderer.clearSeparated();renderedTemplate=template}
+        while(true){
+            val packet=output.poll(0) ?: break
+            if(packet.template==null || packet.template !== template) {staleOutput++;continue}
+            val late=renderer.offer(packet.endSample-hop,packet.audio,packet.isolated)
+            if(late>0)staleOutput++
         }
-        var written=0
-        while(written < out.size) {
-            if(playing == null || playOffset >= playing!!.audio.size) {
-                playing=output.poll(0); playOffset=0
-                val packet=playing
-                if(packet != null) {
-                    val age=SystemClock.elapsedRealtimeNanos()-packet.capturedNs
-                    if(age > (context+hop)*1000000000L/16000) { playing=null; staleOutput++ }
-                    else Diagnostics.event("TSE softwareCaptureToConsumeMs="+age/1000000+" excludesAudioTrackBluetooth=true")
-                }
-            }
-            val packet=playing ?: break
-            if(packet.template == null || packet.template !== targetTemplate()) { playing=null; previousSample=0f; continue }
-            if(previousTemplate !== packet.template) { previousSample=0f; previousTemplate=packet.template }
-            // A muted packet remains exact silence, including its seam.
-            if(playOffset==0 && packet.audio.all { it == 0f }) previousSample=0f
-            selectedOutput=packet.isolated
-            val n=minOf(out.size-written,packet.audio.size-playOffset)
-            for(k in 0 until n) {
-                val pos=playOffset+k
-                val v=packet.audio[pos]
-                out[written+k]=if(pos<80) previousSample*(1f-pos/80f)+v*(pos/80f) else v
-            }
-            playOffset+=n; written+=n
-            if(playOffset == packet.audio.size && n>0) previousSample=out[written-1]
-        }
-        underflowSamples=SeparationFallback.fill(raw,out,written)
-        if(underflowSamples>0) selectedOutput=false
-        // False still means no separated packet, but out now contains raw fallback.
-        return written>0
+        val frame=renderer.render(out)
+        selectedOutput=frame.isolated
+        underflowSamples=frame.rawSamples
+        warmupSamples=frame.warmupSamples
+        if(template==null) Diagnostics.tseState="AUTO REFERENCE ${automatic.phrases}/3: locked solo speech; delayed raw"
+        return frame.rawSamples+frame.warmupSamples<out.size
     }
     private fun correlation(a:FloatArray, aStart:Int, b:FloatArray, size:Int):Float {
         var dot=0.0; var aa=0.0; var bb=0.0
@@ -197,5 +175,5 @@ class ExperimentalSeparator(
         } catch(t:Throwable) { Diagnostics.tseState="ERROR: "+t.javaClass.simpleName; Diagnostics.event("TSE error="+t.javaClass.simpleName); running.set(false) }
         finally { session.close(); options.close() }
     }
-    fun stop() { running.set(false); worker.join(5000); playing=null; input.clear(); output.clear(); Diagnostics.tseState="OFF" }
+    fun stop() { running.set(false); worker.join(5000); renderer.clearSeparated(); input.clear(); output.clear(); Diagnostics.tseState="OFF" }
 }
