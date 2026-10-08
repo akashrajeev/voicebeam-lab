@@ -29,7 +29,7 @@ class EnhFixtureTest {
         val other = load("1221-135767-0005")
         val enrollment = load("1089-134686-0013")
         val vp = VoicePrint(ctx.assets); val d = Denoiser(ctx.assets)
-        val report = StringBuilder("ENH-2 PUBLIC FIXTURE TEST; 4s, RMS=.06; synthetic equal-RMS overlap/noise; scripted lips. Not Indian voices, not Bluetooth or end-to-end latency.\n")
+        val report = StringBuilder("ENH-3 PUBLIC FIXTURE TEST; 4s, RMS=.06; synthetic equal-RMS overlap/noise; scripted lips. Not Indian voices, not Bluetooth or end-to-end latency.\n")
         try {
             val learner = VoiceLearner({ vp.embed(it) }, 16000)
             learner.beginEnrollment()
@@ -75,7 +75,7 @@ class EnhFixtureTest {
                     assertTrue("finite output",out.all { it.isFinite() })
                 }
             }
-            File(ctx.getExternalFilesDir(null),"ENH-2-fixtures.txt").writeText(report.toString())
+            File(ctx.getExternalFilesDir(null),"ENH-3-fixtures.txt").writeText(report.toString())
             for(line in report.lines()) android.util.Log.i("ENH_FIXTURE",line)
         } finally { vp.release();d.release() }
     }

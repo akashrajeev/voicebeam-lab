@@ -218,7 +218,7 @@ class VoiceBeamEngine(private val app: Context) {
             lockedSpeaking = if (audioOnly) 0f else lockedFace?.speaking ?: 0f,
             othersSpeaking = if (audioOnly) 0f else others,
             voiceMatch = latestVoiceMatch.takeIf { now - lastVoiceMatchAtMs < 2800L },
-            wearerMatch = latestWearerMatch.takeIf { now - lastVoiceMatchAtMs < 2800L },
+            wearerMatch = latestWearerMatch.takeIf { now - lastVoiceMatchAtMs < 1000L },
             wearerVetoEnabled = wearerVetoEnabled,
             voiceActive = false,
             voiceLearned = learner?.learned == true,

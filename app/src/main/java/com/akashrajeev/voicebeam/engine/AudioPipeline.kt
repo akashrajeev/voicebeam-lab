@@ -268,7 +268,7 @@ class AudioPipeline(
                     voiceQueue.offer(Pair(input.copyOf(), 1f))
                 } else if (voice) {
                     // Copy: the consumer is on another thread and `clean` is reused next frame.
-                    voiceQueue.offer(Pair(clean.copyOf(n), if (s.hasLock && s.othersSpeaking < 0.3f) s.lockedSpeaking else 0f))
+                    voiceQueue.offer(Pair(input.copyOf(), if (s.hasLock && s.othersSpeaking < 0.3f) s.lockedSpeaking else 0f))
                 }
                 onFrame(FrameInfo(sqrt(e / n), g, gate.probability, voice,
                     routed?.productName?.toString().takeIf { headphoneRoute }))
