@@ -160,6 +160,15 @@ class VoiceBeamEngine(private val app: Context) {
         return id != null
     }
 
+    fun separationReferenceReady():Boolean=pipeline?.separator?.referenceReady()==true
+    fun separationReferenceStatus(): String {
+        if(!_settings.value.experimentalSeparation)return "Separation OFF: enable it in Settings"
+        val sep=pipeline?.separator ?: return "Separation starting: waiting for audio pipeline"
+        if(sep.referenceReady())return sep.referenceStatus()
+        val v=gateInputs()
+        val reason=when { !v.hasLock -> "Tap the target face"; !v.lockedVisible -> "Keep the target visible"; v.lockedSpeaking<.75f -> "Waiting for target lips speaking"; v.othersSpeaking>=.25f -> "Waiting for other visible faces to stop speaking"; else -> null }
+        return if(reason!=null)"${sep.referenceStatus()}. $reason" else sep.referenceStatus()
+    }
     fun enrollmentMessage(): String = "Target: "+(learner?.enrollmentMessage ?: "Models not loaded")+" | Wearer: "+(wearerLearner?.enrollmentMessage ?: "Models not loaded")
 
     fun beginTargetEnrollment() {

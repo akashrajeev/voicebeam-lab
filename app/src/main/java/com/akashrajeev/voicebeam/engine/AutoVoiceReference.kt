@@ -8,6 +8,7 @@ class AutoVoiceReference {
  private val samples=ArrayList<Float>()
  private var previous:FloatArray?=null
  private var key:Int?=null
+ @Synchronized fun capturedMillis():Int=samples.size/16
  @Synchronized fun setTarget(id:Int?){if(key!=id){key=id;centroid=null;phrases=0;previous=null;samples.clear()}}
  @Synchronized fun collect(raw:FloatArray,eligible:Boolean):FloatArray? {
   if(centroid!=null)return null

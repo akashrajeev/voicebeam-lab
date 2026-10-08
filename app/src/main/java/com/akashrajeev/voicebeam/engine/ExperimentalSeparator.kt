@@ -24,6 +24,9 @@ class ExperimentalSeparator(
  private val down=Downsample16To8();private val up=Array(2){Upsample8To16()}
  private val renderer=IndexedSeparationRenderer(3200,16000,80)
  private val automatic=AutoVoiceReference()
+ @Volatile var referenceEligible=false;private set
+ fun referenceStatus():String = when {centroid()!=null -> "Manual target reference ready"; automatic.centroid!=null -> "Auto reference ready: provisional separation"; autoTarget()==null -> "Tap a target face first"; !referenceEligible -> "Auto reference ${automatic.phrases}/3: waiting for visible target speaking alone"; else -> "Auto reference ${automatic.phrases}/3: collecting ${automatic.capturedMillis()/1000f}s / 2s solo speech"}
+ fun referenceReady()=template()!=null
  private fun template()=centroid() ?: automatic.centroid
  private val input=ArrayBlockingQueue<Input>(8);private val output=ArrayBlockingQueue<Output>(16)
  private val identity=ArrayBlockingQueue<Identity>(1)
@@ -46,7 +49,8 @@ class ExperimentalSeparator(
  }
  fun process(raw:FloatArray,out:FloatArray):Boolean {
   val target=autoTarget();if(target!=rawTarget){automatic.setTarget(target);rawTarget=target;identityScores=Scores(listOf(-1f,-1f),0,null,-1)}
-  if(centroid()==null && automatic.centroid==null)automatic.collect(raw,autoEligible())?.let{identity.offer(Identity(null,null,it,target))}
+  referenceEligible=autoEligible()
+  if(centroid()==null && automatic.centroid==null)automatic.collect(raw,referenceEligible)?.let{identity.offer(Identity(null,null,it,target))}
   renderer.push(raw)
   for(v in down.process(raw)){
    buffer[fill++]=v

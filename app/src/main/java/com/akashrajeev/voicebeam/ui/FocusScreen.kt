@@ -102,6 +102,9 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
     val lifecycleOwner = LocalLifecycleOwner.current
     val state by engine.state.collectAsState()
     val settings by engine.settings.collectAsState()
+    var autoReferenceReady by remember { mutableStateOf(false) }
+    var autoReferenceText by remember { mutableStateOf(engine.separationReferenceStatus()) }
+    LaunchedEffect(settings.experimentalSeparation) { while(true){autoReferenceText=engine.separationReferenceStatus();autoReferenceReady=engine.separationReferenceReady();delay(250)} }
     var backCamera by rememberSaveable { mutableStateOf(true) }
     var videoBound by remember { mutableStateOf(false) }
     var showSheet by remember { mutableStateOf(false) }
@@ -254,21 +257,24 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
 
             // Status + caption + controls.
             Column(Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(horizontal = 18.dp, vertical = 12.dp)) {
-                StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned, state.voiceMatch) { engine.unlock() }
+                StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned || (settings.experimentalSeparation && autoReferenceReady), state.voiceMatch) { engine.unlock() }
                 if (state.wearerEnrollmentActive) {
                     Text("Learning YOUR voice ${(state.wearerEnrollmentProgress * 100).roundToInt()}%: only you speak. Target learning paused.", color = Muted, fontSize = 12.sp)
                 }
                 if (!state.wearerLearned && !state.wearerEnrollmentActive) {
                     Button(onClick = { engine.beginWearerEnrollment() }) { Text("Learn my voice (optional)") }
                 }
-                if (state.lockedId != null && !state.voiceLearned && !state.wearerEnrollmentActive) {
+                if(settings.experimentalSeparation) {
+                    Text(autoReferenceText,color=Color.White,fontSize=12.sp,maxLines=2,modifier=Modifier.testTag("autoReferenceStatus"))
+                    Text("No Learn tap. Keep the target visible; three consistent2s solo phrases. Background speech can contaminate the reference.",color=Muted,fontSize=11.sp,maxLines=2)
+                }
+                if (state.lockedId != null && !state.voiceLearned && !state.wearerEnrollmentActive && !settings.experimentalSeparation) {
                     Text(engine.enrollmentMessage(),color=Muted,fontSize=12.sp)
                     Text(if (state.voiceEnrollmentActive)
                         "Learning ${(state.voiceEnrollmentProgress * 100).roundToInt()}%: only the target speaks. Capture 9 seconds in a quiet room; raw mic, no lip/VAD reset."
                         else "Face locked, voice not learned. Ask the target to speak alone, then start voice learning.", color = Muted, fontSize = 12.sp)
                     Button(onClick = { engine.beginTargetEnrollment() }) {
-                        Text(engine.enrollmentMessage(),color=Muted,fontSize=12.sp)
-                    Text(if (state.voiceEnrollmentActive) "Restart voice learning" else "Learn locked voice")
+                        Text(if (state.voiceEnrollmentActive) "Restart voice learning" else "Learn locked voice", maxLines=1)
                     }
                 }
                 if (state.earphones == null && state.listening && !demoFeed) {
