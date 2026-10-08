@@ -1,0 +1,2018 @@
+[
+  {
+    "ms": 121.52247100038949,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 140.29582400053187,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 110.06445499970141,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 145.17925299969647,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 109.56196499955695,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1250,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 119.95483499958937,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 110.15177199988102,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1750,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 167.2905659997923,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 118.5376270004781,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2250,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 123.11570499969093,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 119.47225099993375,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2750,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 153.12656199967023,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 119.64915500084317,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3250,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 115.90889199942467,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 113.66843900032109,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3750,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 152.1247320006296,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.6221618051454126,
+      0.11213021603850429
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 272.16682599919295,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 298.7237739998818,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 275.5794929998956,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 356.5589230001933,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 334.6786339998289,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1250,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 334.4209180004327,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 321.60056100019574,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1750,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 369.04256399975566,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 285.35409399955824,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2250,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 301.9649139996545,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 347.44088200022816,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2750,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 389.7140789995319,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 345.3264030003993,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3250,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 298.09157799991226,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 347.6840130006167,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3750,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 382.42440700014413,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.6221618051454126,
+      0.11213021603850429
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 483.2984070008024,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 354.9222869996811,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 448.44065600045724,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 401.470870000594,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 387.4039919992356,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1250,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 337.0409319995815,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 336.5874619994429,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1750,
+    "scores": [
+      0.5443624527672615,
+      -0.030895357193584105
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 443.5437860001912,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 375.1583399998708,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2250,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 335.4955830000108,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 379.49542200021824,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2750,
+    "scores": [
+      0.38876920694432415,
+      0.14861741589906557
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 369.19238999962545,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 364.4993749994683,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3250,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 362.78234099972906,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 333.0835199994908,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3750,
+    "scores": [
+      0.2973892428590315,
+      0.046351826774243224
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 411.340208999718,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.6221618051454126,
+      0.11213021603850429
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 110.90454399982264,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 106.42383600043104,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 101.61050799979421,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 140.47481000034168,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 99.96698099985224,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1250,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 104.01898700001766,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 98.79746499973407,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1750,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 141.53584400082764,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 101.34101600033318,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2250,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 98.81651999967289,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 96.29127100015467,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2750,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 137.28395799989812,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 100.09996299959312,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3250,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 100.13753200018982,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 104.46744799992302,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3750,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 152.96651700009534,
+    "threads": 2,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.5111456838119577,
+      0.09057791238896057
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 177.2063030002755,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 258.58516599964787,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 229.6343549996891,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 246.63822099955723,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 201.3760009995167,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1250,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 180.47298199962825,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 214.4049090002227,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1750,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 221.0504229997241,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 192.02803499956644,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2250,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 190.04217000019707,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 196.61224599985871,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2750,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 255.88821999917855,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 218.019137999363,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3250,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 231.55777800002397,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 176.28670500016597,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3750,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 241.1791529993934,
+    "threads": 3,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.5111456838119577,
+      0.09057791238896057
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 324.69107899942173,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 250,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 217.83494200008136,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 230.94034299992927,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 750,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 283.57469200000196,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 242.92449799941096,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1250,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 221.70310899946344,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 224.8303019996456,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1750,
+    "scores": [
+      0.4963377365029637,
+      0.017494323355229317
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 301.28305400012323,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 287.0263739996517,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2250,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 240.29745799998636,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 226.79287299979478,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2750,
+    "scores": [
+      0.36169725280851206,
+      0.05402926478545497
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 284.9881689999165,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 312.9170950005573,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3250,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 230.67523700046877,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 224.59331900063262,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3750,
+    "scores": [
+      0.30444275337342297,
+      0.049438101271476464
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 283.10031999990315,
+    "threads": 4,
+    "context_ms": 1000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.5111456838119577,
+      0.09057791238896057
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 278.846156000327,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 317.6262080005472,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.5468668566961468,
+      0.0180807213345263
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 262.1429809996698,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.5468668566961468,
+      0.0180807213345263
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 298.2698949999758,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.40093446327868876,
+      0.17947546436887746
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 257.307588999538,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.40093446327868876,
+      0.17947546436887746
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 294.5790040002976,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.3292142971265927,
+      0.047236142408157045
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 266.0834230000546,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.3292142971265927,
+      0.047236142408157045
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 303.81491699972685,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.6049457204301159,
+      0.10484991266983593
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 657.1624409998549,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 754.6742559998165,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.5468668566961468,
+      0.0180807213345263
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 622.2549779995461,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.5468668566961468,
+      0.0180807213345263
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 627.6149639998039,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.40093446327868876,
+      0.17947546436887746
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 629.1329290006615,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.40093446327868876,
+      0.17947546436887746
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 678.3188780000273,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.3292142971265927,
+      0.047236142408157045
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 681.6897250000693,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.3292142971265927,
+      0.047236142408157045
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 651.8556900000476,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.6049457204301159,
+      0.10484991266983593
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 841.9631960005063,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 888.9026730003025,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.5468668566961468,
+      0.0180807213345263
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 697.5351010005397,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.5468668566961468,
+      0.0180807213345263
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 683.9224020004622,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.40093446327868876,
+      0.17947546436887746
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 556.8721609997738,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.40093446327868876,
+      0.17947546436887746
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 722.3188080006366,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.3292142971265927,
+      0.047236142408157045
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 774.2634269998234,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.3292142971265927,
+      0.047236142408157045
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 818.2447689996479,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "safe",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.6049457204301159,
+      0.10484991266983593
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 195.12143100018875,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 228.59938999954466,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.4539018790766869,
+      0.000353775770998474
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 181.37947299965163,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.4539018790766869,
+      0.000353775770998474
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 219.96241899978486,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.34234683454836484,
+      0.0885047625315422
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 182.07307899956504,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.34234683454836484,
+      0.0885047625315422
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 221.26685599960183,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.28054156065251135,
+      0.05911516251210552
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 183.55108499963535,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.28054156065251135,
+      0.05911516251210552
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 216.8895370004975,
+    "threads": 2,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.46191945614254765,
+      0.09994216033985122
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 367.78952599979675,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 452.653019000536,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.4539018790766869,
+      0.000353775770998474
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 443.93359500008955,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.4539018790766869,
+      0.000353775770998474
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 434.86659199970745,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.34234683454836484,
+      0.0885047625315422
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 401.4752620005311,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.34234683454836484,
+      0.0885047625315422
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 468.8620679999076,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.28054156065251135,
+      0.05911516251210552
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 327.5510499997836,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.28054156065251135,
+      0.05911516251210552
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 426.06476199944154,
+    "threads": 3,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.46191945614254765,
+      0.09994216033985122
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 434.66571899989503,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 500,
+    "scores": [
+      -1.0,
+      -1.0
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 490.26457800027856,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1000,
+    "scores": [
+      0.4539018790766869,
+      0.000353775770998474
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 439.68572599987965,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 1500,
+    "scores": [
+      0.4539018790766869,
+      0.000353775770998474
+    ],
+    "fresh": false,
+    "decision": "SELECT"
+  },
+  {
+    "ms": 449.29046600009315,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2000,
+    "scores": [
+      0.34234683454836484,
+      0.0885047625315422
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 408.67156900003465,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 2500,
+    "scores": [
+      0.34234683454836484,
+      0.0885047625315422
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 514.1493459996127,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3000,
+    "scores": [
+      0.28054156065251135,
+      0.05911516251210552
+    ],
+    "fresh": true,
+    "decision": "RAW"
+  },
+  {
+    "ms": 439.22360699980345,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 3500,
+    "scores": [
+      0.28054156065251135,
+      0.05911516251210552
+    ],
+    "fresh": false,
+    "decision": "RAW"
+  },
+  {
+    "ms": 497.8225899994868,
+    "threads": 4,
+    "context_ms": 2000,
+    "kind": "int8",
+    "case": "overlap",
+    "end_ms": 4000,
+    "scores": [
+      0.46191945614254765,
+      0.09994216033985122
+    ],
+    "fresh": true,
+    "decision": "SELECT"
+  }
+]

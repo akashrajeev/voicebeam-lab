@@ -35,7 +35,7 @@ class ExperimentalSeparator(
     private val running = AtomicBoolean(true)
     private val busy = AtomicBoolean(false)
     private val env = OrtEnvironment.getEnvironment()
-    private val options = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2); setInterOpNumThreads(1) }
+    private val options = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2); setInterOpNumThreads(1);setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT) }
     private val session: OrtSession
     private val ring = FloatArray(context)
     private var write = 0
@@ -53,11 +53,11 @@ class ExperimentalSeparator(
     init {
         require(context == 16000 || context == 32000)
         require(hop in 4000..32000 && hop <= context)
-        val name = if(context == 16000) "convtasnet-1s-safe.onnx" else "convtasnet-2s-safe.onnx"
+        val name = if(context == 16000) "convtasnet-1s-int8.onnx" else "convtasnet-2s-int8.onnx"
         val path = File(app.cacheDir, name)
         if (!path.exists()) app.assets.open("models/$name").use { src -> path.outputStream().use { src.copyTo(it) } }
         session = env.createSession(path.absolutePath, options)
-        Diagnostics.event("TSE enabled contextMs=$contextMs hopMs=$hopMs nativeORT="+env.version)
+        Diagnostics.event("TSE enabled model=int8 identityHz=1 failOpenNoMute=true contextMs=$contextMs hopMs=$hopMs nativeORT="+env.version)
         worker = Thread({ loop() }, "vb-tse").also { it.start() }
     }
     /** Raw mic only. Zero-pad initial context. No pending compute when worker is behind. */
@@ -113,6 +113,9 @@ class ExperimentalSeparator(
     private fun loop() {
         var previous:Packet?=null
         var stickyEvidence=0f
+        var identity=SlowIdentity(hop,context)
+        var identityTemplate:FloatArray?=null
+        val presence=SeparationPresence()
         try {
             while(running.get()) {
                 val packet=input.poll(200) ?: continue
@@ -129,7 +132,10 @@ class ExperimentalSeparator(
                     }
                     val sepEnd=SystemClock.elapsedRealtimeNanos()
                     for(source in sources) for(k in source.indices) source[k]=if(source[k].isFinite()) source[k].coerceIn(-1f,1f) else 0f
-                    val scores=sources.map { source -> voice.embed(source)?.let { VoiceMatch.cosine(it,template) } ?: -1f }
+                    if(identityTemplate !== template){identity=SlowIdentity(hop,context);presence.reset();identityTemplate=template;previous=null}
+                    val prevShift=previous?.let{(packet.endSample-it.endSample).toInt()} ?: hop
+                    val update=identity.update(sources,prevShift){source->voice.embed(source)?.let{VoiceMatch.cosine(it,template)} ?: -1f}
+                    val scores=update.scores
                     val speakerEnd=SystemClock.elapsedRealtimeNanos()
                     val freshBest=if(scores[0]>=scores[1]) 0 else 1
                     var selectedIndex=freshBest
@@ -147,8 +153,10 @@ class ExperimentalSeparator(
                     val accepted=template === centroid() && scores.all { it.isFinite() } && scores[selectedIndex]>threshold() &&
                         scores[selectedIndex]-scores[1-selectedIndex]>margin()
                     val raw=rawSelection()
-                    val strongOther = scores.all { it.isFinite() && it >= 0f } && scores.maxOrNull()!! < threshold()-.10f
-                    val emitted=if((raw || accepted) && template === centroid()) selected.copyOfRange(context-hop,context)
+                    val decision=presence.decide(scores,update.fresh,SystemClock.elapsedRealtime(),template === centroid(),threshold(),margin())
+                    // At1Hz a negative can outlive target entry. Never mute in this candidate.
+                    val strongOther = false
+                    val emitted=if((raw || (accepted && decision==SeparationPresence.Decision.SELECT)) && template === centroid()) selected.copyOfRange(context-hop,context)
                         else if(!strongOther) packet.audio.copyOfRange(context-hop,context) else FloatArray(hop)
                     var peak=0f; for(v in emitted) peak=maxOf(peak,abs(v))
                     if(peak>.95f) for(k in emitted.indices) emitted[k]*=.95f/peak
@@ -164,7 +172,7 @@ class ExperimentalSeparator(
                         " batteryPct="+battery.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)+
                         " thermal="+(if(Build.VERSION.SDK_INT>=29) power.currentThermalStatus else -1)+
                         " backlog="+input.size+" dropsBusy=$droppedBusy dropsOutput="+output.dropped+" staleOutput=$staleOutput"+
-                        " cosine0="+scores[0]+" cosine1="+scores[1]+" stickyEvidence=$stickyEvidence raw=$raw accepted=$accepted peak=$peak")
+                        " model=int8 threads=2 identityHz=1 identityFresh="+update.fresh+" cosine0="+scores[0]+" cosine1="+scores[1]+" stickyEvidence=$stickyEvidence raw=$raw accepted=$accepted peak=$peak")
                 } finally { busy.set(false) }
             }
         } catch(t:Throwable) { Diagnostics.tseState="ERROR: "+t.javaClass.simpleName; Diagnostics.event("TSE error="+t.javaClass.simpleName); running.set(false) }

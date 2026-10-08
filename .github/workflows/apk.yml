@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-3: speed/provider suite plus target/other/entry/silence presence probes.
+# SEP-4: host winner int8CPU2threads/1Hz identity, fail-open no negative mute.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]

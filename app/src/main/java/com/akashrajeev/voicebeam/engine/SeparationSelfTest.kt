@@ -14,9 +14,7 @@ import kotlin.math.*
 /** Public fixture only. No microphone, camera, private data or playback. */
 object SeparationSelfTest {
     private data class Variant(val threads:Int,val slow:Boolean,val kind:String="fp32",val provider:String="CPU")
-    private val variants=listOf(Variant(2,false),Variant(2,true),Variant(3,true),Variant(4,true),
-        Variant(2,true,"int8"),Variant(4,true,"int8"),Variant(2,true,"fp16"),
-        Variant(2,true,"fp32","NNAPI"),Variant(2,true,"int8","NNAPI"),Variant(2,true,"fp32","XNNPACK"),Variant(2,true,"int8","XNNPACK"))
+    private val variants=listOf(Variant(2,false),Variant(2,true),Variant(2,true,"int8"))
     @Volatile var status = "Not run"
     @Volatile private var busy = false
     @Synchronized fun start(ctx:Context) {
@@ -49,8 +47,8 @@ object SeparationSelfTest {
             val enrollment=load(ctx,"1089-134686-0013.wav")
             val template=voice.embed(enrollment.copyOfRange(0,minOf(enrollment.size,48000))) ?: error("TitaNet enrollment failed")
             log("TitaNet modelLoad=PASS embeddingDims="+template.size)
-            val a=repeatNormalize(load(ctx,"1089-134686-0002.wav"),64000)
-            val b=repeatNormalize(load(ctx,"1221-135767-0005.wav"),64000)
+            val a=repeatNormalize(load(ctx,"1089-134686-0002.wav"),192000)
+            val b=repeatNormalize(load(ctx,"1221-135767-0005.wav"),192000)
             val overlap=FloatArray(a.size){a[it]+b[it]}
             val cases=linkedMapOf("overlap" to overlap,"target_only" to a,"other_only" to b,"silence" to FloatArray(a.size),
                 "target_enters" to FloatArray(a.size){b[it]+if(it>=32000)a[it] else 0f})
@@ -74,7 +72,7 @@ object SeparationSelfTest {
                 try {
                     val output=FloatArray(mix.size);val compute=ArrayList<Long>();val sepTimes=ArrayList<Long>();val idTimes=ArrayList<Long>();val refreshTimes=ArrayList<Long>();var missed=0;var uncertain=0
                     val identity=SlowIdentity(hop,context)
-                    val presence=SeparationPresence();var selectedHops=0;var rawHops=0;var muteHops=0;var muteAfterEntry=0
+                    val presence=SeparationPresence();var selectedHops=0;var rawHops=0;var muteHops=0;var muteAfterEntry=0;var firstSelectedAfterEntry=-1L
                     var previous:FloatArray?=null;var last=0f
                     for(end in hop..mix.size step hop) {
                         val window=FloatArray(context){k->val pos=end-context+k;if(pos>=0)mix[pos] else 0f}
@@ -91,7 +89,7 @@ object SeparationSelfTest {
                         val scores=update?.scores ?: sources.map{src->voice.embed(src)?.let{VoiceMatch.cosine(it,template)} ?: -1f}
                         val idEnd=SystemClock.elapsedRealtimeNanos()
                         val decision=presence.decide(scores,update?.fresh ?: true,end/16L,true)
-                        when(decision){SeparationPresence.Decision.SELECT->selectedHops++;SeparationPresence.Decision.RAW->rawHops++;SeparationPresence.Decision.MUTE->{muteHops++;if(caseName=="target_enters" && end>32000)muteAfterEntry++}}
+                        when(decision){SeparationPresence.Decision.SELECT->{selectedHops++;if(caseName=="target_enters" && end>32000 && firstSelectedAfterEntry<0)firstSelectedAfterEntry=end/16L};SeparationPresence.Decision.RAW->rawHops++;SeparationPresence.Decision.MUTE->{muteHops++;if(caseName=="target_enters" && end>32000)muteAfterEntry++}}
                         sepTimes.add((sepEnd-start)/1000000);idTimes.add((idEnd-sepEnd)/1000000)
                         var best=if(scores[0]>=scores[1])0 else 1
                         val prev=previous
@@ -111,7 +109,7 @@ object SeparationSelfTest {
                     val times=compute.sorted();val p50=times[(times.size-1)/2];val p95=times[(times.size-1)*95/100]
                     val improvement=sdr(output.copyOfRange(context,output.size),a.copyOfRange(context,a.size))-sdr(mix.copyOfRange(context,mix.size),a.copyOfRange(context,a.size))
                     fun percentile(x:List<Long>,pct:Int):Long {val a=x.sorted();return if(a.isEmpty())0 else a[(a.size-1)*pct/100]}
-                    val row="case=$caseName selectedHops=$selectedHops rawHops=$rawHops muteHops=$muteHops muteAfterEntry=$muteAfterEntry kind=${variant.kind} provider=${variant.provider} threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
+                    val row="case=$caseName selectedHops=$selectedHops rawHops=$rawHops muteHops=$muteHops muteAfterEntry=$muteAfterEntry firstSelectedAfterEntryMs=$firstSelectedAfterEntry productionNegativeMuteDisabled=true kind=${variant.kind} provider=${variant.provider} threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
                     successful++;log(row);report.append(row).append('\n')
                 }finally{session.close();opts.close()}
                 } catch(t:Throwable) {val failure="VARIANT_FAILED case=$caseName contextMs=${context/16} kind=${variant.kind} provider=${variant.provider} threads=$threads error=${t.javaClass.simpleName}: ${t.message}";log(failure);report.append(failure).append('\n')}
