@@ -3,9 +3,9 @@ package com.akashrajeev.voicebeam.engine
 import android.content.Context
 
 data class Settings(
-    val quietOthers: Float = 0.8f,      // 0..1, how much to turn down everyone else
+    val quietOthers: Float = 0.86f,      // 0..1, how much to turn down everyone else
     val boostDb: Float = 6f,           // extra loudness in the earphones
-    val denoise: Float = .8f,            // 0..1 noise removal strength
+    val denoise: Float = .7f,            // 0..1 noise removal strength
     val useSceneMic: Boolean = true,    // point the mic at the scene (back camera side)
     val saveMode: SaveMode = SaveMode.AUDIO_VIDEO,
     val captionBurn: CaptionBurn = CaptionBurn.BURNED,
@@ -22,9 +22,9 @@ class SettingsStore(context: Context) {
     private val p = context.getSharedPreferences("voicebeam", Context.MODE_PRIVATE)
 
     fun load(): Settings = Settings(
-        quietOthers = p.getFloat("quiet", 0.8f),
+        quietOthers = p.getFloat("quiet", 0.86f),
         boostDb = p.getFloat("boost", 6f),
-        denoise = p.getFloat("denoise", .8f),
+        denoise = p.getFloat("denoise", .7f),
         useSceneMic = p.getBoolean("sceneMic", true),
         saveMode = runCatching { SaveMode.valueOf(p.getString("saveMode", null)!!) }.getOrDefault(SaveMode.AUDIO_VIDEO),
         captionBurn = runCatching { CaptionBurn.valueOf(p.getString("burn", null)!!) }.getOrDefault(CaptionBurn.BURNED),

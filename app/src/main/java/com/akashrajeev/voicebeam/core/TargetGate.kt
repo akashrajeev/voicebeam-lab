@@ -30,7 +30,7 @@ enum class TargetState { UNLOCKED, TARGET, OTHER, UNCERTAIN, OVERLAP }
 class TargetGate(
     private val frameMs: Float = 10f,
     private val attackMs: Float = 25f,
-    private val releaseMs: Float = 160f,
+    private val releaseMs: Float = 60f,
     private val holdMs: Float = 300f,
 ) {
     var state: TargetState = TargetState.UNLOCKED
@@ -49,6 +49,7 @@ class TargetGate(
         state = when {
             !i.hasLock -> TargetState.UNLOCKED
             !i.voiceLearned -> TargetState.UNCERTAIN
+            !i.audioOnly && i.lockedVisible && i.othersSpeaking > 0.55f && i.lockedSpeaking < 0.3f -> TargetState.OTHER
             !i.voiceActive -> TargetState.UNCERTAIN
             wearerVeto(i) -> TargetState.OTHER
             // A 3-second query can contain several turns. Only a strong negative vetoes lips.
