@@ -17,7 +17,7 @@ android {
         versionName = "ENH-6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters += listOf("arm64-v8a")
+            abiFilters += if (System.getenv("VB_EMULATOR") == "1") listOf("x86_64") else listOf("arm64-v8a")
         }
     }
 
@@ -39,7 +39,7 @@ android {
         debug {
             signingConfig = signingConfigs.getByName("debug")
             // Debug also carries x86_64 so the emulator tests can run it.
-            ndk { abiFilters += listOf("arm64-v8a") }
+            ndk { abiFilters += if (System.getenv("VB_EMULATOR") == "1") listOf("x86_64") else listOf("arm64-v8a") }
         }
         release {
             // R8 stays off until a minified build has been run on a device: the sherpa-onnx JNI layer
