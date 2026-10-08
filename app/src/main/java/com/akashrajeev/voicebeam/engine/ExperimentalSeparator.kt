@@ -37,6 +37,7 @@ class ExperimentalSeparator(
  @Volatile var selectedOutput=false;private set
  @Volatile var underflowSamples=0;private set
  @Volatile var warmupSamples=0;private set
+ private var referenceLogAt=0L
  private var renderedGeneration=-1;private var captured=0L;private var rawTarget:Int?=null;private var renderedTemplate:FloatArray?=null
  private val buffer=FloatArray(204);private var fill=0;private var blockStart=0L
  private var drops=0;private var late=0
@@ -51,6 +52,8 @@ class ExperimentalSeparator(
   val target=autoTarget();if(target!=rawTarget){automatic.setTarget(target);rawTarget=target;identityScores=Scores(listOf(-1f,-1f),0,null,-1)}
   referenceEligible=autoEligible()
   if(centroid()==null && automatic.centroid==null)automatic.collect(raw,referenceEligible)?.let{identity.offer(Identity(null,null,it,target))}
+  val now=SystemClock.elapsedRealtime()
+  if(now-referenceLogAt>=1000){referenceLogAt=now;Diagnostics.event("AUTO_REFERENCE phrases=${automatic.phrases} capturedMs=${automatic.capturedMillis()} eligible=$referenceEligible ready=${referenceReady()} last=${automatic.lastDecision}")}
   renderer.push(raw)
   for(v in down.process(raw)){
    buffer[fill++]=v
