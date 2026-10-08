@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-4: host winner int8CPU2threads/1Hz identity, fail-open no negative mute.
+# SEP-4: paced production probe plus host winner int8CPU2threads/1Hz identity, fail-open no negative mute.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]
