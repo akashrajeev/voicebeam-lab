@@ -206,7 +206,8 @@ class AudioPipeline(
                 val s = signals()
                 gate.quietOthers = quietOthers
                 val g = gate.process(s.copy(voiceActive = voice))
-                val boost = if (gate.boostAllowed) TargetGate.dbToLinear(boostDb) else 1f
+                val requestedBoost = if (gate.boostAllowed) TargetGate.dbToLinear(boostDb) else 1f
+                val boost = FrameDsp.safeBoost(clean, n, g, requestedBoost)
                 val e = FrameDsp.gateAndBoost(clean, n, g, boost, gated, out)
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
@@ -242,7 +243,7 @@ class AudioPipeline(
                         " mediaVolume=" + audioManager.getStreamVolume(android.media.AudioManager.STREAM_MUSIC) +
                         "/" + audioManager.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC) +
                         " mediaMuted=" + audioManager.isStreamMute(android.media.AudioManager.STREAM_MUSIC) +
-                        " boostDb=" + boostDb + " rawRms=" + sqrt(rawEnergy / input.size) +
+                        " effectiveBoost=" + boost + " boostDb=" + boostDb + " rawRms=" + sqrt(rawEnergy / input.size) +
                         " outputRms=" + sqrt(outputEnergy / n) +
                         " micSamples=" + input.size + " level=" + sqrt(e / n) +
                         " track=ENH tseEnabled=false enrollment=" + enrollmentStatus() +

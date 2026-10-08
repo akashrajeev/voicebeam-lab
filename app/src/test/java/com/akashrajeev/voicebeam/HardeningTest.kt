@@ -16,6 +16,14 @@ import kotlin.math.abs
 
 class HardeningTest {
 
+    @Test fun peakSafeBoostAvoidsHardClipping() {
+        val clean = floatArrayOf(.4f, -.8f, .2f)
+        val boost = FrameDsp.safeBoost(clean, 3, 1f, 4f)
+        assertEquals(1.1875f, boost, .0001f)
+        val gated = FloatArray(3); val out = FloatArray(3)
+        FrameDsp.gateAndBoost(clean, 3, 1f, boost, gated, out)
+        assertTrue(out.all { abs(it) <= .95001f })
+    }
     @Test fun queueKeepsOrderAndDropsOldestOnOverload() {
         val q = DropOldestQueue<Int>(3)
         assertFalse(q.offer(1)); assertFalse(q.offer(2)); assertFalse(q.offer(3))

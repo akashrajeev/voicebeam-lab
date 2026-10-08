@@ -24,10 +24,10 @@ class SuppressionTest {
         assertFalse(g.boostAllowed)
         assertTrue(g.gain > 0.99f)
     }
-    @Test fun freshNegativeSpeakerMatchVetoesLipMotion() {
+    @Test fun conflictingNegativeAndLipMotionIsUncertain() {
         val g = TargetGate()
         assertEquals(0f, g.targetProbability(target.copy(voiceMatch = 0.1f)), 0f)
-        assertEquals(TargetState.OTHER, g.state)
+        assertEquals(TargetState.UNCERTAIN, g.state)
     }
     @Test fun fullyQuietOthersConvergesToMuteNotBoostedResidual() {
         val g = TargetGate(frameMs = 10f); g.quietOthers = 1f

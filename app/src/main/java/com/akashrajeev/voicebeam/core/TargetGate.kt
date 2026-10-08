@@ -53,7 +53,7 @@ class TargetGate(
             wearerVeto(i) -> TargetState.OTHER
             // A 3-second query can contain several turns. Only a strong negative vetoes lips.
             i.audioOnly -> if ((i.voiceMatch ?: 0f) > 0.8f) TargetState.TARGET else if (i.voiceMatch != null && i.voiceMatch < 0.2f) TargetState.OTHER else TargetState.UNCERTAIN
-            i.voiceMatch != null && i.voiceMatch < 0.2f -> TargetState.OTHER
+            i.voiceMatch != null && i.voiceMatch < 0.2f -> if (i.lockedVisible && i.lockedSpeaking > 0.55f) TargetState.UNCERTAIN else TargetState.OTHER
             i.lockedSpeaking > 0.55f && i.othersSpeaking > 0.55f -> TargetState.OVERLAP
             i.othersSpeaking > 0.55f && i.lockedSpeaking < 0.3f -> TargetState.OTHER
             i.lockedVisible && i.lockedSpeaking > 0.55f -> TargetState.TARGET
