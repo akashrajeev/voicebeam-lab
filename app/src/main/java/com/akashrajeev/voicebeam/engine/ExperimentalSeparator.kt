@@ -9,6 +9,7 @@ import android.os.Build
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
+import com.akashrajeev.voicebeam.core.SeparationFallback
 import com.akashrajeev.voicebeam.core.DropOldestQueue
 import com.akashrajeev.voicebeam.core.VoiceMatch
 import com.akashrajeev.voicebeam.ml.VoicePrint
@@ -23,7 +24,7 @@ class ExperimentalSeparator(
     app: Context, private val voice: VoicePrint, private val centroid: () -> FloatArray?,
     private val threshold: () -> Float, private val margin: () -> Float,
     private val rawSelection: () -> Boolean,
-    contextMs: Int = 1000, hopMs: Int = 250,
+    contextMs: Int = 1000, hopMs: Int = 500,
     private val autoTarget:()->Int?={null}, private val autoEligible:()->Boolean={false},
 ) {
     private val battery = app.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
@@ -34,6 +35,7 @@ class ExperimentalSeparator(
     private val automatic=AutoVoiceReference()
     private fun targetTemplate()=centroid() ?: automatic.centroid
     @Volatile var selectedOutput=false;private set
+    @Volatile var underflowSamples=0;private set
     private var referencePending:FloatArray?=null
     private var referenceTarget:Int?=null
     private val input = DropOldestQueue<Packet>(1)
@@ -81,7 +83,7 @@ class ExperimentalSeparator(
                 } else droppedBusy++
             }
         }
-        out.fill(0f);selectedOutput=false
+        out.fill(0f);selectedOutput=false;underflowSamples=0
         if(targetTemplate()==null) {
             for(k in out.indices) out[k]=raw.getOrElse(k){0f}.coerceIn(-.95f,.95f)
             Diagnostics.tseState="AUTO REFERENCE ${automatic.phrases}/3: wait for locked face solo speech; raw passthrough"
@@ -113,6 +115,9 @@ class ExperimentalSeparator(
             playOffset+=n; written+=n
             if(playOffset == packet.audio.size && n>0) previousSample=out[written-1]
         }
+        underflowSamples=SeparationFallback.fill(raw,out,written)
+        if(underflowSamples>0) selectedOutput=false
+        // False still means no separated packet, but out now contains raw fallback.
         return written>0
     }
     private fun correlation(a:FloatArray, aStart:Int, b:FloatArray, size:Int):Float {

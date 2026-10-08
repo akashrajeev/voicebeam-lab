@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-6: ENH aligned mixer/validated enrollment/selected-only peak-safe boost. int8CPU2threads/1Hz identity, fail-open no negative mute.
+# SEP-7: queue-underflow raw fallback,1s/500ms hop, diagnostic export. Not phone validated.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]

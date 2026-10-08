@@ -84,7 +84,7 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
             SectionHeader("PRIVATE separation experiment")
             SwitchRow("Two-speaker separation (experimental)", "OFF by default. No Learn tap: waits for three consistent2s phrases while locked face speaks alone. Auto reference is provisional. Delayed output; presence policy not reliable. Not safe for live hearing claims. Model CC-BY-SA version ambiguity remains.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
             Text("Context / hop", color=Color.White)
-            Segmented(listOf("1s / 250ms", "2s / 500ms", "2s blocks"), s.separationLiveMode) { i -> engine.updateSettings { it.copy(separationLiveMode=i) } }
+            Segmented(listOf("1s / 500ms", "2s / 500ms", "2s blocks"), s.separationLiveMode) { i -> engine.updateSettings { it.copy(separationLiveMode=i) } }
             SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate; uncertainty passes raw mix.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
             Text("State: " + Diagnostics.tseState, color=Muted, fontSize=12.sp)
             SliderRow("TSE cosine threshold (uncalibrated)", "${s.separationCosine}", s.separationCosine, 0.2f..0.7f) { v -> engine.updateSettings { it.copy(separationCosine=v) } }

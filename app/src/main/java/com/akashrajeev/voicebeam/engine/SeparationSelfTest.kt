@@ -107,9 +107,10 @@ object SeparationSelfTest {
                         last=output[end-1]
                     }
                     val times=compute.sorted();val p50=times[(times.size-1)/2];val p95=times[(times.size-1)*95/100]
-                    val improvement=sdr(output.copyOfRange(context,output.size),a.copyOfRange(context,a.size))-sdr(mix.copyOfRange(context,mix.size),a.copyOfRange(context,a.size))
+                    val absolute=sdr(output.copyOfRange(context,output.size),a.copyOfRange(context,a.size))
+                    val improvement=absolute-sdr(mix.copyOfRange(context,mix.size),a.copyOfRange(context,a.size))
                     fun percentile(x:List<Long>,pct:Int):Long {val a=x.sorted();return if(a.isEmpty())0 else a[(a.size-1)*pct/100]}
-                    val row="case=$caseName selectedHops=$selectedHops rawHops=$rawHops muteHops=$muteHops muteAfterEntry=$muteAfterEntry firstSelectedAfterEntryMs=$firstSelectedAfterEntry productionNegativeMuteDisabled=true kind=${variant.kind} provider=${variant.provider} threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 SI_SDRi=$improvement projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
+                    val row="case=$caseName selectedHops=$selectedHops rawHops=$rawHops muteHops=$muteHops muteAfterEntry=$muteAfterEntry firstSelectedAfterEntryMs=$firstSelectedAfterEntry productionNegativeMuteDisabled=true kind=${variant.kind} provider=${variant.provider} threads=$threads identityHz=${if(slow)1 else 1000/(hop/16)} sepP95Ms=${percentile(sepTimes,95)} idP95Ms=${percentile(idTimes,95)} refreshP95Ms=${percentile(refreshTimes,95)} contextMs=${context/16} hopMs=${hop/16} p50Ms=$p50 p95Ms=$p95 selectedSeparatorSI_SDR=$absolute SI_SDRi=$improvement notProductionPolicyOutput=true projectedDeadlineMisses=$missed/${compute.size} uncertainHops=$uncertain actualQueueDrops=NA offlineSequential=true"
                     successful++;log(row);report.append(row).append('\n')
                 }finally{session.close();opts.close()}
                 } catch(t:Throwable) {val failure="VARIANT_FAILED case=$caseName contextMs=${context/16} kind=${variant.kind} provider=${variant.provider} threads=$threads error=${t.javaClass.simpleName}: ${t.message}";log(failure);report.append(failure).append('\n')}

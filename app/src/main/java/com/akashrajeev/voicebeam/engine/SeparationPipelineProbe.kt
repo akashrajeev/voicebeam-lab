@@ -22,17 +22,17 @@ object SeparationPipelineProbe {
    check(autoReady){"AUTO_REFERENCE fixture did not converge"}
    Log.i("VoiceBeamSelfTest","AUTO_REFERENCE scriptedVisualSolo=true ready=$autoReady phrases=${automatic.phrases} noCameraValidation=true")
    for(context in listOf(1000,2000)) {
-    val sep=ExperimentalSeparator(ctx,voice,{template},{.35f},{.10f},{false},context,context/4)
-    var gaps=0;var frames=0;var late=0;val start=SystemClock.elapsedRealtimeNanos()
+    val sep=ExperimentalSeparator(ctx,voice,{template},{.35f},{.10f},{false},context,500)
+    var gaps=0;var fallbackFrames=0;var frames=0;var late=0;val start=SystemClock.elapsedRealtimeNanos()
     try {
      for(pos in mix.indices step 160) {
       val deadline=start+pos*1000000000L/16000
       val remaining=deadline-SystemClock.elapsedRealtimeNanos();if(remaining>0)Thread.sleep(remaining/1000000,(remaining%1000000).toInt()) else if(-remaining>10000000)late++
       val out=FloatArray(160);val got=sep.process(mix.copyOfRange(pos,pos+160),out)
-      if(pos>=context*16){frames++;if(!got)gaps++}
+      if(pos>=context*16){frames++;if(!got)gaps++;if(sep.underflowSamples>0)fallbackFrames++}
      }
-     Log.i("VoiceBeamSelfTest","PIPELINE contextMs=$context hopMs=${context/4} postWarmFrames=$frames missingOutputFrames=$gaps pacingLateFrames=$late noMic=true noPlayback=true")
-    }finally{sep.stop()}
+     Log.i("VoiceBeamSelfTest","PIPELINE contextMs=$context hopMs=500 postWarmFrames=$frames missingOutputFrames=$gaps rawUnderflowFrames=$fallbackFrames pacingLateFrames=$late noMic=true noPlayback=true")
+    }finally{sep.stop(); Log.i("VoiceBeamSelfTest","PRODUCTION_DIAGNOSTICS contextMs=$context\n"+Diagnostics.snapshot())}
    }
   }finally{voice.release()}
  }

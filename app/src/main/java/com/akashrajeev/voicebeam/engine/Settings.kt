@@ -16,7 +16,7 @@ data class Settings(
     val onboarded: Boolean = false,
     val hd1080: Boolean = false,
     val experimentalSeparation: Boolean = false,
-    val separationLiveMode: Int = 1, // 0=1s/250ms; 1=2s/500ms; 2=2s blocks
+    val separationLiveMode: Int = 0, // 0=1s/500ms; 1=2s/500ms; 2=2s blocks
     val separationRaw: Boolean = false,
     val separationCosine: Float = 0.35f, // provisional experiment control, not calibrated
     val separationMargin: Float = 0.10f,
