@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-5: automatic visual solo-speech reference plus host winner int8CPU2threads/1Hz identity, fail-open no negative mute.
+# SEP-6: ENH aligned mixer/validated enrollment/selected-only peak-safe boost. int8CPU2threads/1Hz identity, fail-open no negative mute.
 on:
   push:
     branches: [experiment/tse-overlap-2026-10-08]

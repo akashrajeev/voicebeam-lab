@@ -3,7 +3,7 @@ package com.akashrajeev.voicebeam.engine
 import com.akashrajeev.voicebeam.core.VoiceMatch
 
 /**
- * Learns the locked speaker's voice from moments when only their lips move,
+ * Learns a frozen voice template during explicit raw-mic capture,
  * then scores new speech against it. Pure logic; the embedding function is injected.
  */
 class VoiceLearner(
@@ -40,31 +40,47 @@ class VoiceLearner(
     fun feed(samples: FloatArray, lipWeight: Float): Float? {
         if (!learned) {
             if (!enrollmentEnabled) return null
-            if (enrollmentEnabled) {
-                enrollFill = append(enrollBuf, enrollFill, samples)
-                if (enrollFill >= chunk) {
-                    var energy=0.0; for(v in enrollBuf) energy+=v*v
-                    if(kotlin.math.sqrt(energy/enrollBuf.size)>=.005) {
-                        val embedding=embed(enrollBuf.copyOf())
-                        if(embedding!=null) {prints.add(embedding);enrollmentMessage="Captured ${prints.size}/$needed phrases"}
-                        else enrollmentMessage="Embedding failed: try again"
-                    } else enrollmentMessage="Too quiet: move closer and speak alone"
+            var off = 0
+            while (off < samples.size && enrollmentEnabled) {
+                val n = minOf(samples.size - off, chunk - enrollFill)
+                System.arraycopy(samples, off, enrollBuf, enrollFill, n)
+                off += n; enrollFill += n
+                if (enrollFill == chunk) {
+                    var energy = 0.0
+                    for (v in enrollBuf) energy += v * v
+                    if (kotlin.math.sqrt(energy / enrollBuf.size) >= .005) {
+                        val embedding = validEmbedding(embed(enrollBuf.copyOf()))
+                        if (embedding != null && (prints.isEmpty() || embedding.size == prints[0].size)) {
+                            prints.add(embedding); enrollmentMessage = "Captured ${prints.size}/$needed phrases"
+                        } else enrollmentMessage = "Embedding failed: try again"
+                    } else enrollmentMessage = "Too quiet: move closer and speak alone"
                     enrollFill = 0
-                    if (prints.size >= needed) { centroid = VoiceMatch.average(prints); enrollmentEnabled = false; enrollmentMessage="LEARNED" }
+                    if (prints.size >= needed) {
+                        centroid = validEmbedding(VoiceMatch.average(prints))
+                        enrollmentEnabled = centroid == null
+                        enrollmentMessage = if (centroid != null) "LEARNED" else "Embedding failed: restart learning"
+                    }
                 }
             }
-            else { enrollFill = 0 }
             return null
         }
         scoreFill = append(scoreBuf, scoreFill, samples)
         if (scoreFill < chunk) return null
         scoreFill = 0
-        val e = embed(scoreBuf.copyOf()) ?: return null
+        val e = validEmbedding(embed(scoreBuf.copyOf())) ?: return null
         lastQueryEmbedding = e
         val c = centroid ?: return null
+        if (e.size != c.size) return null
         val score = VoiceMatch.score(VoiceMatch.cosine(e, c))
         // Lab: freeze enrolment; self-confirming adaptation can learn a distractor.
         return score
+    }
+
+    private fun validEmbedding(e: FloatArray?): FloatArray? {
+        if (e == null || e.isEmpty() || e.any { !it.isFinite() }) return null
+        val norm = kotlin.math.sqrt(e.sumOf { it.toDouble() * it })
+        if (norm <= 1e-8) return null
+        return FloatArray(e.size) { (e[it] / norm).toFloat() }
     }
 
     private fun append(buf: FloatArray, fill: Int, s: FloatArray): Int {

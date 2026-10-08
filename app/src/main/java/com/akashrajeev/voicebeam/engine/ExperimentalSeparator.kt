@@ -30,9 +30,10 @@ class ExperimentalSeparator(
     private val power = app.getSystemService(Context.POWER_SERVICE) as PowerManager
     private val context = contextMs * 16
     private val hop = hopMs * 16
-    private data class Packet(val audio: FloatArray, val template: FloatArray?, val endSample: Long, val capturedNs: Long,val reference:FloatArray?=null,val targetId:Int?=null)
+    private data class Packet(val audio: FloatArray, val template: FloatArray?, val endSample: Long, val capturedNs: Long,val reference:FloatArray?=null,val targetId:Int?=null,val isolated:Boolean=false)
     private val automatic=AutoVoiceReference()
     private fun targetTemplate()=centroid() ?: automatic.centroid
+    @Volatile var selectedOutput=false;private set
     private var referencePending:FloatArray?=null
     private var referenceTarget:Int?=null
     private val input = DropOldestQueue<Packet>(1)
@@ -80,7 +81,7 @@ class ExperimentalSeparator(
                 } else droppedBusy++
             }
         }
-        out.fill(0f)
+        out.fill(0f);selectedOutput=false
         if(targetTemplate()==null) {
             for(k in out.indices) out[k]=raw.getOrElse(k){0f}.coerceIn(-.95f,.95f)
             Diagnostics.tseState="AUTO REFERENCE ${automatic.phrases}/3: wait for locked face solo speech; raw passthrough"
@@ -102,6 +103,7 @@ class ExperimentalSeparator(
             if(previousTemplate !== packet.template) { previousSample=0f; previousTemplate=packet.template }
             // A muted packet remains exact silence, including its seam.
             if(playOffset==0 && packet.audio.all { it == 0f }) previousSample=0f
+            selectedOutput=packet.isolated
             val n=minOf(out.size-written,packet.audio.size-playOffset)
             for(k in 0 until n) {
                 val pos=playOffset+k
@@ -172,7 +174,7 @@ class ExperimentalSeparator(
                         else if(!strongOther) packet.audio.copyOfRange(context-hop,context) else FloatArray(hop)
                     var peak=0f; for(v in emitted) peak=maxOf(peak,abs(v))
                     if(peak>.95f) for(k in emitted.indices) emitted[k]*=.95f/peak
-                    if(running.get()) output.offer(Packet(emitted,template,packet.endSample,packet.capturedNs))
+                    if(running.get()) output.offer(Packet(emitted,template,packet.endSample,packet.capturedNs,isolated=accepted && decision==SeparationPresence.Decision.SELECT && !raw))
                     val ms=(speakerEnd-start)/1000000
                     times.add(ms); if(times.size>1200) times.removeAt(0)
                     val sorted=times.sorted(); val p50=sorted[(sorted.size-1)/2]; val p95=sorted[(sorted.size-1)*95/100]

@@ -65,6 +65,7 @@ class AudioPipeline(
      */
     val voiceQueue = DropOldestQueue<Pair<FloatArray, Float>>(VOICE_BACKLOG_BLOCKS)
 
+    private val alignment=com.akashrajeev.voicebeam.core.DenoiseAlignment()
     private val gate = TargetGate(frameMs = (models.denoiser.frameShift.takeIf { it > 0 } ?: 256) * 1000f / SAMPLE_RATE)
     private val vad = com.akashrajeev.voicebeam.ml.NeuralVad(app.assets)
     private val running = AtomicBoolean(false)
@@ -75,7 +76,7 @@ class AudioPipeline(
     fun start(useSceneMic: Boolean) {
         if (running.getAndSet(true)) return
         Diagnostics.event("audio_start sceneMic=" + useSceneMic)
-        capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset()
+        capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset();alignment.reset()
         thread = Thread({
             try { loop(useSceneMic) }
             catch (t: Throwable) {
@@ -193,13 +194,14 @@ class AudioPipeline(
 
                 val denoiseStart = SystemClock.elapsedRealtimeNanos()
                 System.arraycopy(input, 0, denoiseIn, 0, input.size)
+                alignment.push(input)
                 val denoised = try { models.denoiser.process(denoiseIn) } catch (t: Throwable) { input }
                 val n = minOf(denoised.size, input.size)
                 val mix = denoiseMix
                 if (n == 0) continue
                 if (clean.size < n) { clean = FloatArray(n); gated = FloatArray(n); out = FloatArray(n) }
                 // denoiser output may lag input by a frame; mixing uses aligned sizes
-                FrameDsp.mixDenoised(denoised, input, mix, clean, n)
+                alignment.mix(denoised, mix, clean, n)
 
                 val vadStart = SystemClock.elapsedRealtimeNanos()
                 val voice = vad.isVoice(clean.let { if (it.size == n) it else it.copyOf(n) })
@@ -218,6 +220,11 @@ class AudioPipeline(
                     val extracted = FloatArray(input.size)
                     experimental.process(input, extracted)
                     for (k in 0 until n) { gated[k] = extracted[k]; out[k] = extracted[k].coerceIn(-0.95f,0.95f) }
+                    // Never amplify raw fallback, uncertain identity or an unseen target.
+                    if(experimental.selectedOutput && s.hasLock && s.lockedVisible && s.lockedSpeaking>.75f && s.othersSpeaking<.25f){
+                        val safe=FrameDsp.safeBoost(out,n,1f,TargetGate.dbToLinear(boostDb))
+                        for(k in 0 until n)out[k]*=safe
+                    }
                 }
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.

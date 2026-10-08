@@ -19,7 +19,7 @@ class AutoVoiceReference {
   return if(rms>=.005)a else null
  }
  @Synchronized fun accept(e:FloatArray?):Boolean {
-  if(e==null || e.any{!it.isFinite()}){previous=null;phrases=0;return false}
+  if(e==null || e.isEmpty() || e.any{!it.isFinite()} || e.sumOf{it.toDouble()*it}<1e-8){previous=null;phrases=0;return false}
   val prev=previous
   if(prev!=null && VoiceMatch.cosine(prev,e)<.55f){previous=e;phrases=1;return false}
   phrases++

@@ -1,0 +1,146 @@
+[
+  {
+    "context": 16000,
+    "noise_rms": 0,
+    "stage": "none",
+    "oracle_sdr_i": 15.569182932376862,
+    "best_lag_samples": 0,
+    "elapsed_ms": 347.60490999997273
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0,
+    "stage": "pre",
+    "oracle_sdr_i": 11.142236292362213,
+    "best_lag_samples": 0,
+    "elapsed_ms": 343.0917820005561
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0,
+    "stage": "post",
+    "oracle_sdr_i": 13.848870813846588,
+    "best_lag_samples": 0,
+    "elapsed_ms": 838.4005709995108
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0.01,
+    "stage": "none",
+    "oracle_sdr_i": 14.568012192845345,
+    "best_lag_samples": 0,
+    "elapsed_ms": 342.44722299990826
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0.01,
+    "stage": "pre",
+    "oracle_sdr_i": 11.403370812535286,
+    "best_lag_samples": 0,
+    "elapsed_ms": 339.1023750000386
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0.01,
+    "stage": "post",
+    "oracle_sdr_i": 13.713409379124641,
+    "best_lag_samples": 0,
+    "elapsed_ms": 752.6709479998317
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0.025,
+    "stage": "none",
+    "oracle_sdr_i": 12.680873900651932,
+    "best_lag_samples": 0,
+    "elapsed_ms": 333.32363799945597
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0.025,
+    "stage": "pre",
+    "oracle_sdr_i": 10.593049079179764,
+    "best_lag_samples": 0,
+    "elapsed_ms": 378.0399019997276
+  },
+  {
+    "context": 16000,
+    "noise_rms": 0.025,
+    "stage": "post",
+    "oracle_sdr_i": 13.111969023942947,
+    "best_lag_samples": 0,
+    "elapsed_ms": 752.3055909996401
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0,
+    "stage": "none",
+    "oracle_sdr_i": 15.68810898065567,
+    "best_lag_samples": 0,
+    "elapsed_ms": 345.30204400016373
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0,
+    "stage": "pre",
+    "oracle_sdr_i": 11.180562555789948,
+    "best_lag_samples": 0,
+    "elapsed_ms": 322.32595900040906
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0,
+    "stage": "post",
+    "oracle_sdr_i": 13.889032900333405,
+    "best_lag_samples": 0,
+    "elapsed_ms": 767.3591080001643
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0.01,
+    "stage": "none",
+    "oracle_sdr_i": 14.826765730977058,
+    "best_lag_samples": 0,
+    "elapsed_ms": 293.1761629997709
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0.01,
+    "stage": "pre",
+    "oracle_sdr_i": 10.819986060261726,
+    "best_lag_samples": 0,
+    "elapsed_ms": 298.60525599997345
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0.01,
+    "stage": "post",
+    "oracle_sdr_i": 13.541089728474617,
+    "best_lag_samples": 0,
+    "elapsed_ms": 734.3118439994214
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0.025,
+    "stage": "none",
+    "oracle_sdr_i": 13.155607759952545,
+    "best_lag_samples": 0,
+    "elapsed_ms": 281.8833169994832
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0.025,
+    "stage": "pre",
+    "oracle_sdr_i": 10.358672678470612,
+    "best_lag_samples": 0,
+    "elapsed_ms": 299.7916180001994
+  },
+  {
+    "context": 32000,
+    "noise_rms": 0.025,
+    "stage": "post",
+    "oracle_sdr_i": 13.103190958499908,
+    "best_lag_samples": 0,
+    "elapsed_ms": 786.5792680004233
+  }
+]
