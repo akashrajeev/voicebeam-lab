@@ -29,7 +29,7 @@ class EnhFixtureTest {
         val other = load("1221-135767-0005")
         val enrollment = load("1089-134686-0013")
         val vp = VoicePrint(ctx.assets); val d = Denoiser(ctx.assets)
-        val report = StringBuilder("ENH-3 PUBLIC FIXTURE TEST; 4s, RMS=.06; synthetic equal-RMS overlap/noise; scripted lips. Not Indian voices, not Bluetooth or end-to-end latency.\n")
+        val report = StringBuilder("ENH-4 PUBLIC FIXTURE TEST; 4s, RMS=.06; synthetic equal-RMS overlap/noise; scripted lips. Not Indian voices, not Bluetooth or end-to-end latency.\n")
         try {
             val learner = VoiceLearner({ vp.embed(it) }, 16000)
             learner.beginEnrollment()
@@ -75,17 +75,18 @@ class EnhFixtureTest {
                     assertTrue("finite output",out.all { it.isFinite() })
                 }
             }
-            File(ctx.getExternalFilesDir(null),"ENH-3-fixtures.txt").writeText(report.toString())
+            File(ctx.getExternalFilesDir(null),"ENH-4-fixtures.txt").writeText(report.toString())
             for(line in report.lines()) android.util.Log.i("ENH_FIXTURE",line)
         } finally { vp.release();d.release() }
     }
     private fun rms(v: FloatArray): Float = sqrt(v.sumOf { it.toDouble()*it }/v.size.coerceAtLeast(1)).toFloat()
     private fun bestCorrelation(ref: FloatArray,out: FloatArray): Double {
         var best=0.0
-        for(lag in 0..1024 step 16) {
-            val n=minOf(ref.size,out.size-lag);if(n<16000)continue
+        for(lag in -1024..1024 step 16) {
+            val refOff=maxOf(0,-lag);val outOff=maxOf(0,lag)
+            val n=minOf(ref.size-refOff,out.size-outOff);if(n<16000)continue
             var dot=0.0;var a=0.0;var b=0.0
-            for(i in 0 until n){dot+=ref[i]*out[i+lag];a+=ref[i]*ref[i];b+=out[i+lag]*out[i+lag]}
+            for(i in 0 until n){val x=ref[i+refOff];val y=out[i+outOff];dot+=x*y;a+=x*x;b+=y*y}
             best=maxOf(best,abs(dot)/sqrt((a*b).coerceAtLeast(1e-20)))
         };return best
     }

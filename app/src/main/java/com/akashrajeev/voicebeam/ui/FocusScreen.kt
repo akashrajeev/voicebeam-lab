@@ -254,8 +254,10 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
 
             // Status + caption + controls.
             Column(Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(horizontal = 18.dp, vertical = 12.dp)) {
-                Text("ENH-3 | Enhancement, not overlapping-voice separation", color = Muted, fontSize = 12.sp)
-                Text(engine.enrollmentMessage(), color = Muted, fontSize = 12.sp)
+                Column(Modifier.fillMaxWidth().background(Color(0xE6101519), RoundedCornerShape(12.dp)).padding(10.dp)) {
+                    Text("ENH-4 | Enhancement, not overlapping-voice separation", color = Color.White, fontSize = 12.sp)
+                    Text(engine.enrollmentMessage(), color = Color.White, fontSize = 12.sp)
+                }
                 StatusLine(state.lockedId != null, state.lockedSpeaking, state.voiceLearned, state.voiceMatch) { engine.unlock() }
                 if (state.wearerEnrollmentActive) {
                     Text("Learning YOUR voice ${(state.wearerEnrollmentProgress * 100).roundToInt()}%: only you speak. Target learning paused.", color = Muted, fontSize = 12.sp)
