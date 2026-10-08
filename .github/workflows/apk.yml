@@ -34,3 +34,5 @@ jobs:
             app/build/outputs/apk/debug/*.apk
             app/build/outputs/apk/androidTest/debug/*.apk
           retention-days: 1
+
+# Final-candidate native tests explicitly use86%quiet and70%denoise.
