@@ -1,7 +1,7 @@
 package com.akashrajeev.voicebeam.core
 
 /** Audio-thread-owned fixed-delay schedule. Late separated samples never replay. */
-class IndexedSeparationRenderer(val delaySamples:Int, capacity:Int=delaySamples*3) {
+class IndexedSeparationRenderer(val delaySamples:Int, capacity:Int=delaySamples*3, private val seamSamples:Int=0) {
     data class Frame(val isolated:Boolean,val rawSamples:Int,val warmupSamples:Int)
     private val raw=FloatArray(capacity)
     private val extracted=FloatArray(capacity)
@@ -10,6 +10,7 @@ class IndexedSeparationRenderer(val delaySamples:Int, capacity:Int=delaySamples*
     private val isolated=BooleanArray(capacity)
     private var captured=0L
     private var rendered=0L
+    private var blend=0f
     init { require(delaySamples>0 && capacity>delaySamples) }
     private fun slot(i:Long)=(i%raw.size).toInt()
     fun clearSeparated(){sepIndex.fill(-1L)}
@@ -29,8 +30,10 @@ class IndexedSeparationRenderer(val delaySamples:Int, capacity:Int=delaySamples*
         for(k in out.indices){val i=start+k
             if(i<0){out[k]=0f;warmup++;allSelected=false;continue}
             val j=slot(i)
-            if(sepIndex[j]==i){out[k]=extracted[j];if(!isolated[j])allSelected=false}
-            else {out[k]=if(rawIndex[j]==i)raw[j] else 0f;rawCount++;allSelected=false}
+            val ready=sepIndex[j]==i
+            val rv=if(rawIndex[j]==i)raw[j] else 0f
+            if(ready){blend=if(seamSamples>0)minOf(1f,blend+1f/seamSamples) else 1f;out[k]=rv*(1f-blend)+extracted[j]*blend;if(!isolated[j] || blend<1f)allSelected=false}
+            else {out[k]=rv;blend=0f;rawCount++;allSelected=false}
             rendered=i+1
         }
         return Frame(allSelected,rawCount,warmup)

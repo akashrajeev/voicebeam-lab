@@ -21,4 +21,5 @@ class IndexedSeparationRendererTest {
  @Test fun ringWrapKeepsEveryRawSampleOnce(){val r=IndexedSeparationRenderer(2,6);val out=FloatArray(1)
   repeat(100){r.push(floatArrayOf(it/200f));r.render(out);if(it>=2)assertEquals((it-2)/200f,out[0],0f)}
  }
+ @Test fun sameIndexSeamCannotBoostRaw(){val r=IndexedSeparationRenderer(2,12,2);val out=FloatArray(2);r.push(floatArrayOf(.2f,.2f));r.render(out);r.offer(0,floatArrayOf(.6f,.6f),true);r.push(floatArrayOf(.1f,.1f));assertFalse(r.render(out).isolated);assertArrayEquals(floatArrayOf(.4f,.6f),out,.00001f)}
 }
