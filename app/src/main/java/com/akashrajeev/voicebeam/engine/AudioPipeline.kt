@@ -15,6 +15,7 @@ import android.util.Log
 import com.akashrajeev.voicebeam.core.DropOldestQueue
 import com.akashrajeev.voicebeam.core.MonitorOutput
 import com.akashrajeev.voicebeam.core.MonitorRoute
+import com.akashrajeev.voicebeam.core.DenoiseAlignment
 import com.akashrajeev.voicebeam.core.FrameDsp
 import com.akashrajeev.voicebeam.core.GateInputs
 import com.akashrajeev.voicebeam.core.TargetGate
@@ -44,7 +45,7 @@ class AudioPipeline(
     var enrollmentActive: () -> Boolean = { false }
     var enrollmentStatus: () -> String = { "unknown" }
     @Volatile var quietOthers = 0.8f
-    @Volatile var boostDb = 12f
+    @Volatile var boostDb = 6f
     @Volatile var denoiseMix = 1f          // 0 = raw, 1 = fully denoised
     @Volatile var monitorEnabled = true    // hard-limited to an actual headphone route
     @Volatile var rawWriter: WavWriter? = null
@@ -148,6 +149,7 @@ class AudioPipeline(
         val input = FloatArray(frameShift)
         // Reused every frame. Only data handed to another thread is copied.
         val denoiseIn = FloatArray(frameShift)
+        val alignment = DenoiseAlignment(maxOf(4096, frameShift * 8))
         var clean = FloatArray(frameShift)
         var gated = FloatArray(frameShift)
         var out = FloatArray(frameShift)
@@ -192,13 +194,16 @@ class AudioPipeline(
 
                 val denoiseStart = SystemClock.elapsedRealtimeNanos()
                 System.arraycopy(input, 0, denoiseIn, 0, input.size)
-                val denoised = try { models.denoiser.process(denoiseIn) } catch (t: Throwable) { input }
+                alignment.push(input)
+                val denoised = try { models.denoiser.process(denoiseIn) } catch (t: Throwable) {
+                    alignment.reset(); alignment.push(input); input
+                }
                 val n = minOf(denoised.size, input.size)
                 val mix = denoiseMix
                 if (n == 0) continue
                 if (clean.size < n) { clean = FloatArray(n); gated = FloatArray(n); out = FloatArray(n) }
-                // denoiser output may lag input by a frame; mixing uses aligned sizes
-                FrameDsp.mixDenoised(denoised, input, mix, clean, n)
+                // Streaming GTCRN has one warmup frame. Mix the matching buffered raw samples.
+                alignment.mix(denoised, mix, clean, n)
 
                 val vadStart = SystemClock.elapsedRealtimeNanos()
                 val voice = vad.isVoice(clean.let { if (it.size == n) it else it.copyOf(n) })

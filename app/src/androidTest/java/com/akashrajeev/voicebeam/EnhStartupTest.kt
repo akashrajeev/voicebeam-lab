@@ -36,12 +36,12 @@ class EnhStartupTest {
         compose.waitUntil(30_000) { engine.state.value.listening || engine.state.value.audioError != null }
         assertNull(engine.state.value.audioError)
         assertTrue(engine.state.value.listening)
-        compose.onNodeWithText("ENH-4 | Enhancement, not overlapping-voice separation").assertExists()
+        compose.onNodeWithText("ENH-5 | Enhancement, not overlapping-voice separation").assertExists()
         val ctx = InstrumentationRegistry.getInstrumentation().targetContext
         val bmp = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
         assertNotNull(bmp)
-        File(ctx.getExternalFilesDir(null), "ENH-4-focus.png").outputStream().use { bmp!!.compress(Bitmap.CompressFormat.PNG, 100, it) }
-        android.util.Log.i("ENH_CHECK", "ENH-4 native models loaded, focus opened, debug audio active. Acoustic quality and Bluetooth unverified.")
+        File(ctx.getExternalFilesDir(null), "ENH-5-focus.png").outputStream().use { bmp!!.compress(Bitmap.CompressFormat.PNG, 100, it) }
+        android.util.Log.i("ENH_CHECK", "ENH-5 native models loaded, focus opened, debug audio active. Acoustic quality and Bluetooth unverified.")
         compose.runOnUiThread { engine.stopListening() }
     }
 }

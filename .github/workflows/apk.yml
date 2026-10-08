@@ -1,5 +1,5 @@
-name: ENH-4-tested-apk
-# ENH-4: safe enhancement and enrollment. Bluetooth unchanged.
+name: ENH-5-tested-apk
+# ENH-5: safe enhancement and enrollment. Bluetooth unchanged.
 on:
   push:
     branches: [lab/hardening-2026-10-07]
@@ -29,7 +29,7 @@ jobs:
           grep -ho 'tests="[0-9]*"' app/build/test-results/testDebugUnitTest/*.xml
       - uses: actions/upload-artifact@v4
         with:
-          name: VoiceBeam-ENH-4-app-and-startup-test
+          name: VoiceBeam-ENH-5-app-and-startup-test
           path: |
             app/build/outputs/apk/debug/*.apk
             app/build/outputs/apk/androidTest/debug/*.apk

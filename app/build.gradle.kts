@@ -13,8 +13,8 @@ android {
         minSdk = 26
         targetSdk = 35
         buildConfigField("String", "LAB_COMMIT", "\"" + (System.getenv("GITHUB_SHA") ?: "local") + "\"")
-        versionCode = 104
-        versionName = "ENH-4"
+        versionCode = 105
+        versionName = "ENH-5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters += listOf("arm64-v8a")
