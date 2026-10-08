@@ -24,12 +24,16 @@ class ExperimentalSeparator(
     private val threshold: () -> Float, private val margin: () -> Float,
     private val rawSelection: () -> Boolean,
     contextMs: Int = 1000, hopMs: Int = 250,
+    private val autoTarget:()->Int?={null}, private val autoEligible:()->Boolean={false},
 ) {
     private val battery = app.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
     private val power = app.getSystemService(Context.POWER_SERVICE) as PowerManager
     private val context = contextMs * 16
     private val hop = hopMs * 16
-    private data class Packet(val audio: FloatArray, val template: FloatArray?, val endSample: Long, val capturedNs: Long)
+    private data class Packet(val audio: FloatArray, val template: FloatArray?, val endSample: Long, val capturedNs: Long,val reference:FloatArray?=null,val targetId:Int?=null)
+    private val automatic=AutoVoiceReference()
+    private fun targetTemplate()=centroid() ?: automatic.centroid
+    private var referencePending:FloatArray?=null
     private val input = DropOldestQueue<Packet>(1)
     private val output = DropOldestQueue<Packet>(1)
     private val running = AtomicBoolean(true)
@@ -62,20 +66,22 @@ class ExperimentalSeparator(
     }
     /** Raw mic only. Zero-pad initial context. No pending compute when worker is behind. */
     fun process(raw: FloatArray, out: FloatArray): Boolean {
+        automatic.setTarget(autoTarget())
+        if(centroid()==null && automatic.centroid==null){automatic.collect(raw,autoEligible())?.let{referencePending=it}}
         for(v in raw) {
             ring[write] = v; write = (write+1)%context; captured++; hopFill++
             if(hopFill == hop) {
                 hopFill=0
                 if(running.get() && busy.compareAndSet(false,true)) {
                     val window=FloatArray(context) { k -> ring[(write+k)%context] }
-                    input.offer(Packet(window,centroid(),captured,SystemClock.elapsedRealtimeNanos()))
+                    input.offer(Packet(window,targetTemplate(),captured,SystemClock.elapsedRealtimeNanos(),referencePending,autoTarget()));referencePending=null
                 } else droppedBusy++
             }
         }
         out.fill(0f)
-        if(centroid()==null) {
+        if(targetTemplate()==null) {
             for(k in out.indices) out[k]=raw.getOrElse(k){0f}.coerceIn(-.95f,.95f)
-            Diagnostics.tseState="VOICE NOT LEARNED: raw mic passthrough, no isolation"
+            Diagnostics.tseState="AUTO REFERENCE ${automatic.phrases}/3: wait for locked face solo speech; raw passthrough"
             return true
         }
         var written=0
@@ -90,7 +96,7 @@ class ExperimentalSeparator(
                 }
             }
             val packet=playing ?: break
-            if(packet.template == null || packet.template !== centroid()) { playing=null; previousSample=0f; continue }
+            if(packet.template == null || packet.template !== targetTemplate()) { playing=null; previousSample=0f; continue }
             if(previousTemplate !== packet.template) { previousSample=0f; previousTemplate=packet.template }
             // A muted packet remains exact silence, including its seam.
             if(playOffset==0 && packet.audio.all { it == 0f }) previousSample=0f
@@ -120,8 +126,12 @@ class ExperimentalSeparator(
             while(running.get()) {
                 val packet=input.poll(200) ?: continue
                 try {
+                    if(packet.template==null && packet.reference!=null && packet.targetId==autoTarget()){
+                        val learned=automatic.accept(voice.embed(packet.reference))
+                        Diagnostics.event("TSE AUTO_REFERENCE phrases=${automatic.phrases} ready=$learned provisional=true")
+                    }
                     val template=packet.template
-                    if(template == null || template !== centroid()) { previous=null; stickyEvidence=0f; Diagnostics.tseState="UNCERTAIN: no frozen target"; continue }
+                    if(template == null || template !== targetTemplate()) { previous=null; stickyEvidence=0f; Diagnostics.tseState="UNCERTAIN: no frozen target"; continue }
                     val start=SystemClock.elapsedRealtimeNanos()
                     val sources:Array<FloatArray> = OnnxTensor.createTensor(env,FloatBuffer.wrap(packet.audio),longArrayOf(1,context.toLong())).use { tensor ->
                         session.run(mapOf(session.inputNames.first() to tensor)).use { result ->
@@ -150,13 +160,13 @@ class ExperimentalSeparator(
                     } else stickyEvidence=scores[freshBest]
                     val selected=sources[selectedIndex]
                     previous=Packet(selected.copyOf(),template,packet.endSample,packet.capturedNs)
-                    val accepted=template === centroid() && scores.all { it.isFinite() } && scores[selectedIndex]>threshold() &&
+                    val accepted=template === targetTemplate() && scores.all { it.isFinite() } && scores[selectedIndex]>threshold() &&
                         scores[selectedIndex]-scores[1-selectedIndex]>margin()
                     val raw=rawSelection()
-                    val decision=presence.decide(scores,update.fresh,SystemClock.elapsedRealtime(),template === centroid(),threshold(),margin())
+                    val decision=presence.decide(scores,update.fresh,SystemClock.elapsedRealtime(),template === targetTemplate(),threshold(),margin())
                     // At1Hz a negative can outlive target entry. Never mute in this candidate.
                     val strongOther = false
-                    val emitted=if((raw || (accepted && decision==SeparationPresence.Decision.SELECT)) && template === centroid()) selected.copyOfRange(context-hop,context)
+                    val emitted=if((raw || (accepted && decision==SeparationPresence.Decision.SELECT)) && template === targetTemplate()) selected.copyOfRange(context-hop,context)
                         else if(!strongOther) packet.audio.copyOfRange(context-hop,context) else FloatArray(hop)
                     var peak=0f; for(v in emitted) peak=maxOf(peak,abs(v))
                     if(peak>.95f) for(k in emitted.indices) emitted[k]*=.95f/peak

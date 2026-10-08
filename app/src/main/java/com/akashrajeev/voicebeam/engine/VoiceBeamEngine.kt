@@ -259,7 +259,8 @@ class VoiceBeamEngine(private val app: Context) {
         if (s.experimentalSeparation) p.separator = ExperimentalSeparator(app, m.voicePrint,
             { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw },
             if(s.separationLiveMode==0) 1000 else 2000,
-            when(s.separationLiveMode) { 0 -> 250; 1 -> 500; else -> 2000 })
+            when(s.separationLiveMode) { 0 -> 250; 1 -> 500; else -> 2000 },
+            {tracker.lockedId},{val v=gateInputs();v.hasLock && v.lockedVisible && v.lockedSpeaking>=.75f && v.othersSpeaking<.25f})
         pipeline = p
         pipelineDebugFeed = wantDebug
         if (wantDebug) {

@@ -16,6 +16,11 @@ object SeparationPipelineProbe {
    val template=voice.embed(load("1089-134686-0013.wav").take(48000).toFloatArray()) ?: error("Probe enrollment failed")
    fun repeat(x:FloatArray):FloatArray {val rms=sqrt(x.fold(0.0){s,v->s+v*v}/x.size);return FloatArray(96000){x[it%x.size]*(.06/rms).toFloat()}}
    val a=repeat(load("1089-134686-0002.wav"));val b=repeat(load("1221-135767-0005.wav"));val mix=FloatArray(a.size){a[it]+b[it]}
+   val automatic=AutoVoiceReference();automatic.setTarget(1)
+   var autoReady=false
+   for(i in 0..2){val phrase=load("1089-134686-0013.wav").copyOfRange(i*16000,(i+1)*16000);val captured=automatic.collect(phrase,true);autoReady=automatic.accept(captured?.let{voice.embed(it)})}
+   check(autoReady){"AUTO_REFERENCE fixture did not converge"}
+   Log.i("VoiceBeamSelfTest","AUTO_REFERENCE scriptedVisualSolo=true ready=$autoReady phrases=${automatic.phrases} noCameraValidation=true")
    for(context in listOf(1000,2000)) {
     val sep=ExperimentalSeparator(ctx,voice,{template},{.35f},{.10f},{false},context,context/4)
     var gaps=0;var frames=0;var late=0;val start=SystemClock.elapsedRealtimeNanos()
