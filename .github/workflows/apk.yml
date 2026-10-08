@@ -1,5 +1,5 @@
 name: private-tse-experiment-apk
-# SEP-10: compact focus controls, visible auto-reference progress and rejection log. causal pretrained SkiM8k25ms state blocks,200ms indexed raw fallback. Host only, phone pending; generation-safe ID and UI causal test.
+# SEP-11: continuity writes, CPU bypass, fallback counters. compact focus controls, visible auto-reference progress and rejection log. causal pretrained SkiM8k25ms state blocks,200ms indexed raw fallback. Host only, phone pending; generation-safe ID and UI causal test.
 on:
   push:
     branches: [experiment/skim-causal-2026-10-08]

@@ -22,4 +22,5 @@ class IndexedSeparationRendererTest {
   repeat(100){r.push(floatArrayOf(it/200f));r.render(out);if(it>=2)assertEquals((it-2)/200f,out[0],0f)}
  }
  @Test fun sameIndexSeamCannotBoostRaw(){val r=IndexedSeparationRenderer(2,12,2);val out=FloatArray(2);r.push(floatArrayOf(.2f,.2f));r.render(out);r.offer(0,floatArrayOf(.6f,.6f),true);r.push(floatArrayOf(.1f,.1f));assertFalse(r.render(out).isolated);assertArrayEquals(floatArrayOf(.4f,.6f),out,.00001f)}
+ @Test fun fallbackExitFadesWithoutSilence(){val r=IndexedSeparationRenderer(2,12,2);val out=FloatArray(2);r.push(floatArrayOf(.2f,.2f));r.render(out);r.offer(0,floatArrayOf(.6f,.6f),true);r.push(floatArrayOf(.2f,.2f));r.render(out);r.push(floatArrayOf(.2f,.2f));val f=r.render(out);assertEquals(2,f.rawSamples);assertArrayEquals(floatArrayOf(.4f,.2f),out,.0001f);assertEquals(2L,r.switchCount);assertEquals(0L,r.missingRawSamples)}
 }

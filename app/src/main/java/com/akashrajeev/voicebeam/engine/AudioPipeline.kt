@@ -168,6 +168,7 @@ class AudioPipeline(
             track?.play()
             models.denoiser.reset()
             gate.reset()
+            var shortWrites=0L;var zeroWrites=0L
             var fedFrames = 0L
             val feedStart = SystemClock.uptimeMillis()
             while (running.get()) {
@@ -194,17 +195,19 @@ class AudioPipeline(
 
                 val denoiseStart = SystemClock.elapsedRealtimeNanos()
                 System.arraycopy(input, 0, denoiseIn, 0, input.size)
-                alignment.push(input)
-                val denoised = try { models.denoiser.process(denoiseIn) } catch (t: Throwable) { input }
+                val sepActive=separator!=null
+                if(!sepActive)alignment.push(input)
+                val denoised = if(sepActive)input else try { models.denoiser.process(denoiseIn) } catch (t: Throwable) { input }
                 val n = minOf(denoised.size, input.size)
                 val mix = denoiseMix
                 if (n == 0) continue
                 if (clean.size < n) { clean = FloatArray(n); gated = FloatArray(n); out = FloatArray(n) }
                 // denoiser output may lag input by a frame; mixing uses aligned sizes
-                alignment.mix(denoised, mix, clean, n)
+                if(sepActive)input.copyInto(clean,0,0,n) else alignment.mix(denoised, mix, clean, n)
 
                 val vadStart = SystemClock.elapsedRealtimeNanos()
-                val voice = vad.isVoice(clean.let { if (it.size == n) it else it.copyOf(n) })
+                var sepEnergy=0.0;if(sepActive)for(k in 0 until n)sepEnergy+=clean[k]*clean[k]
+                val voice = if(sepActive)sepEnergy/n>.000025 else vad.isVoice(clean.let { if (it.size == n) it else it.copyOf(n) })
                 val gateStart = SystemClock.elapsedRealtimeNanos()
                 val s = signals()
                 gate.quietOthers = quietOthers
@@ -235,8 +238,18 @@ class AudioPipeline(
                 // Keep feeding silence for unknown/speaker routes so routing can settle and recover
                 // after headphones are connected. Only an ACTUAL headphone route receives speech.
                 val writeSpeech = monitorEnabled && headphoneRoute
-                val written = track?.write(MonitorOutput.samples(monitorEnabled, headphoneRoute, out, silence), 0, n, AudioTrack.WRITE_NON_BLOCKING)
-                if (written != null && written < 0) error("Playback write failed: $written")
+                val playSamples=MonitorOutput.samples(monitorEnabled, headphoneRoute, out, silence)
+                var written:Int?=null
+                if(track!=null){var offset=0
+                    while(offset<n && running.get()){
+                        val w=track.write(playSamples,offset,n-offset,AudioTrack.WRITE_BLOCKING)
+                        if(w<0)error("Playback write failed: $w")
+                        if(w==0){zeroWrites++;Thread.sleep(1);continue}
+                        if(w<n-offset)shortWrites++
+                        offset+=w
+                    }
+                    written=offset
+                }
                 if (!routeLogged || lastRoute != routed?.id) {
                     Log.i("VoiceBeamAudio", "route type=" + routed?.type + " monitor=" + writeSpeech + " write=" + written)
                     Diagnostics.event("route type=" + routed?.type + " monitor=" + writeSpeech + " write=" + written)
@@ -274,6 +287,7 @@ class AudioPipeline(
                         " vadUs=" + (gateStart - vadStart) / 1000 +
                         " gateUs=" + (playStart - gateStart) / 1000 +
                         " playbackUs=" + (end - playStart) / 1000 +
+                        " shortWrites=$shortWrites zeroWrites=$zeroWrites trackUnderruns="+(track?.underrunCount ?: -1)+" continuity="+(separator?.continuityStatus() ?: "NA")+
                         " droppedCaptionBlocks=" + asrQueue.dropped)
                     lastDiagnosticMs = now
                 }

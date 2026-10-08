@@ -11,6 +11,10 @@ class IndexedSeparationRenderer(val delaySamples:Int, capacity:Int=delaySamples*
     private var captured=0L
     private var rendered=0L
     private var blend=0f
+    private var residual=0f
+    private var wasReady=false
+    var switchCount=0L;private set
+    var missingRawSamples=0L;private set
     init { require(delaySamples>0 && capacity>delaySamples) }
     private fun slot(i:Long)=(i%raw.size).toInt()
     fun clearSeparated(){sepIndex.fill(-1L)}
@@ -31,9 +35,11 @@ class IndexedSeparationRenderer(val delaySamples:Int, capacity:Int=delaySamples*
             if(i<0){out[k]=0f;warmup++;allSelected=false;continue}
             val j=slot(i)
             val ready=sepIndex[j]==i
+            if(ready!=wasReady){switchCount++;wasReady=ready}
+            if(rawIndex[j]!=i)missingRawSamples++
             val rv=if(rawIndex[j]==i)raw[j] else 0f
-            if(ready){blend=if(seamSamples>0)minOf(1f,blend+1f/seamSamples) else 1f;out[k]=rv*(1f-blend)+extracted[j]*blend;if(!isolated[j] || blend<1f)allSelected=false}
-            else {out[k]=rv;blend=0f;rawCount++;allSelected=false}
+            if(ready){blend=if(seamSamples>0)minOf(1f,blend+1f/seamSamples) else 1f;out[k]=rv*(1f-blend)+extracted[j]*blend;residual=out[k]-rv;if(!isolated[j] || blend<1f)allSelected=false}
+            else {if(seamSamples>0){blend=maxOf(0f,blend-1f/seamSamples);residual*=if(blend>0f)blend/(blend+1f/seamSamples) else 0f}else{blend=0f;residual=0f};out[k]=(rv+residual).coerceIn(-.95f,.95f);rawCount++;allSelected=false}
             rendered=i+1
         }
         return Frame(allSelected,rawCount,warmup)
