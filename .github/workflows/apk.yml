@@ -1,8 +1,8 @@
 name: private-tse-experiment-apk
-# SEP-8: indexed fixed-delay raw/SEP rendering,1s software delay. Host tested, not phone validated.
+# SEP-9: causal pretrained SkiM8k25ms state blocks,200ms indexed raw fallback. Host only, phone pending.
 on:
   push:
-    branches: [experiment/tse-overlap-2026-10-08]
+    branches: [experiment/skim-causal-2026-10-08]
     paths: ['.github/workflows/apk.yml']
 permissions:
   contents: read

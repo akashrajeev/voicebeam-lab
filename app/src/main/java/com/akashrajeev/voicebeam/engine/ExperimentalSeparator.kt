@@ -2,178 +2,89 @@ package com.akashrajeev.voicebeam.engine
 
 import android.content.Context
 import android.os.SystemClock
-import android.os.Debug
-import android.os.BatteryManager
-import android.os.PowerManager
-import android.os.Build
-import ai.onnxruntime.OnnxTensor
-import ai.onnxruntime.OrtEnvironment
-import ai.onnxruntime.OrtSession
-import com.akashrajeev.voicebeam.core.IndexedSeparationRenderer
-import com.akashrajeev.voicebeam.core.DropOldestQueue
-import com.akashrajeev.voicebeam.core.VoiceMatch
+import android.util.Log
+import com.akashrajeev.voicebeam.core.*
 import com.akashrajeev.voicebeam.ml.VoicePrint
-import java.io.File
-import java.nio.FloatBuffer
+import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
-import kotlin.math.sqrt
 
-/** Private phone probe. Continuity is NOT evidence that the enrolled voice is present. */
+/** Causal SkiM trial. Source identity remains provisional; never negative mute. */
 class ExperimentalSeparator(
-    app: Context, private val voice: VoicePrint, private val centroid: () -> FloatArray?,
-    private val threshold: () -> Float, private val margin: () -> Float,
-    private val rawSelection: () -> Boolean,
-    contextMs: Int = 1000, hopMs: Int = 500,
-    private val autoTarget:()->Int?={null}, private val autoEligible:()->Boolean={false},
+ app:Context, private val voice:VoicePrint, private val centroid:()->FloatArray?,
+ private val threshold:()->Float, private val margin:()->Float, private val rawSelection:()->Boolean,
+ contextMs:Int=1000,hopMs:Int=500,
+ private val autoTarget:()->Int?={null},private val autoEligible:()->Boolean={false},
 ) {
-    private val battery = app.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-    private val power = app.getSystemService(Context.POWER_SERVICE) as PowerManager
-    private val context = contextMs * 16
-    private val hop = hopMs * 16
-    private data class Packet(val audio: FloatArray, val template: FloatArray?, val endSample: Long, val capturedNs: Long,val reference:FloatArray?=null,val targetId:Int?=null,val isolated:Boolean=false)
-    private val automatic=AutoVoiceReference()
-    private fun targetTemplate()=centroid() ?: automatic.centroid
-    @Volatile var selectedOutput=false;private set
-    @Volatile var underflowSamples=0;private set
-    private var referencePending:FloatArray?=null
-    private var referenceTarget:Int?=null
-    private val input = DropOldestQueue<Packet>(1)
-    private val output = DropOldestQueue<Packet>(1)
-    private val running = AtomicBoolean(true)
-    private val busy = AtomicBoolean(false)
-    private val env = OrtEnvironment.getEnvironment()
-    private val options = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2); setInterOpNumThreads(1);setOptimizationLevel(OrtSession.SessionOptions.OptLevel.ALL_OPT) }
-    private val session: OrtSession
-    private val ring = FloatArray(context)
-    private var write = 0
-    private var hopFill = 0
-    private var captured = 0L
-    private val renderer=IndexedSeparationRenderer(hop+8000)
-    private var renderedTemplate:FloatArray?=null
-    @Volatile var warmupSamples=0;private set
-    private var droppedBusy = 0L
-    private var staleOutput = 0L
-    private val times = ArrayList<Long>()
-    private val startNs = SystemClock.elapsedRealtimeNanos()
-    private val worker: Thread
-    init {
-        require(context == 16000 || context == 32000)
-        require(hop in 4000..32000 && hop <= context)
-        val name = if(context == 16000) "convtasnet-1s-int8.onnx" else "convtasnet-2s-int8.onnx"
-        val path = File(app.cacheDir, name)
-        if (!path.exists()) app.assets.open("models/$name").use { src -> path.outputStream().use { src.copyTo(it) } }
-        session = env.createSession(path.absolutePath, options)
-        Diagnostics.event("TSE enabled model=int8 identityHz=1 failOpenNoMute=true contextMs=$contextMs hopMs=$hopMs fixedPlaybackDelayMs="+(hop+8000)/16+" nativeORT="+env.version)
-        worker = Thread({ loop() }, "vb-tse").also { it.start() }
-    }
-    /** Raw mic only. Zero-pad initial context. No pending compute when worker is behind. */
-    fun process(raw: FloatArray, out: FloatArray): Boolean {
-        if(referenceTarget!=autoTarget()){referencePending=null;referenceTarget=autoTarget()}
-        automatic.setTarget(autoTarget())
-        if(centroid()==null && automatic.centroid==null){automatic.collect(raw,autoEligible())?.let{referencePending=it}}
-        for(v in raw) {
-            ring[write] = v; write = (write+1)%context; captured++; hopFill++
-            if(hopFill == hop) {
-                hopFill=0
-                if(running.get() && busy.compareAndSet(false,true)) {
-                    val window=FloatArray(context) { k -> ring[(write+k)%context] }
-                    input.offer(Packet(window,targetTemplate(),captured,SystemClock.elapsedRealtimeNanos(),referencePending,autoTarget()));referencePending=null
-                } else droppedBusy++
-            }
-        }
-        renderer.push(raw)
-        val template=targetTemplate()
-        if(template !== renderedTemplate){renderer.clearSeparated();renderedTemplate=template}
-        while(true){
-            val packet=output.poll(0) ?: break
-            if(packet.template==null || packet.template !== template) {staleOutput++;continue}
-            val late=renderer.offer(packet.endSample-hop,packet.audio,packet.isolated)
-            if(late>0)staleOutput++
-        }
-        val frame=renderer.render(out)
-        selectedOutput=frame.isolated
-        underflowSamples=frame.rawSamples
-        warmupSamples=frame.warmupSamples
-        if(template==null) Diagnostics.tseState="AUTO REFERENCE ${automatic.phrases}/3: locked solo speech; delayed raw"
-        return frame.rawSamples+frame.warmupSamples<out.size
-    }
-    private fun correlation(a:FloatArray, aStart:Int, b:FloatArray, size:Int):Float {
-        var dot=0.0; var aa=0.0; var bb=0.0
-        for(i in 0 until size) { val x=a[aStart+i].toDouble(); val y=b[i].toDouble(); dot+=x*y; aa+=x*x; bb+=y*y }
-        return (dot/(sqrt(aa*bb)+1e-8)).toFloat()
-    }
-    private fun loop() {
-        var previous:Packet?=null
-        var stickyEvidence=0f
-        var identity=SlowIdentity(hop,context)
-        var identityTemplate:FloatArray?=null
-        val presence=SeparationPresence()
-        try {
-            while(running.get()) {
-                val packet=input.poll(200) ?: continue
-                try {
-                    if(packet.template==null && packet.reference!=null && packet.targetId==autoTarget()){
-                        val learned=automatic.accept(voice.embed(packet.reference))
-                        Diagnostics.event("TSE AUTO_REFERENCE phrases=${automatic.phrases} ready=$learned provisional=true")
-                    }
-                    val template=packet.template
-                    if(template == null || template !== targetTemplate()) { previous=null; stickyEvidence=0f; Diagnostics.tseState="UNCERTAIN: no frozen target"; continue }
-                    val start=SystemClock.elapsedRealtimeNanos()
-                    val sources:Array<FloatArray> = OnnxTensor.createTensor(env,FloatBuffer.wrap(packet.audio),longArrayOf(1,context.toLong())).use { tensor ->
-                        session.run(mapOf(session.inputNames.first() to tensor)).use { result ->
-                            @Suppress("UNCHECKED_CAST")
-                            val value=result[0].value as Array<Array<FloatArray>>
-                            value[0].map { it.copyOf() }.toTypedArray()
-                        }
-                    }
-                    val sepEnd=SystemClock.elapsedRealtimeNanos()
-                    for(source in sources) for(k in source.indices) source[k]=if(source[k].isFinite()) source[k].coerceIn(-1f,1f) else 0f
-                    if(identityTemplate !== template){identity=SlowIdentity(hop,context);presence.reset();identityTemplate=template;previous=null}
-                    val prevShift=previous?.let{(packet.endSample-it.endSample).toInt()} ?: hop
-                    val update=identity.update(sources,prevShift){source->voice.embed(source)?.let{VoiceMatch.cosine(it,template)} ?: -1f}
-                    val scores=update.scores
-                    val speakerEnd=SystemClock.elapsedRealtimeNanos()
-                    val freshBest=if(scores[0]>=scores[1]) 0 else 1
-                    var selectedIndex=freshBest
-                    val prev=previous
-                    val shift=if(prev == null) context else (packet.endSample-prev.endSample).toInt()
-                    if(prev != null && prev.template === template && shift in 1 until context) {
-                        val continuity=sources.map { correlation(prev.audio,shift,it,context-shift) }
-                        val linked=if(continuity[0]>=continuity[1]) 0 else 1
-                        // Accumulate evidence for linked waveform, never use it to assert presence.
-                        stickyEvidence=.75f*stickyEvidence+.25f*scores[linked]
-                        if(abs(scores[0]-scores[1])<margin() || scores[freshBest]<stickyEvidence+.10f) selectedIndex=linked
-                    } else stickyEvidence=scores[freshBest]
-                    val selected=sources[selectedIndex]
-                    previous=Packet(selected.copyOf(),template,packet.endSample,packet.capturedNs)
-                    val accepted=template === targetTemplate() && scores.all { it.isFinite() } && scores[selectedIndex]>threshold() &&
-                        scores[selectedIndex]-scores[1-selectedIndex]>margin()
-                    val raw=rawSelection()
-                    val decision=presence.decide(scores,update.fresh,SystemClock.elapsedRealtime(),template === targetTemplate(),threshold(),margin())
-                    // At1Hz a negative can outlive target entry. Never mute in this candidate.
-                    val strongOther = false
-                    val emitted=if((raw || (accepted && decision==SeparationPresence.Decision.SELECT)) && template === targetTemplate()) selected.copyOfRange(context-hop,context)
-                        else if(!strongOther) packet.audio.copyOfRange(context-hop,context) else FloatArray(hop)
-                    var peak=0f; for(v in emitted) peak=maxOf(peak,abs(v))
-                    if(peak>.95f) for(k in emitted.indices) emitted[k]*=.95f/peak
-                    if(running.get()) output.offer(Packet(emitted,template,packet.endSample,packet.capturedNs,isolated=accepted && decision==SeparationPresence.Decision.SELECT && !raw))
-                    val ms=(speakerEnd-start)/1000000
-                    times.add(ms); if(times.size>1200) times.removeAt(0)
-                    val sorted=times.sorted(); val p50=sorted[(sorted.size-1)/2]; val p95=sorted[(sorted.size-1)*95/100]
-                    val runtime=Runtime.getRuntime()
-                    Diagnostics.tseState=if(raw) "RAW PROBE: target presence unverified" else if(accepted) "Provisional match" else if(strongOther) "Provisional non-target: muted" else "UNCERTAIN: raw mix passthrough"
-                    Diagnostics.event("TSE sepMs="+(sepEnd-start)/1000000+" speakerMs="+(speakerEnd-sepEnd)/1000000+
-                        " p50Ms=$p50 p95Ms=$p95 sustainSec="+(speakerEnd-startNs)/1000000000+" computeWithin200ms="+(p95<=200)+
-                        " nativeHeapMB="+Debug.getNativeHeapAllocatedSize()/1048576+" usedHeapMB="+(runtime.totalMemory()-runtime.freeMemory())/1048576+
-                        " batteryPct="+battery.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)+
-                        " thermal="+(if(Build.VERSION.SDK_INT>=29) power.currentThermalStatus else -1)+
-                        " backlog="+input.size+" dropsBusy=$droppedBusy dropsOutput="+output.dropped+" staleOutput=$staleOutput"+
-                        " model=int8 threads=2 identityHz=1 identityFresh="+update.fresh+" cosine0="+scores[0]+" cosine1="+scores[1]+" stickyEvidence=$stickyEvidence raw=$raw accepted=$accepted peak=$peak")
-                } finally { busy.set(false) }
-            }
-        } catch(t:Throwable) { Diagnostics.tseState="ERROR: "+t.javaClass.simpleName; Diagnostics.event("TSE error="+t.javaClass.simpleName); running.set(false) }
-        finally { session.close(); options.close() }
-    }
-    fun stop() { running.set(false); worker.join(5000); renderer.clearSeparated(); input.clear(); output.clear(); Diagnostics.tseState="OFF" }
+ private data class Input(val audio:FloatArray,val start:Long)
+ private data class Output(val audio:FloatArray,val start:Long,val template:FloatArray?,val isolated:Boolean)
+ private data class Identity(val sources:Array<FloatArray>?,val template:FloatArray?,val reference:FloatArray?,val target:Int?)
+ private val identityVoice=VoicePrint(app.assets)
+ private val model=SkiMStream(app)
+ private val down=Downsample16To8();private val up=Array(2){Upsample8To16()}
+ private val renderer=IndexedSeparationRenderer(3200,16000)
+ private val automatic=AutoVoiceReference()
+ private fun template()=centroid() ?: automatic.centroid
+ private val input=ArrayBlockingQueue<Input>(8);private val output=ArrayBlockingQueue<Output>(16)
+ private val identity=ArrayBlockingQueue<Identity>(1)
+ private val running=AtomicBoolean(true)
+ @Volatile private var scores=listOf(-1f,-1f)
+ @Volatile private var scoreTime=0L
+ @Volatile private var scoreTemplate:FloatArray?=null
+ @Volatile var selectedOutput=false;private set
+ @Volatile var underflowSamples=0;private set
+ @Volatile var warmupSamples=0;private set
+ private var captured=0L;private var rawTarget:Int?=null;private var renderedTemplate:FloatArray?=null
+ private val buffer=FloatArray(204);private var fill=0;private var blockStart=0L
+ private var drops=0;private var late=0
+ private val worker:Thread
+ private val idWorker:Thread
+ init {
+  Diagnostics.event("SKIM causal=true chunkMs=25 fixedDelayMs=200 sampleRate=8000 model=int8 failOpenNoMute=true")
+  idWorker=Thread({identityLoop()},"vb-skim-id").also{it.start()}
+  worker=Thread({loop()},"vb-skim").also{it.start()}
+ }
+ fun process(raw:FloatArray,out:FloatArray):Boolean {
+  val target=autoTarget();if(target!=rawTarget){automatic.setTarget(target);rawTarget=target;scores=listOf(-1f,-1f);scoreTime=0}
+  if(centroid()==null && automatic.centroid==null)automatic.collect(raw,autoEligible())?.let{identity.offer(Identity(null,null,it,target))}
+  renderer.push(raw)
+  for(v in down.process(raw)){
+   buffer[fill++]=v
+   if(fill==204){val p=Input(buffer.copyOf(),blockStart);if(!input.offer(p))drops++;buffer.copyInto(buffer,0,200,204);fill=4;blockStart+=400}
+  }
+  captured+=raw.size
+  val t=template();if(t !== renderedTemplate){renderer.clearSeparated();renderedTemplate=t}
+  while(true){val p=output.poll() ?: break;if(p.template!==t){late++;continue};late+=renderer.offer(p.start,p.audio,p.isolated)}
+  val f=renderer.render(out);selectedOutput=f.isolated;underflowSamples=f.rawSamples;warmupSamples=f.warmupSamples
+  return f.rawSamples+f.warmupSamples<out.size
+ }
+ private fun identityLoop(){
+  try{while(running.get()){
+   val p=identity.poll(200,java.util.concurrent.TimeUnit.MILLISECONDS) ?: continue
+   if(p.reference!=null){val e=identityVoice.embed(p.reference);if(p.target==autoTarget())automatic.accept(e);continue}
+   if(p.template==null || p.template!==template())continue
+   val s=p.sources!!.map{identityVoice.embed(it)?.let{e->VoiceMatch.cosine(e,p.template)} ?: -1f}
+   if(p.template===template()){scores=s;scoreTemplate=p.template;scoreTime=SystemClock.elapsedRealtime()}
+  }}catch(t:Throwable){Diagnostics.event("SKIM identityError="+t.javaClass.simpleName)}finally{identityVoice.release()}
+ }
+ private fun loop(){var expected=0L;var idFill=0;val idAudio=Array(2){FloatArray(16000)};var idTemplate:FloatArray?=null;val times=ArrayList<Long>();var n=0
+  try{while(running.get()){
+   val p=input.poll(200,java.util.concurrent.TimeUnit.MILLISECONDS) ?: continue
+   if(p.start!=expected){model.reset();up.forEach{it.reset()};idFill=0;scores=listOf(-1f,-1f);scoreTime=0;Diagnostics.event("SKIM stateReset gapSamples="+(p.start-expected))};expected=p.start+400
+   val start=SystemClock.elapsedRealtimeNanos();val src=model.process(p.audio);val samples=Array(2){up[it].process(src[it])};val t=template()
+   if(t!==idTemplate){idFill=0;idTemplate=t;scores=listOf(-1f,-1f);scoreTime=0}
+   for(s in 0..1)samples[s].copyInto(idAudio[s],idFill);idFill+=400
+   if(idFill==16000){identity.offer(Identity(Array(2){idAudio[it].copyOf()},t,null,null));idFill=0}
+   val s=scores;val best=if(s[0]>=s[1])0 else 1
+   val fresh=scoreTemplate===t && SystemClock.elapsedRealtime()-scoreTime<=1000
+   val accepted=t!=null && fresh && s[best]>threshold() && s[best]-s[1-best]>margin()
+   val isolated=accepted && !rawSelection()
+   // No uncertain output packet: indexed renderer retains the same-time raw fallback.
+   if(isolated || rawSelection())output.offer(Output(samples[best],p.start-7,t,isolated))
+   val ms=(SystemClock.elapsedRealtimeNanos()-start)/1000000;times.add(ms);n++
+   Diagnostics.tseState=if(accepted)"Provisional causal target" else "UNCERTAIN: delayed raw"
+   if(n%40==0){val sorted=times.sorted();val row="SKIM chunks=$n p50Ms=${sorted[(sorted.size-1)/2]} p95Ms=${sorted[(sorted.size-1)*95/100]} dropsInput=$drops lateSamples=$late backlog=${input.size} fixedDelayMs=200 noNegativeMute=true";Diagnostics.event(row);Log.i("VoiceBeamSelfTest",row)}
+  }}catch(t:Throwable){Diagnostics.tseState="SKIM ERROR "+t.javaClass.simpleName;Diagnostics.event(Diagnostics.tseState);Log.e("VoiceBeamSelfTest","SKIM error",t)}finally{model.close()}
+ }
+ fun stop(){running.set(false);worker.join(5000);idWorker.join(5000);input.clear();output.clear();identity.clear();renderer.clearSeparated();Diagnostics.tseState="OFF"}
 }
