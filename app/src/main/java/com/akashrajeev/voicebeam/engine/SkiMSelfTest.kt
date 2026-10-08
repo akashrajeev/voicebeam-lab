@@ -9,6 +9,10 @@ import kotlin.math.*
 
 /** Public-fixture model quality plus paced exact production path, no actual mic/camera/playback. */
 object SkiMSelfTest {
+ @Volatile var status="Not run"
+ @Volatile private var busy=false
+ @Synchronized fun start(ctx:Context){if(busy)return;busy=true;status="Running causal SkiM fixtures";Thread({try{status=run(ctx)}catch(t:Throwable){status="FAILED "+t.javaClass.simpleName+": "+t.message;log(status)}finally{busy=false}},"vb-skim-test").start()}
+
  private fun log(s:String){Log.i("VoiceBeamSelfTest",s)}
  private fun sdr(y:FloatArray,x:FloatArray):Double {val ym=y.average();val xm=x.average();var dot=0.0;var xx=0.0;for(i in y.indices){dot+=(y[i]-ym)*(x[i]-xm);xx+=(x[i]-xm).pow(2)};val g=dot/(xx+1e-12);var p=0.0;var e=0.0;for(i in y.indices){val z=g*(x[i]-xm);p+=z*z;e+=(y[i]-ym-z).pow(2)};return 10*log10((p+1e-12)/(e+1e-12))}
  fun run(ctx:Context):String {

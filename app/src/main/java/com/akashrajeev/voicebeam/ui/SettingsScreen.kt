@@ -52,7 +52,7 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
     Column(Modifier.fillMaxSize().background(Bg)) {
         Column(Modifier.weight(1f).statusBarsPadding().verticalScroll(rememberScrollState()).padding(horizontal = 18.dp)) {
             Text("Settings", color = Color.White, fontSize = 28.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 16.dp))
-            if(!state.voiceLearned) Text("VOICE NOT LEARNED: raw mic passes through, no isolation",color=Color.Yellow,fontSize=14.sp)
+            if(!state.voiceLearned) Text("MANUAL VOICE NOT LEARNED: auto reference waits for locked solo speech",color=Color.Yellow,fontSize=14.sp)
             Text(engine.enrollmentMessage(),color=Muted,fontSize=12.sp)
             SectionHeader("Listening")
             SliderRow("Noise removal", when { s.denoise < 0.05f -> "Off"; s.denoise < 0.6f -> "Light"; else -> "Strong" }, s.denoise, 0f..1f) { v -> engine.updateSettings { it.copy(denoise = v) } }
@@ -78,11 +78,11 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
                 SwitchRow("Demo feed (testing)", "Plays a recorded two-person clip instead of the camera and mic", s.debugFeed) { v -> engine.updateSettings { it.copy(debugFeed = v) } }
             }
             SectionHeader("Public-fixture self-test")
-            Text(com.akashrajeev.voicebeam.engine.SeparationSelfTest.status, color=Muted, fontSize=12.sp)
-            Button(onClick={engine.stopListening();com.akashrajeev.voicebeam.engine.SeparationSelfTest.start(context.applicationContext)}) { Text("Run separation self-test") }
+            Text(com.akashrajeev.voicebeam.engine.SkiMSelfTest.status, color=Muted, fontSize=12.sp)
+            Button(onClick={engine.stopListening();com.akashrajeev.voicebeam.engine.SkiMSelfTest.start(context.applicationContext)}) { Text("Run separation self-test") }
             Text("Stops live capture. No mic/camera/playback. Logs native load, synthetic SI-SDRi and compute. Share log after it finishes.",color=Muted,fontSize=12.sp)
             SectionHeader("PRIVATE separation experiment")
-            SwitchRow("Two-speaker separation (experimental)", "OFF by default. No Learn tap: waits for three consistent2s phrases while locked face speaks alone. Auto reference is provisional. Delayed output; presence policy not reliable. Not safe for live hearing claims. Model CC-BY-SA version ambiguity remains.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
+            SwitchRow("Two-speaker separation (experimental)", "OFF by default. No Learn tap: waits for three consistent2s phrases while locked face speaks alone. Auto reference is provisional. Delayed output; presence policy not reliable. Not safe for live hearing claims. SkiM model CC-BY4.0;8kHz bandwidth.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
             Text("Context / hop", color=Color.White)
             Text("SkiM causal:25ms chunks,200ms software delay. Phone validation pending.")
             SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate; uncertainty passes raw mix.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
