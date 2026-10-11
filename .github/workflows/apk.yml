@@ -4,7 +4,7 @@ on:
   push:
     branches: [sep9-revised-ui-2026-10-11]
 permissions:
-  contents: read
+  contents: write
 jobs:
   apk:
     runs-on: ubuntu-latest
@@ -26,7 +26,14 @@ jobs:
           ls -la app/build/outputs/apk/debug/
           sha256sum app/build/outputs/apk/debug/*.apk
           grep -ho 'tests="[0-9]*"' app/build/test-results/testDebugUnitTest/*.xml
+      - name: Publish APK as private release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp app/build/outputs/apk/debug/*.apk VoiceBeam-ENH-6-SEP-9.apk
+          gh release create sep9-${GITHUB_SHA::7} VoiceBeam-ENH-6-SEP-9.apk --target "$GITHUB_SHA" --prerelease --title "ENH-6 + SEP-9 test build ${GITHUB_SHA::7}" --notes "Debug APK. Separation OFF by default."
       - uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
           name: VoiceBeam-ENH-6-SEP-9
           path: |
