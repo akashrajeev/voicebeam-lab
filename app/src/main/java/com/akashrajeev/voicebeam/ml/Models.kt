@@ -108,7 +108,7 @@ class VoicePrint(assets: AssetManager) {
         config = SpeakerEmbeddingExtractorConfig(model = "models/speaker.onnx", numThreads = 1),
     )
 
-    fun embed(samples: FloatArray): FloatArray? {
+    @Synchronized fun embed(samples: FloatArray): FloatArray? {
         val s = extractor.createStream()
         return try {
             s.acceptWaveform(samples, SAMPLE_RATE)

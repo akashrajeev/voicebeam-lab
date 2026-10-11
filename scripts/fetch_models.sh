@@ -41,3 +41,11 @@ mkdir -p app/src/androidTest/assets
 [ -f app/src/androidTest/assets/noisy_speech.wav ] || curl -fL -o app/src/androidTest/assets/noisy_speech.wav "$REL/speech-enhancement-models/speech_with_noise.wav" || true
 
 ls -la "$ASSETS" "$ASSETS/asr"
+
+# Java/JNI C API 20 frontend backed by sherpa's newer ORT 1.28.2, not two cores.
+# Keep 4j JNI; strip only the duplicate core so packaging is deterministic.
+if [ ! -f app/libs/onnxruntime-android-java-jni.aar ]; then
+  curl -fL -o app/libs/onnxruntime-android-java-jni.aar https://repo.maven.apache.org/maven2/com/microsoft/onnxruntime/onnxruntime-android/1.20.0/onnxruntime-android-1.20.0.aar
+  zip -d app/libs/onnxruntime-android-java-jni.aar 'jni/*/libonnxruntime.so'
+  python3 scripts/native/patch_ort_symbol_version.py app/libs/onnxruntime-android-java-jni.aar
+fi

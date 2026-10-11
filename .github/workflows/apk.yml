@@ -1,8 +1,8 @@
-name: ENH-6-caption-apk
-# ENH-6: safe enhancement and enrollment. Bluetooth unchanged.
+name: ENH-6-SEP-9-apk
+# SEP-9 (causal SkiM) ported onto revised UI + consent + captions. Separation OFF by default, raw fallback. Host-tested only, phone pending.
 on:
   push:
-    branches: [revised-ui-caption-2026-10-11]
+    branches: [sep9-revised-ui-2026-10-11]
     paths: ['.github/workflows/apk.yml']
 permissions:
   contents: read

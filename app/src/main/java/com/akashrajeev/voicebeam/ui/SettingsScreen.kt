@@ -106,6 +106,18 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
                 SectionHeader("Testing")
                 SwitchRow("Demo feed (testing)", "Plays a recorded two-person clip instead of the camera and mic", s.debugFeed) { v -> engine.updateSettings { it.copy(debugFeed = v) } }
             }
+            SectionHeader("Public-fixture self-test")
+            Text(com.akashrajeev.voicebeam.engine.SkiMSelfTest.status, color=Muted, fontSize=12.sp)
+            Button(onClick={engine.stopListening();com.akashrajeev.voicebeam.engine.SkiMSelfTest.start(context.applicationContext)}) { Text("Run separation self-test") }
+            Text("Stops live capture. No mic/camera/playback. Logs native load, synthetic SI-SDRi and compute. Share log after it finishes.",color=Muted,fontSize=12.sp)
+            SectionHeader("PRIVATE separation experiment")
+            SwitchRow("Two-speaker separation (experimental)", "OFF by default. No Learn tap: waits for three consistent2s phrases while locked face speaks alone. Auto reference is provisional. Delayed output; presence policy not reliable. Not safe for live hearing claims. SkiM model CC-BY4.0;8kHz bandwidth.", s.experimentalSeparation) { v -> engine.updateSettings { it.copy(experimentalSeparation=v) } }
+            Text("Context / hop", color=Color.White)
+            Text("SkiM causal: 25ms chunks, 200ms software delay. Phone validation pending.", color = Muted, fontSize = 12.sp)
+            SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate; uncertainty passes raw mix.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
+            Text("State: " + Diagnostics.tseState, color=Muted, fontSize=12.sp)
+            SliderRow("TSE cosine threshold (uncalibrated)", "${s.separationCosine}", s.separationCosine, 0.2f..0.7f) { v -> engine.updateSettings { it.copy(separationCosine=v) } }
+            SliderRow("TSE source margin (uncalibrated)", "${s.separationMargin}", s.separationMargin, 0f..0.3f) { v -> engine.updateSettings { it.copy(separationMargin=v) } }
             SectionHeader("Optional wearer voice veto")
             Text("Experimental. Speak alone for three clean 3-second phrases. Voice template stays in RAM, clears when models close. This cannot separate overlapping voices.", color = Muted, fontSize = 12.sp)
             Text(if (state.wearerLearned) "Wearer voice learned" else if (state.wearerEnrollmentActive)

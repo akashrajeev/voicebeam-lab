@@ -9,12 +9,12 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.akashrajeev.voicebeam.lab"
+        applicationId = "com.akashrajeev.voicebeam.lab.tse"
         minSdk = 26
         targetSdk = 35
         buildConfigField("String", "LAB_COMMIT", "\"" + (System.getenv("GITHUB_SHA") ?: "local") + "\"")
-        versionCode = 106
-        versionName = "ENH-6"
+        versionCode = 107
+        versionName = "ENH-6-SEP-9"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters += listOf("arm64-v8a")
@@ -66,6 +66,7 @@ android {
 
 dependencies {
     implementation(files("libs/sherpa-onnx.aar"))
+    implementation(files("libs/onnxruntime-android-java-jni.aar"))
 
     val composeBom = platform("androidx.compose:compose-bom:2024.09.02")
     implementation(composeBom)

@@ -264,6 +264,9 @@ fun FocusScreen(engine: VoiceBeamEngine, captionMode: Boolean, onNavigate: (Scre
                     val l = minOf(x1, x2); val r = maxOf(x1, x2)
                     val pad = (r - l) * 0.12f
                     val tl = Offset(l - pad, y1 - pad); val sz = GSize(r - l + 2 * pad, y2 - y1 + 2 * pad)
+                    // Guard against the full-screen green ring: skip degenerate or screen-sized boxes.
+                    if (!sz.width.isFinite() || !sz.height.isFinite() || sz.width <= 0f || sz.height <= 0f ||
+                        sz.width > size.width * 0.8f || sz.height > size.height * 0.7f) continue
                     if (f.id == state.lockedId) {
                         drawOval(Accent.copy(alpha = 0.14f), tl - Offset(16f, 16f), GSize(sz.width + 32f, sz.height + 32f), style = Stroke(16f))
                         drawOval(Accent.copy(alpha = 0.30f), tl - Offset(7f, 7f), GSize(sz.width + 14f, sz.height + 14f), style = Stroke(1.5.dp.toPx()))

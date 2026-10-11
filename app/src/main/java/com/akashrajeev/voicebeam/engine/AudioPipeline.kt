@@ -44,6 +44,7 @@ class AudioPipeline(
 
     var enrollmentActive: () -> Boolean = { false }
     var enrollmentStatus: () -> String = { "unknown" }
+    @Volatile var separator: ExperimentalSeparator? = null
     @Volatile var quietOthers = 0.8f
     @Volatile var boostDb = 6f
     @Volatile var denoiseMix = .8f          // 0 = raw, 1 = fully denoised
@@ -65,6 +66,7 @@ class AudioPipeline(
      */
     val voiceQueue = DropOldestQueue<Pair<FloatArray, Float>>(VOICE_BACKLOG_BLOCKS)
 
+    private val alignment=com.akashrajeev.voicebeam.core.DenoiseAlignment()
     private val gate = TargetGate(frameMs = (models.denoiser.frameShift.takeIf { it > 0 } ?: 256) * 1000f / SAMPLE_RATE)
     private val vad = com.akashrajeev.voicebeam.ml.NeuralVad(app.assets)
     private val running = AtomicBoolean(false)
@@ -75,7 +77,7 @@ class AudioPipeline(
     fun start(useSceneMic: Boolean) {
         if (running.getAndSet(true)) return
         Diagnostics.event("audio_start sceneMic=" + useSceneMic)
-        capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset()
+        capturedSamples = 0L; asrQueue.clear(); voiceQueue.clear(); vad.reset();alignment.reset()
         thread = Thread({
             try { loop(useSceneMic) }
             catch (t: Throwable) {
@@ -225,6 +227,23 @@ class AudioPipeline(
                 val requestedBoost = if (gate.boostAllowed) TargetGate.dbToLinear(boostDb) else 1f
                 val boost = FrameDsp.safeBoost(clean, n, g, requestedBoost) // diagnostic estimate; envelope limits actual output
                 val e = envelope.process(clean, n, g, requestedBoost, gated, out)
+                val experimental = separator
+                if (experimental != null) {
+                    // SEP-9 selectable path. Any failure falls back to the raw mic so audio never goes silent.
+                    try {
+                        val extracted = FloatArray(input.size)
+                        experimental.process(input, extracted)
+                        for (k in 0 until n) { gated[k] = extracted[k]; out[k] = extracted[k].coerceIn(-0.95f, 0.95f) }
+                        // Never amplify raw fallback, uncertain identity or an unseen target.
+                        if (experimental.selectedOutput && s.hasLock && s.lockedVisible && s.lockedSpeaking > .75f && s.othersSpeaking < .25f) {
+                            val safe = FrameDsp.safeBoost(out, n, 1f, TargetGate.dbToLinear(boostDb))
+                            for (k in 0 until n) out[k] *= safe
+                        }
+                    } catch (t: Throwable) {
+                        for (k in 0 until n) { gated[k] = input[k].coerceIn(-.95f, .95f); out[k] = gated[k] }
+                        Diagnostics.event("separation_failed_raw_fallback " + t.javaClass.simpleName)
+                    }
+                }
                 cleanWriter?.write(gated, n)
                 // Speaker playback of a boosted live microphone causes a runaway feedback loop.
                 // The actual routed output, not merely a paired headset, must be safe.
@@ -262,7 +281,7 @@ class AudioPipeline(
                         " effectiveBoost=" + boost + " boostDb=" + boostDb + " rawRms=" + sqrt(rawEnergy / input.size) +
                         " outputRms=" + sqrt(outputEnergy / n) +
                         " micSamples=" + input.size + " level=" + sqrt(e / n) +
-                        " track=ENH tseEnabled=false enrollment=" + enrollmentStatus() +
+                        " tseEnabled="+(separator!=null)+" enrollment=" + enrollmentStatus() +
                         " quietOthers=" + quietOthers + " locked=" + s.hasLock + " visible=" + s.lockedVisible +
                         " lockedLips=" + s.lockedSpeaking + " otherLips=" + s.othersSpeaking +
                         " voiceMatch=" + s.voiceMatch + " wearerMatch=" + s.wearerMatch + " wearerVeto=" + s.wearerVetoEnabled + " boostAllowed=" + gate.boostAllowed +
@@ -296,6 +315,7 @@ class AudioPipeline(
         } finally {
             try { rec?.stop() } catch (_: Throwable) {}
             rec?.release()
+            separator?.stop()
             try { track?.stop() } catch (_: Throwable) {}
             track?.release()
         }
