@@ -29,8 +29,8 @@ jobs:
           grep -ho 'tests="[0-9]*"' app/build/test-results/testDebugUnitTest/*.xml
       - uses: actions/upload-artifact@v4
         with:
-          name: VoiceBeam-ENH-6-consent
+          name: VoiceBeam-ENH-6-SEP-9
           path: |
             app/build/outputs/apk/debug/*.apk
             app/build/outputs/apk/androidTest/debug/*.apk
-          retention-days: 1
+          retention-days: 3
