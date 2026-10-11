@@ -232,7 +232,9 @@ class AudioPipeline(
                     // SEP-9 selectable path. Any failure falls back to the raw mic so audio never goes silent.
                     try {
                         val extracted = FloatArray(input.size)
-                        experimental.process(input, extracted)
+                        val enh = FloatArray(input.size)
+                        for (k in 0 until input.size) enh[k] = if (k < n) out[k].coerceIn(-0.95f, 0.95f) else input[k].coerceIn(-0.95f, 0.95f)
+                        experimental.process(input, enh, extracted)
                         for (k in 0 until n) { gated[k] = extracted[k]; out[k] = extracted[k].coerceIn(-0.95f, 0.95f) }
                         // Never amplify raw fallback, uncertain identity or an unseen target.
                         if (experimental.selectedOutput && s.hasLock && s.lockedVisible && s.lockedSpeaking > .75f && s.othersSpeaking < .25f) {

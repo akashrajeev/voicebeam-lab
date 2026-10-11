@@ -12,7 +12,7 @@ import kotlin.math.abs
 /** Causal SkiM trial. Source identity remains provisional; never negative mute. */
 class ExperimentalSeparator(
  app:Context, private val voice:VoicePrint, private val centroid:()->FloatArray?,
- private val threshold:()->Float, private val margin:()->Float, private val rawSelection:()->Boolean,
+ private val threshold:()->Float, private val margin:()->Float, private val rawSelection:()->Boolean, private val denoiseFallback:()->Boolean={true},
  contextMs:Int=1000,hopMs:Int=500,
  private val autoTarget:()->Int?={null},private val autoEligible:()->Boolean={false},
 ) {
@@ -22,7 +22,7 @@ class ExperimentalSeparator(
  private val identityVoice=VoicePrint(app.assets)
  private val model=SkiMStream(app)
  private val down=Downsample16To8();private val up=Array(2){Upsample8To16()}
- private val renderer=IndexedSeparationRenderer(3200,16000,80)
+ private val renderer=IndexedSeparationRenderer(3200,16000,320)
  private val automatic=AutoVoiceReference()
  private fun template()=centroid() ?: automatic.centroid
  private val input=ArrayBlockingQueue<Input>(8);private val output=ArrayBlockingQueue<Output>(16)
@@ -36,7 +36,7 @@ class ExperimentalSeparator(
  @Volatile var warmupSamples=0;private set
  private var renderedGeneration=-1;private var captured=0L;private var rawTarget:Int?=null;private var renderedTemplate:FloatArray?=null
  private val buffer=FloatArray(204);private var fill=0;private var blockStart=0L
- private var drops=0;private var late=0
+ private var holdUntil=0L;private var drops=0;private var late=0
  private val worker:Thread
  private val idWorker:Thread
  init {
@@ -44,10 +44,10 @@ class ExperimentalSeparator(
   idWorker=Thread({identityLoop()},"vb-skim-id").also{it.start()}
   worker=Thread({loop()},"vb-skim").also{it.start()}
  }
- fun process(raw:FloatArray,out:FloatArray):Boolean {
+ fun process(raw:FloatArray,enh:FloatArray?,out:FloatArray):Boolean {
   val target=autoTarget();if(target!=rawTarget){automatic.setTarget(target);rawTarget=target;identityScores=Scores(listOf(-1f,-1f),0,null,-1)}
   if(centroid()==null && automatic.centroid==null)automatic.collect(raw,autoEligible())?.let{identity.offer(Identity(null,null,it,target))}
-  renderer.push(raw)
+  renderer.push(if(enh!=null && denoiseFallback())enh else raw)
   for(v in down.process(raw)){
    buffer[fill++]=v
    if(fill==204){val p=Input(buffer.copyOf(),blockStart);if(!input.offer(p))drops++;buffer.copyInto(buffer,0,200,204);fill=4;blockStart+=400}
@@ -78,9 +78,11 @@ class ExperimentalSeparator(
    val result=identityScores;val s=result.values;val best=if(s[0]>=s[1])0 else 1
    val fresh=result.template===t && result.generation==generation && SystemClock.elapsedRealtime()-result.time<=1000
    val accepted=t!=null && fresh && s[best]>threshold() && s[best]-s[1-best]>margin()
-   val isolated=accepted && !rawSelection()
+   if(accepted)holdUntil=SystemClock.elapsedRealtime()+700
+   val held=!accepted && t!=null && result.template===t && result.generation==generation && SystemClock.elapsedRealtime()<holdUntil && s[best]>threshold()*0.6f
+   val isolated=(accepted||held) && !rawSelection()
    // No uncertain output packet: indexed renderer retains the same-time raw fallback.
-   if(isolated || rawSelection())output.offer(Output(samples[best],p.start-7,t,isolated,generation))
+   if(isolated || rawSelection())output.offer(Output(samples[best],p.start-15,t,isolated,generation))
    val ms=(SystemClock.elapsedRealtimeNanos()-start)/1000000;times.add(ms);n++
    Diagnostics.tseState=if(accepted)"Provisional causal target" else "UNCERTAIN: delayed raw"
    if(n%40==0){val sorted=times.sorted();val row="SKIM chunks=$n p50Ms=${sorted[(sorted.size-1)/2]} p95Ms=${sorted[(sorted.size-1)*95/100]} dropsInput=$drops lateSamples=$late backlog=${input.size} fixedDelayMs=200 noNegativeMute=true";Diagnostics.event(row);Log.i("VoiceBeamSelfTest",row)}

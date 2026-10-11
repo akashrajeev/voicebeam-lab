@@ -115,6 +115,7 @@ fun SettingsScreen(engine: VoiceBeamEngine, onNavigate: (Screen) -> Unit) {
             Text("Context / hop", color=Color.White)
             Text("SkiM causal: 25ms chunks, 200ms software delay. Phone validation pending.", color = Muted, fontSize = 12.sp)
             SwitchRow("RAW selected-source probe", "Does NOT verify target presence. May play another voice when target absent. OFF = provisional gate; uncertainty passes raw mix.", s.separationRaw) { v -> engine.updateSettings { it.copy(separationRaw=v) } }
+            SwitchRow("Denoised fallback (recommended)", "ON: when the target voice is not confirmed, you hear the denoised + gated + limited ENH audio (200 ms delayed). OFF: delayed raw mic (old behaviour). Use this switch to A/B on the phone.", s.separationDenoiseFallback) { v -> engine.updateSettings { it.copy(separationDenoiseFallback=v) } }
             Text("State: " + Diagnostics.tseState, color=Muted, fontSize=12.sp)
             SliderRow("TSE cosine threshold (uncalibrated)", "${s.separationCosine}", s.separationCosine, 0.2f..0.7f) { v -> engine.updateSettings { it.copy(separationCosine=v) } }
             SliderRow("TSE source margin (uncalibrated)", "${s.separationMargin}", s.separationMargin, 0f..0.3f) { v -> engine.updateSettings { it.copy(separationMargin=v) } }

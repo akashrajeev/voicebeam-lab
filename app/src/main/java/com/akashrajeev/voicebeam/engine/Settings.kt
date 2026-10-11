@@ -18,6 +18,7 @@ data class Settings(
     val experimentalSeparation: Boolean = false,
     val separationLiveMode: Int = 0, // 0=1s/500ms; 1=2s/500ms; 2=2s blocks
     val separationRaw: Boolean = false,
+    val separationDenoiseFallback: Boolean = true,
     val separationCosine: Float = 0.35f, // provisional experiment control, not calibrated
     val separationMargin: Float = 0.10f,
     val debugFeed: Boolean = false,
@@ -45,6 +46,7 @@ class SettingsStore(context: Context) {
         experimentalSeparation = p.getBoolean("tse", false),
         separationLiveMode = p.getInt("tseMode",1).coerceIn(0,2),
         separationRaw = p.getBoolean("tseRaw",false),
+        separationDenoiseFallback = p.getBoolean("tseDnFb",true),
         separationCosine = p.getFloat("tseCos", 0.35f),
         separationMargin = p.getFloat("tseMargin", 0.10f),
         debugFeed = p.getBoolean("dbgFeed", false),
@@ -59,7 +61,7 @@ class SettingsStore(context: Context) {
             .putBoolean("sceneMic", s.useSceneMic).putString("saveMode", s.saveMode.name).putString("burn", s.captionBurn.name)
             .putBoolean("others", s.showOthersCaptions).putBoolean("raw", s.keepRawAudio).putBoolean("stage", s.stageEnabled)
             .putInt("capSize", s.captionSize).putBoolean("onboarded", s.onboarded).putBoolean("hd1080", s.hd1080).putBoolean("dbgFeed", s.debugFeed).putBoolean("consentBoth", s.requireBothConsent).putBoolean("capMoonshine", s.moonshineCaptions).putBoolean("capDeepgram", s.deepgramCaptions)
-            .putInt("tseMode",s.separationLiveMode).putBoolean("tseRaw",s.separationRaw)
+            .putInt("tseMode",s.separationLiveMode).putBoolean("tseRaw",s.separationRaw).putBoolean("tseDnFb",s.separationDenoiseFallback)
             .putBoolean("tse", s.experimentalSeparation).putFloat("tseCos", s.separationCosine).putFloat("tseMargin", s.separationMargin)
             .apply()
     }

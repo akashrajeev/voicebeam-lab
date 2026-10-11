@@ -11,9 +11,19 @@ class Downsample16To8 {
   return out
  }
 }
-/** Linear interpolation8k->16k with carried previous sample, causal1sample delay. */
+/** 8k->16k windowed-sinc half-sample interpolator. Original samples pass exactly; 4-sample lookahead adds 8 samples at 16k. */
 class Upsample8To16 {
- private var prev=0f
- fun reset(){prev=0f}
- fun process(input:FloatArray):FloatArray {val out=FloatArray(input.size*2);for(i in input.indices){out[i*2]=(prev+input[i])*.5f;out[i*2+1]=input[i];prev=input[i]};return out}
+ private val c=DoubleArray(4){m->val x=m+0.5;val sinc=Math.sin(Math.PI*x)/(Math.PI*x);val w=0.5+0.5*Math.cos(Math.PI*x/4.0);sinc*w}.let{a->val sum=a.sum()*2;DoubleArray(4){a[it]/sum}}
+ private val h=FloatArray(8)
+ fun reset(){h.fill(0f)}
+ fun process(input:FloatArray):FloatArray {
+  val out=FloatArray(input.size*2)
+  for(i in input.indices){
+   for(k in 0 until 7)h[k]=h[k+1];h[7]=input[i]
+   // h[0..7]=in[i-7..i]; emitted index j=i-4 is h[3], previous h[2], next h[4]
+   var mid=0.0;for(m in 0..3)mid+=c[m]*(h[3-m]+h[4+m])
+   out[i*2]=mid.toFloat();out[i*2+1]=h[3]
+  }
+  return out
+ }
 }

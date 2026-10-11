@@ -363,12 +363,12 @@ class VoiceBeamEngine(private val app: Context) {
             latestProbability = f.probability
             _state.update { it.copy(inputLevel = f.level, gain = f.gain, targetProbability = f.probability, earphones = f.monitorRoute) }
         }
-        Diagnostics.modeStatus="tse="+s.experimentalSeparation+",contextHop="+s.separationLiveMode+",raw="+s.separationRaw
+        Diagnostics.modeStatus="tse="+s.experimentalSeparation+",contextHop="+s.separationLiveMode+",raw="+s.separationRaw+",dnFallback="+s.separationDenoiseFallback
         p.enrollmentActive = { learner?.enrollmentEnabled == true || wearerLearner?.enrollmentEnabled == true }
         p.enrollmentStatus = { enrollmentMessage() }
         p.quietOthers = s.quietOthers; p.boostDb = s.boostDb; p.denoiseMix = s.denoise
         if (s.experimentalSeparation) p.separator = try { ExperimentalSeparator(app, m.voicePrint,
-            { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw },
+            { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw }, { _settings.value.separationDenoiseFallback },
             if(s.separationLiveMode==0) 1000 else 2000,
             when(s.separationLiveMode) { 0 -> 500; 1 -> 500; else -> 2000 },
             {tracker.lockedId},{val v=gateInputs();v.hasLock && v.lockedVisible && v.lockedSpeaking>=.75f && v.othersSpeaking<.25f}) } catch (t: Throwable) { Diagnostics.event("separation_init_failed_raw " + t.javaClass.simpleName); null }
