@@ -368,10 +368,10 @@ class VoiceBeamEngine(private val app: Context) {
         p.enrollmentStatus = { enrollmentMessage() }
         p.quietOthers = s.quietOthers; p.boostDb = s.boostDb; p.denoiseMix = s.denoise
         if (s.experimentalSeparation) p.separator = try { ExperimentalSeparator(app, m.voicePrint,
-            { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw }, { _settings.value.separationDenoiseFallback },
+            { learner?.centroid }, { _settings.value.separationCosine }, { _settings.value.separationMargin }, { _settings.value.separationRaw },
             if(s.separationLiveMode==0) 1000 else 2000,
             when(s.separationLiveMode) { 0 -> 500; 1 -> 500; else -> 2000 },
-            {tracker.lockedId},{val v=gateInputs();v.hasLock && v.lockedVisible && v.lockedSpeaking>=.75f && v.othersSpeaking<.25f}) } catch (t: Throwable) { Diagnostics.event("separation_init_failed_raw " + t.javaClass.simpleName); null }
+            {tracker.lockedId},{val v=gateInputs();v.hasLock && v.lockedVisible && v.lockedSpeaking>=.75f && v.othersSpeaking<.25f},{ _settings.value.separationDenoiseFallback }) } catch (t: Throwable) { Diagnostics.event("separation_init_failed_raw " + t.javaClass.simpleName); null }
         pipeline = p
         pipelineDebugFeed = wantDebug
         if (wantDebug) {

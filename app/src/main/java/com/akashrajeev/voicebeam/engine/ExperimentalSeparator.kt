@@ -12,9 +12,9 @@ import kotlin.math.abs
 /** Causal SkiM trial. Source identity remains provisional; never negative mute. */
 class ExperimentalSeparator(
  app:Context, private val voice:VoicePrint, private val centroid:()->FloatArray?,
- private val threshold:()->Float, private val margin:()->Float, private val rawSelection:()->Boolean, private val denoiseFallback:()->Boolean={true},
+ private val threshold:()->Float, private val margin:()->Float, private val rawSelection:()->Boolean,
  contextMs:Int=1000,hopMs:Int=500,
- private val autoTarget:()->Int?={null},private val autoEligible:()->Boolean={false},
+ private val autoTarget:()->Int?={null},private val autoEligible:()->Boolean={false},private val denoiseFallback:()->Boolean={true},
 ) {
  private data class Input(val audio:FloatArray,val start:Long)
  private data class Output(val audio:FloatArray,val start:Long,val template:FloatArray?,val isolated:Boolean,val generation:Int)
@@ -44,6 +44,7 @@ class ExperimentalSeparator(
   idWorker=Thread({identityLoop()},"vb-skim-id").also{it.start()}
   worker=Thread({loop()},"vb-skim").also{it.start()}
  }
+ fun process(raw:FloatArray,out:FloatArray):Boolean=process(raw,null,out)
  fun process(raw:FloatArray,enh:FloatArray?,out:FloatArray):Boolean {
   val target=autoTarget();if(target!=rawTarget){automatic.setTarget(target);rawTarget=target;identityScores=Scores(listOf(-1f,-1f),0,null,-1)}
   if(centroid()==null && automatic.centroid==null)automatic.collect(raw,autoEligible())?.let{identity.offer(Identity(null,null,it,target))}
