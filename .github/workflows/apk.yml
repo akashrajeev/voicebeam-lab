@@ -3,7 +3,6 @@ name: ENH-6-SEP-9-apk
 on:
   push:
     branches: [sep9-revised-ui-2026-10-11]
-    paths: ['.github/workflows/apk.yml']
 permissions:
   contents: read
 jobs:
